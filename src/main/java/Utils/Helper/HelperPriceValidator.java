@@ -4,6 +4,7 @@ import io.restassured.path.json.JsonPath;
 import org.testng.asserts.SoftAssert;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,17 +32,18 @@ public class HelperPriceValidator {
      * @param priceFieldMapping  Mapping of priceDetails fields → breakdown fields
      * @param softAssert         TestNG SoftAssert for validation
      */
-    public static void validatePriceFields(JsonPath jsonPath, int offerOrder,
-                                           List<Map<String, Object>> passengerBreakdowns,
-                                           Map<String, String> priceFieldMapping,
-                                           SoftAssert softAssert) {
+    public static void validatePriceFields (JsonPath jsonPath,
+                                            int offerOrder,
+                                            List<Map<String, Object>> passengerBreakdowns,
+                                            Map<String, String> priceFieldMapping,
+                                            Map<String, Object> payload, SoftAssert softAssert) {
         // Loop through all mappings (e.g., totalAmount ↔ passengerTotalAmount)
         for (Map.Entry<String, String> entry : priceFieldMapping.entrySet()) {
             String priceDetailsField = entry.getKey();    // Field in priceDetails
             String passengerField    = entry.getValue();  // Field in passenger breakdown
 
             // Calculate expected value from passenger breakdown (full precision)
-            BigDecimal calculatedTotal = calculateTotalAmountForPaxBigDecimal(passengerBreakdowns, passengerField);
+            BigDecimal calculatedTotal = calculateTotalAmountForPaxBigDecimal(passengerBreakdowns, passengerField, payload);
 
             // Extract actual value from offer.priceDetails
             BigDecimal reportedAmount  = getPriceDetailsAmount(jsonPath, offerOrder, priceDetailsField);
@@ -52,7 +54,7 @@ public class HelperPriceValidator {
 
             // Log raw and normalized values for debugging
             System.out.printf(
-                    "\t✔ [Offer %d] Validating %s: Expected=%.2f, Actual=%.2f (raw calc=%.5f, raw api=%.5f)%n",
+                    "\tTC:9.2 ✔ [Offer %d] Validating %s: Expected=%.2f, Actual=%.2f (raw calc=%.5f, raw api=%.5f)%n",
                     offerOrder, priceDetailsField,
                     expected.doubleValue(),
                     actual.doubleValue(),
@@ -61,7 +63,7 @@ public class HelperPriceValidator {
             );
 
             // Validate with tolerance check
-            assertWithRoundingTolerance(actual, expected, 0.01, priceDetailsField, offerOrder, softAssert);
+            assertWithRoundingTolerance(actual, expected, 0.01, priceDetailsField, offerOrder,"TC:9.2" ,softAssert);
         }
     }
 
@@ -79,31 +81,45 @@ public class HelperPriceValidator {
     }
 
     /**
-     * Calculates the total amount for a specific field in passenger breakdown data.
-     * Example: If fieldName = "baseFare" and a passenger has 2 tickets,
-     * total = baseFare × numberOfPassengers (summed for all passenger types).
+     * Utility: Calculate total amount across passenger breakdowns for a given field (e.g., paxBaseAmount, paxTotalTaxAmount).
+     * Multiplies per-passenger amount × count retrieved from the request payload.
      *
-     * @param passengerBreakdowns List of passenger breakdown maps.
-     * @param fieldName           Field in passenger breakdown to sum (e.g., "baseFare", "taxes").
-     * @return Total amount as BigDecimal.
+     * @param passengerBreakdowns Breakdown list from the response
+     * @param fieldName           Field name to aggregate (e.g., "paxBaseAmount", "paxTotalTaxAmount")
+     * @param payload             The request payload (contains passengers with type + count)
+     * @return BigDecimal total aggregated amount
      */
-    private static BigDecimal calculateTotalAmountForPaxBigDecimal(List<Map<String, Object>> passengerBreakdowns,
-                                                                   String fieldName) {
+    private static BigDecimal calculateTotalAmountForPaxBigDecimal(
+            List<Map<String, Object>> passengerBreakdowns,
+            String fieldName,
+            Map<String, Object> payload) {
+
         BigDecimal total = BigDecimal.ZERO;
 
-        for (Map<String, Object> passenger : passengerBreakdowns) {
-            Number count = (Number) passenger.get("numberOfPassengers"); // Number of passengers for this breakdown
+        // Build a map from payload passenger types → counts
+        List<Map<String, Object>> payloadPassengers = (List<Map<String, Object>>) payload.get("passengers");
+        Map<String, Integer> paxCountMap = new HashMap<>();
+        for (Map<String, Object> pax : payloadPassengers) {
+            String type = ((String) pax.get("passengerTypeCode")).toUpperCase(); // normalize
+            Integer count = ((Number) pax.get("count")).intValue();
+            paxCountMap.put(type, count);
+        }
 
-            // Retrieve field data (should be a map containing "amount")
+        // Now aggregate response breakdowns using payload counts
+        for (Map<String, Object> passenger : passengerBreakdowns) {
+            String paxType = ((String) passenger.get("passengerTypeCode")).toUpperCase();
+            int paxCount = paxCountMap.getOrDefault(paxType, 1); // fallback to 1 if not in payload
+
             Object fieldObj = passenger.get(fieldName);
-            if (fieldObj instanceof Map && count != null) {
+            if (fieldObj instanceof Map) {
                 Map<String, Object> fieldMap = (Map<String, Object>) fieldObj;
-                BigDecimal amount = getAmountOrZero(fieldMap); // Convert to BigDecimal
-                BigDecimal countBD = new BigDecimal(count.toString());
-                total = total.add(amount.multiply(countBD)); // Multiply fare by passenger count
+                BigDecimal amount = getAmountOrZero(fieldMap);
+                total = total.add(amount.multiply(BigDecimal.valueOf(paxCount)));
             }
         }
 
         return total;
     }
+
+
 }

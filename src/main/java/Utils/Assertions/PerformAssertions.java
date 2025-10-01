@@ -36,15 +36,15 @@ public class PerformAssertions {
      *
      * @param fullUrl Endpoint URL
      * @param requestPayload JSON payload object
-     * @param headers HTTP headers
      * @return Response from the API
      */
-    private static Response performPost(String fullUrl, Object requestPayload, Map<String, String> headers) {
+    private static Response performPost(String fullUrl, Object requestPayload) {
         Response response = RestAssured
                 .given()
                     .body(requestPayload)
                     .contentType(ContentType.JSON)
-                    .headers(headers)
+                    .header("x-api-key","ttdb2dc2-58c5-481c-84b5-95350a3a7978-f61360c2-f536-4b19-9a25-97b8f17ce4dc")
+                    .header("client-id","NDC-Core")
                     .log().method()
                 .when()
                     .post(fullUrl)
@@ -53,8 +53,8 @@ public class PerformAssertions {
                     .extract()
                     .response();
 
-        String correlationId = response.getHeader("Correlation-Id");
-        System.out.println("Correlation-Id: " + correlationId);
+        String correlationId = response.getHeader("CorrelationId");
+        System.out.println("CorrelationId: " + correlationId);
 
         return response;
     }
@@ -69,15 +69,14 @@ public class PerformAssertions {
      * @param Url Search API endpoint
      * @param headers HTTP headers
      * @param payload Search request payload
-     * @param agencyName Agency identifier (for assertions)
      * @param expectedStatusCode Expected HTTP status code
      * @return SearchResult containing offer ID and selected offer details (null if invalid search)
      */
     public static SearchResult PerformSearch(String Url, Map<String, String> headers,
-                                             Map<String, Object> payload, String agencyName,
-                                             int expectedStatusCode,String searchAddPaxScenarioType) {
+                                             Map<String, Object> payload,
+                                             int expectedStatusCode, String searchAddPaxScenarioType) {
 
-        Response response = performPost(Url, payload, headers);
+        Response response = performPost(Url, payload);
         validateResponse(response, expectedStatusCode, true);
 
         SoftAssert softAssert = new SoftAssert();
@@ -85,19 +84,24 @@ public class PerformAssertions {
         switch (expectedStatusCode) {
             case 200:
                 if (Objects.equals(searchAddPaxScenarioType, "pass")) {
-                    validatePositiveSearchAssertions(response, payload, headers, agencyName, softAssert);
+                    validatePositiveSearchAssertions(response, payload, headers, softAssert);
                     softAssert.assertAll();
                 }
-                // Run positive assertions
+
+                // Extract responseId and supplier for FareConfirm payload
+                String responseId = response.jsonPath().getString("responseId");
+                String supplier = response.jsonPath().getString("supplier");
+
+                // Extract first offer
                 String offerId = getSearchOfferId(response, 0);
                 Map<String, Object> selectedOffer = getNthOffer(response, 0);
 
-                return new SearchResult(offerId, selectedOffer);
+                return new SearchResult(offerId, selectedOffer, responseId, supplier);
 
             case 400:
                 validateResponse(response, expectedStatusCode, true);
                 String expectedMsg = NegativeSearchAssertions.generateExpectedMessage(searchAddPaxScenarioType);
-                assertContainsExpectedError(response, expectedMsg,softAssert);
+                assertContainsExpectedError(response, expectedMsg, softAssert);
                 softAssert.assertAll();
                 return null;
 
@@ -108,6 +112,7 @@ public class PerformAssertions {
         }
     }
 
+
     /**
      * Performs the FareConfirm API step:
      *  - Sends selected offer for confirmation
@@ -116,16 +121,17 @@ public class PerformAssertions {
      *  - Saves response for later validation
      *  - Runs assertions comparing it with Search offer details
      * @param Url FareConfirm endpoint
-     * @param headers HTTP headers
      * @param payloadMap FareConfirm payload
      * @param selectedOfferFromSearch Offer details from Search step
      * @param expectedStatusCode Expected status code
      * @return FareConfirm offer ID
      */
-    public static String PerformFareConfirm(String Url, Map<String, String> headers,
+    public static String PerformFareConfirm(String Url,
                                             Map<String, Object> payloadMap,
-                                            Map<String, Object> selectedOfferFromSearch, int expectedStatusCode, String searchAddPaxScenarioType) {
-        Response response = performPost(Url, payloadMap, headers);
+                                            Map<String, Object> selectedOfferFromSearch,
+                                            int expectedStatusCode, String searchAddPaxScenarioType) {
+
+        Response response = performPost(Url, payloadMap);
         validateResponse(response, expectedStatusCode, true);
 
         Map<String, Object> responseMap = response.jsonPath().getMap("$");
@@ -133,40 +139,22 @@ public class PerformAssertions {
 
         String fareConfirmOfferId = getFareConfirmOfferId(response);
 
-        saveFareConfirmResponse(fareConfirmOfferId, responseMap);
+        // fallback to original offerId if null
+        String offerIdForFile = fareConfirmOfferId != null ? fareConfirmOfferId
+                : (String) selectedOfferFromSearch.get("offerId");
+
+        saveFareConfirmResponse(offerIdForFile, responseMap);
+
         selectedOfferFromSearch.put("fareConfirmOfferId", fareConfirmOfferId);
+        selectedOfferFromSearch.put("selectedOfferId", fareConfirmOfferId); // for payload reuse
+
         if (Objects.equals(searchAddPaxScenarioType, "pass")) {
-            validateFareConfirm(response, selectedOfferFromSearch, headers);
+            validateFareConfirm(response, selectedOfferFromSearch);
         }
+
         return fareConfirmOfferId;
     }
 
-    /**
-     * Performs the AddPax API step:
-     *  - Sends passenger details
-     *  - Validates status code & response
-     *  - Returns generated Offer ID
-     *
-     * @param Url AddPax endpoint
-     * @param headers HTTP headers
-     * @param payloadMap AddPax payload
-     * @param expectedStatusCode Expected HTTP status code
-     * @return AddPax offer ID
-     */
-    public static String PerformAddPax(String Url, Map<String, String> headers, Map<String, Object> payloadMap, int expectedStatusCode, String addPaxFlow,String scenarioType) {
-        Response response = performPost(Url, payloadMap, headers);
-        SoftAssert softAssert = new SoftAssert();
-        if (Objects.equals(addPaxFlow, "fail")) {
-          //  validateResponse(response, expectedStatusCode, true);
-            String expectedMsg = NegativeAddPaxAssertions.generateExpectedMessage(scenarioType);
-            assertContainsExpectedError(response,expectedMsg,softAssert);
-            softAssert.assertAll();
-            return null;
-        }
-        validateResponse(response, expectedStatusCode, true);
-        return getAddPaxOfferId(response);
-
-    }
 
     /**
      * Performs the Book API step:
@@ -177,7 +165,6 @@ public class PerformAssertions {
      *  - Returns booking info (PNR, ticket numbers, etc.)
      *
      * @param url Book endpoint
-     * @param headers HTTP headers
      * @param payloadMap Booking payload
      * @param expectedStatusCode Expected HTTP status code
      * @param selectedOfferFromSearch Offer data from Search
@@ -185,10 +172,10 @@ public class PerformAssertions {
      * @param fareConfirmId FareConfirm ID
      * @return Booking info map
      */
-    public static Map<String, Object> PerformBook(String url, Map<String, String> headers, Map<String, Object> payloadMap,
+    public static Map<String, Object> PerformBook(String url, Map<String, Object> payloadMap,
                                                   int expectedStatusCode, Map<String, Object> selectedOfferFromSearch,
                                                   Map<String, Object> searchPayload, String fareConfirmId) {
-        Response response = performPost(url, payloadMap, headers);
+        Response response = performPost(url, payloadMap);
         validateResponse(response, expectedStatusCode, true);
 
         Map<String, Object> bookResponse = response.jsonPath().getMap("$");
@@ -196,7 +183,7 @@ public class PerformAssertions {
         Map<String, Object> fareConfirmResponse = loadFareConfirmResponse(fareConfirmId);
 
         SoftAssert softAssert = new SoftAssert();
-        validateBookingResponse(response, bookResponse, fareConfirmResponse, addPaxPayload, headers, selectedOfferFromSearch, softAssert);
+        validateBookingResponse(response, bookResponse, fareConfirmResponse, addPaxPayload, selectedOfferFromSearch, softAssert);
         softAssert.assertAll();
 
         return getBookingInfo(response);
@@ -209,8 +196,8 @@ public class PerformAssertions {
      *  - Compares Retrieve data against Book step
      *  - Returns final booking info
      */
-    public static Map<String, Object> PerformBookAfterHold(String Url, Map<String, String> headers, Map<String, Object> payloadMap, int expectedStatusCode, Map<String, Object> bookMap) {
-        Response response = performPost(Url, payloadMap, headers);
+    public static Map<String, Object> PerformBookAfterHold(String Url, Map<String, Object> payloadMap, int expectedStatusCode, Map<String, Object> bookMap) {
+        Response response = performPost(Url, payloadMap);
         validateResponse(response, expectedStatusCode, true);
 
         Map<String, Object> retrieveMap = getBookingInfo(response);
@@ -227,8 +214,8 @@ public class PerformAssertions {
      *  - Validates status code & structure
      *  - Compares Retrieve data against Book step
      */
-    public static Map<String, Object> PerformRetrieve(String url, Map<String, String> headers, Map<String, Object> payloadMap, int expectedStatusCode, Map<String, Object> bookMap) {
-        Response response = performPost(url, payloadMap, headers);
+    public static Map<String, Object> PerformRetrieve(String url, Map<String, Object> payloadMap, int expectedStatusCode, Map<String, Object> bookMap) {
+        Response response = performPost(url, payloadMap);
         validateResponse(response, expectedStatusCode, true);
 
         Map<String, Object> retrieveMap = getBookingInfo(response);

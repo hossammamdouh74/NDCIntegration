@@ -30,9 +30,8 @@ public class HelperTaxFeeValidator {
      * Step 9.3: Validate taxesAndFees per passenger type.
      * ---------------------------------------------------
      * For each passenger type (ADT, CHD, INF):
-     *  - Sum up all individual taxes and fees for one passenger
-     *  - Multiply by number of passengers
-     *  - Compare with passengerTaxesAmount reported in breakdown
+     *  - Sum up all individual taxes and fees
+     *  - Compare directly with passengerTaxesAmount
      *
      * @param passengerBreakdowns Passenger fare breakdown list
      * @param offerOrder          Index of the offer being validated
@@ -44,42 +43,38 @@ public class HelperTaxFeeValidator {
         for (Map<String, Object> passenger : passengerBreakdowns) {
             // Extract taxesAndFees breakdown list for this passenger type
             List<Map<String, Object>> taxesAndFeesList = (List<Map<String, Object>>) passenger.get("taxesAndFees");
-            // Extract number of passengers of this type
-            Number numPassengers = (Number) passenger.get("numberOfPassengers");
             // Extract passenger type code (ADT, CHD, INF, etc.)
             String paxType = (String) passenger.get("passengerTypeCode");
 
-            // Skip validation if breakdown or count is missing
-            if (taxesAndFeesList == null || numPassengers == null) {
+            // Skip validation if breakdown is missing
+            if (taxesAndFeesList == null) {
                 System.out.printf("⚠️ Skipped taxesAndFees validation for passengerTypeCode=%s due to null values%n", paxType);
                 continue;
             }
 
-            // Calculate expected taxes by summing breakdown × passenger count
-            BigDecimal sumTaxesAndFees = sumAmountsFromList(taxesAndFeesList);
-            BigDecimal totalForPaxType = sumTaxesAndFees
-                    .multiply(BigDecimal.valueOf(numPassengers.intValue()))
-                    .setScale(4, RoundingMode.HALF_UP);
+            // Calculate expected taxes by summing breakdown (ignore passenger count)
+            BigDecimal sumTaxesAndFees = sumAmountsFromList(taxesAndFeesList).setScale(4, RoundingMode.HALF_UP);
 
-            // Extract reported passengerTaxesAmount × passenger count
-            Map<String, Object> passengerTaxesAmountMap = (Map<String, Object>) passenger.get("passengerTaxesAmount");
-            BigDecimal reportedTaxesAmount = getAmountOrZero(passengerTaxesAmountMap)
-                    .multiply(BigDecimal.valueOf(numPassengers.intValue()))
-                    .setScale(4, RoundingMode.HALF_UP);
+            // Extract reported passengerTaxesAmount
+            Map<String, Object> passengerTaxesAmountMap = (Map<String, Object>) passenger.get("paxTotalTaxAmount");
+            BigDecimal reportedTaxesAmount = getAmountOrZero(passengerTaxesAmountMap).setScale(4, RoundingMode.HALF_UP);
 
             // Log calculated vs reported for debugging
-            System.out.printf("\t✔ [Offer %d] Validating taxes for %s: Calculated=%.2f, Reported=%.2f%n",
-                    offerOrder, paxType, totalForPaxType.doubleValue(), reportedTaxesAmount.doubleValue());
+            System.out.printf("\tTC:9.3✔ [Offer %d] Validating taxes for %s: Calculated=%.2f, Reported=%.2f%n",
+                    offerOrder, paxType, sumTaxesAndFees.doubleValue(), reportedTaxesAmount.doubleValue());
 
             // Validate with tolerance check (rounded to 2 decimals)
-            assertWithRoundingTolerance(reportedTaxesAmount.setScale(2, RoundingMode.HALF_UP),
-                    totalForPaxType.setScale(2, RoundingMode.HALF_UP),
+            assertWithRoundingTolerance(
+                    reportedTaxesAmount.setScale(2, RoundingMode.HALF_UP),
+                    sumTaxesAndFees.setScale(2, RoundingMode.HALF_UP),
                     0.01,
                     "taxes for " + paxType,
-                    offerOrder,
-                    softAssert);
+                    offerOrder, "TC:9.3" ,
+                    softAssert
+            );
         }
     }
+
 
     /**
      * Step 9.4: Validate aggregated total taxes in priceDetails.
@@ -100,7 +95,7 @@ public class HelperTaxFeeValidator {
 
         // Get reported total taxes amount from priceDetails
         Map<String, Object> priceDetailsTaxesAmountMap =
-                jsonPath.getMap("offers[" + offerOrder + "].priceDetails.taxesAmount");
+                jsonPath.getMap("offers[" + offerOrder + "].priceDetails.totalTaxAmount");
 
         // Normalize reported amount
         BigDecimal reported = getAmountOrZero(priceDetailsTaxesAmountMap).setScale(2, RoundingMode.HALF_UP);
@@ -116,11 +111,11 @@ public class HelperTaxFeeValidator {
         BigDecimal calculated = sumAmountsFromList(priceTaxesAndFeesList).setScale(2, RoundingMode.HALF_UP);
 
         // Log calculated vs reported for debugging
-        System.out.printf("\t✔ [Offer %d] Validating total taxes in priceDetails: Calculated=%.2f, Reported=%.2f%n",
+        System.out.printf("\t✔TC:9.4 [Offer %d] Validating total taxes in priceDetails: Calculated=%.2f, Reported=%.2f%n",
                 offerOrder, calculated.doubleValue(), reported.doubleValue());
 
         // Validate with tolerance check
         assertWithRoundingTolerance(reported, calculated, 0.01,
-                "total taxes in priceDetails", offerOrder, softAssert);
+                "total taxes in priceDetails", offerOrder,"TC:9.4" ,softAssert);
     }
 }

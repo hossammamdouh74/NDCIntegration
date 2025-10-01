@@ -7,14 +7,12 @@ import Utils.ReportManager.ReportManager;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.Map;
 
 import static Utils.Assertions.PerformAssertions.*;
 import static Utils.Helper.HelperTestData.*;
 import static Utils.Loader.HeaderLoader.getHeaders;
 import static Utils.Loader.PayloadLoader.*;
-import static Utils.ReportManager.ReportManager.logPassengerBreakdown;
 
 /**
  * 🔹 OneSupplierTests
@@ -52,7 +50,7 @@ public class NegativeScenarioWTTest extends BaseAirlineTest {
         ReportManager.getTest().info("Search URL: " + SearchEndPoint);
         String addPaxFlow = (String) data.getOrDefault("addPaxFlow","pass");
         // Execute Search
-        SearchResult result = PerformSearch(SearchEndPoint, headers, payload, AgencyName, expectedStatusCode ,addPaxFlow);
+        SearchResult result = PerformSearch(SearchEndPoint, headers, payload, expectedStatusCode ,addPaxFlow);
 
         // Ensure result is valid
         if (result == null) {
@@ -89,58 +87,18 @@ public class NegativeScenarioWTTest extends BaseAirlineTest {
         System.out.println("\n🔹 Running FareConfirm for: " + AgencyName + " | " + testCaseId + " Description: " + description);
 
         // Build payload + headers
-        Map<String, String> headers = getHeaders(AgencyName);
-        Map<String, Object> payload = FareConfirmPayload(selectedOfferId);
+        Map<String, Object> payload = FareConfirmPayload(selectedOfferFromSearch);
         String addPaxFlow = (String) selectedOfferFromSearch.getOrDefault("addPaxFlow","pass");
 
         // Execute FareConfirm
         ReportManager.getTest().info("Running FareConfirm for: " + testCaseId + " - " + description);
-        String FareConfirmOfferID = PerformFareConfirm(FareConfirmOfferEndPoint, headers, payload, selectedOfferFromSearch, 200,addPaxFlow);
+        String FareConfirmOfferID = PerformFareConfirm(FareConfirmOfferEndPoint, payload, selectedOfferFromSearch, 200,addPaxFlow);
 
         System.out.println("✅ FareConfirmOfferID captured: " + FareConfirmOfferID);
         AddValidFareConfirmOffer(testCaseId, description, FareConfirmOfferID, selectedOfferFromSearch);
     }
 
-    /**
-     * 🔹 ADD PAX TESTS
-     * - Positive flow → Adds passengers successfully (status 200).
-     * - Negative flow → Iterates over invalid payloads from /AddPax/ folder (status 400).
-     * - Saves AddPaxOfferID for booking tests.
-     */
-    @Test(priority = 2, dataProvider = "validAddPaxData")
-    public void testNegativeAddPax( String testCaseId,String fareConfirmOfferId, String description, Map<String, Object> selectedOfferFromSearch) {
-        if (fareConfirmOfferId == null || fareConfirmOfferId.isEmpty()) {
-            throw new SkipException("No valid offer ID for AddPax for: " + testCaseId);
-        }
 
-        // Ensure searchPayload exists (needed for passenger info)
-        Map<String, Object> searchPayload = (Map<String, Object>) selectedOfferFromSearch.get("searchPayload");
-        if (searchPayload == null) {
-            throw new SkipException("Missing searchPayload for AddPax test: " + testCaseId);
-        }
-
-        Map<String, String> headers = getHeaders(AgencyName);
-        System.out.println("\n🔹 Running Add Pax for: " + AgencyName + " | " + testCaseId + " Description: " + description);
-
-        logPassengerBreakdown(searchPayload, AgencyName, testCaseId, description);
-
-        String addPaxFlow = (String) selectedOfferFromSearch.get("addPaxFlow");
-
-        // 🔸 Negative flow
-        if ("fail".equals(addPaxFlow)) {
-            System.out.println("\n🏃‍♂️ Running Negative AddPax...");
-            String folderPath = "src/test/resources/TestData/" + AgencyName + "/AddPax/";
-            List<Map<String, Object>> negativePayloads = getNegativeAddPaxPayloads(folderPath, testCaseId, fareConfirmOfferId);
-
-            for (Map<String, Object> negPayload : negativePayloads) {
-                String negScenarioType = (String) negPayload.get("scenarioType");
-                PerformAddPax(AddPaxEndPoint, headers, negPayload, 400, addPaxFlow, negScenarioType);
-            }
-            return; // stop after negatives
-        }
-        System.out.println("❌ missing addPaxFlow :" +addPaxFlow);
-
-    }
 
     /**
      * 🔹 NEGATIVE SEARCH TESTS
@@ -164,7 +122,7 @@ public class NegativeScenarioWTTest extends BaseAirlineTest {
         ReportManager.getTest().info("Search URL: " + SearchEndPoint);
 
         // Execute Search
-        PerformSearch(SearchEndPoint, headers, payload, HelperTestData.AgencyName, expectedStatusCode, searchScenarioType);
+        PerformSearch(SearchEndPoint, headers, payload,  expectedStatusCode, searchScenarioType);
 
         // Assertion only if scenarioType is present
         if (expectedStatusCode == 400) {

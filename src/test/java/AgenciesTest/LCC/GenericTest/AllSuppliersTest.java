@@ -6,16 +6,11 @@ import Utils.ReportManager.ReportManager;
 import org.testng.SkipException;
 import org.testng.annotations.*;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-
 import static Utils.Assertions.PerformAssertions.*;
 import static Utils.Helper.HelperTestData.*;
-import static Utils.Helper.SavedBookResponses.getBookResponses;
 import static Utils.Loader.HeaderLoader.getHeaders;
 import static Utils.Loader.PayloadLoader.*;
-import static Utils.ReportManager.ReportManager.logPassengerBreakdown;
 
 /**
  * Generic test suite for LCC agencies that validates the entire booking lifecycle:
@@ -52,7 +47,7 @@ public class AllSuppliersTest extends BaseAirlineTest {
         ReportManager.getTest().info("Search URL: " + SearchEndPoint);
 
         // perform search
-        SearchResult result = PerformSearch(SearchEndPoint, headers, payload, agencyName, expectedStatusCode, scenarioType);
+        SearchResult result = PerformSearch(SearchEndPoint, headers, payload,  expectedStatusCode, scenarioType);
 
         // ✅ handle invalid scenario (status 400)
         if (expectedStatusCode == 400) {
@@ -91,63 +86,17 @@ public class AllSuppliersTest extends BaseAirlineTest {
             throw new SkipException("❌ Skipping FareConfirm - No valid offer for: " + testCaseId);
         }
 
-        Map<String, String> headers = getHeaders(agencyName);
-        Map<String, Object> payload = FareConfirmPayload(selectedOfferId);
+        Map<String, Object> payload = FareConfirmPayload(selectedOfferFromSearch);
         String addPaxFlow = (String) selectedOfferFromSearch.getOrDefault("addPaxFlow","pass");
 
-        String FareConfirmOfferID = PerformFareConfirm(FareConfirmOfferEndPoint, headers, payload, selectedOfferFromSearch, 200,addPaxFlow);
+        String FareConfirmOfferID = PerformFareConfirm(FareConfirmOfferEndPoint, payload, selectedOfferFromSearch, 200,addPaxFlow);
         System.out.println("✅ FareConfirmOfferID captured: " + FareConfirmOfferID);
 
         // Store for AddPax step
         AddValidFareConfirmOffer(testCaseId, description, FareConfirmOfferID, selectedOfferFromSearch);
     }
 
-    /**
-     * 🔹 ADD PAX TESTS
-     * - Positive flow → Adds passengers successfully (status 200).
-     * - Negative flow → Iterates over invalid payloads from /AddPax/ folder (status 400).
-     * - Saves AddPaxOfferID for booking tests.
-     */
-    @Test(priority = 2, dataProvider = "validAddPaxData")
-    public void testAddPax(String fareConfirmOfferId, String testCaseId, String description, Map<String, Object> selectedOfferFromSearch) {
-        if (fareConfirmOfferId == null || fareConfirmOfferId.isEmpty()) {
-            throw new SkipException("No valid offer ID for AddPax for: " + testCaseId);
-        }
 
-        // Ensure searchPayload exists (needed for passenger info)
-        Map<String, Object> searchPayload = (Map<String, Object>) selectedOfferFromSearch.get("searchPayload");
-        if (searchPayload == null) {
-            throw new SkipException("Missing searchPayload for AddPax test: " + testCaseId);
-        }
-
-        Map<String, String> headers = getHeaders(agencyName);
-        System.out.println("\n🔹 Running Add Pax for: " +agencyName + " | " + testCaseId + " Description: " + description);
-
-        logPassengerBreakdown(searchPayload, agencyName, testCaseId, description);
-
-        String addPaxFlow = (String) selectedOfferFromSearch.get("addPaxFlow");
-
-        // 🔸 Negative flow
-        if (Objects.equals(addPaxFlow, "fail")) {
-            String folderPath = "src/test/resources/TestData/" + agencyName + "/AddPax/";
-            List<Map<String, Object>> negativePayloads = getNegativeAddPaxPayloads(folderPath,testCaseId ,fareConfirmOfferId);
-
-            for (Map<String, Object> negPayload : negativePayloads) {
-                System.out.println("⚠️ Running Negative AddPax ");
-                PerformAddPax(AddPaxEndPoint, headers, negPayload, 400, addPaxFlow,"");
-            }
-            return; // Exit after running negative tests
-        }
-
-        // 🔸 Positive flow
-        Map<String, Object> payload = AddPaxPayload(searchPayload, fareConfirmOfferId);
-
-        String addPaxOfferId = PerformAddPax(AddPaxEndPoint, headers, payload, 200, "","");
-        System.out.println("✅ AddPax Offer ID: " + addPaxOfferId);
-
-        ReportManager.getTest().info("✅ AddPax Offer ID: " + addPaxOfferId);
-        AddValidAddPax(testCaseId, description, addPaxOfferId, selectedOfferFromSearch);
-    }
 
     /**
      * Step 4: Booking Flow (Book / Hold → BookAfterHold).

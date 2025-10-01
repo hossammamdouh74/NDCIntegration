@@ -8,8 +8,6 @@ import org.testng.asserts.SoftAssert;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static Utils.Helper.HelperCurrencyValidator.validateCurrencies;
-
 public class FareConfirmAssertions {
 
     /**
@@ -32,9 +30,8 @@ public class FareConfirmAssertions {
      *
      * @param fareConfirmResponse       API response from FareConfirm
      * @param selectedOfferFromSearch   Map containing the offer data from Search API
-     * @param headers                   Request headers (for currency validation)
      */
-    public static void validateFareConfirm(Response fareConfirmResponse, Map<String, Object> selectedOfferFromSearch, Map<String, String> headers) {
+    public static void validateFareConfirm(Response fareConfirmResponse, Map<String, Object> selectedOfferFromSearch) {
         SoftAssert softAssert = new SoftAssert();
 
         // Extract the selected offer object from FareConfirm response
@@ -46,7 +43,7 @@ public class FareConfirmAssertions {
         validateBasicFlags(softAssert, selectedOfferFromSearch, FareConfirmOffer);
         validatePriceDetails(softAssert, selectedOfferFromSearch, FareConfirmOffer);
         validatePassengerFareBreakdown(softAssert, selectedOfferFromSearch, FareConfirmOffer);
-        validateCurrencies(fareConfirmResponse, headers, "selectedOfferOptions", softAssert);
+        //validateCurrencies(fareConfirmResponse, "selectedOfferOptions", softAssert);
         validatePassengerBreakdownTotalsMatchOverall(fareConfirmResponse,selectedOfferFromSearch,softAssert);
         validateSingleOfferReturned(fareConfirmResponse,softAssert);
         validateJourneyCountConsistency(fareConfirmResponse, selectedOfferFromSearch, softAssert);

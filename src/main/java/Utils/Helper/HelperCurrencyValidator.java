@@ -80,9 +80,8 @@ public class HelperCurrencyValidator {
         for (int j = 0; j < fareBreakdowns.size(); j++) {
             String pbPath = basePath + ".passengerFareBreakdown[" + j + "]";
             String[] currencyPaths = {
-                    pbPath + ".passengerBaseAmount.currency",
-                    pbPath + ".passengerTotalAmount.currency",
-                    pbPath + ".passengerTaxesAmount.currency"
+                    pbPath + ".paxBaseAmount.currency",
+                    pbPath + ".paxTotalTaxAmount.currency"
             };
 
             // Validate currency for each amount in passenger fare breakdown
@@ -98,8 +97,8 @@ public class HelperCurrencyValidator {
     private static void validatePriceDetailsCurrencies(JsonPath jsonPath, String basePath, String expected, SoftAssert softAssert) {
         String[] pricePaths = {
                 basePath + ".priceDetails.totalAmount.currency",
-                basePath + ".priceDetails.baseAmount.currency",
-                basePath + ".priceDetails.taxesAmount.currency"
+                basePath + ".priceDetails.totalBaseAmount.currency",
+                basePath + ".priceDetails.totalTaxAmount.currency"
         };
 
         // Check each price field for currency match

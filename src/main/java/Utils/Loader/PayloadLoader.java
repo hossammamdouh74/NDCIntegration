@@ -40,6 +40,8 @@ public class PayloadLoader {
         Map<String, Object> payload = new HashMap<>();
         payload.put("searchCriteria", data.get("searchCriteria"));
         payload.put("passengers", data.get("passengers"));
+        payload.put("credentialsSelector",data.get("credentialsSelector"));
+        payload.put("supplier",data.get("supplier"));
 
         injectDynamicDates(payload);
         return payload;
@@ -48,14 +50,18 @@ public class PayloadLoader {
     /**
      * Creates a Fare Confirm payload.
      *
-     * @param selectedOfferID The offer ID to confirm
+     * @param selectedOfferFromSearch The offer ID to confirm
      * @return Map containing the offer ID
      */
-    public static Map<String, Object> FareConfirmPayload(String selectedOfferID) {
+    public static Map<String, Object> FareConfirmPayload(Map<String, Object> selectedOfferFromSearch) {
         Map<String, Object> payload = new HashMap<>();
-        payload.put("offerId", selectedOfferID);
+        payload.put("selectedOfferId", selectedOfferFromSearch.get("offerId")); // new key name
+        payload.put("supplier", selectedOfferFromSearch.get("supplier"));
+        payload.put("credentialsSelector", selectedOfferFromSearch.get("credentialsSelector"));
+        payload.put("searchResponseId", selectedOfferFromSearch.get("searchResponseId"));
         return payload;
     }
+
 
     /**
      * Builds an Add Passenger payload by selecting only the passengers

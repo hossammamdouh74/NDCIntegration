@@ -95,7 +95,7 @@ public class HelperGeneralMethods {
      */
     public static void assertWithRoundingTolerance(BigDecimal actual, BigDecimal expected,
                                                     double tolerance, String fieldName,
-                                                    int offerOrder, SoftAssert softAssert) {
+                                                    int offerOrder, String TcId ,SoftAssert softAssert ) {
         // Calculate absolute difference between actual and expected
         BigDecimal diff = actual.subtract(expected).abs();
 
@@ -107,14 +107,14 @@ public class HelperGeneralMethods {
         // Case 2: Within tolerance → log info, do not fail
         if (diff.compareTo(BigDecimal.valueOf(tolerance)) <= 0) {
             System.out.printf(
-                    "ℹ️ [Offer %d] Minor rounding difference in %s: Expected=%.2f, Actual=%.2f (Diff=%.4f)%n",
+                    "ℹ️"+TcId+ "[Offer %d] Minor rounding difference in %s: Expected=%.2f, Actual=%.2f (Diff=%.4f)%n",
                     offerOrder, fieldName, expected.doubleValue(), actual.doubleValue(), diff.doubleValue()
             );
         }
         // Case 3: Beyond tolerance → fail as real mismatch
         else {
             softAssert.fail(
-                    String.format("❌ [Offer %d] Mismatch in %s: Expected=%.2f, Actual=%.2f (Diff=%.4f)",
+                    String.format("❌ " +TcId+" [Offer %d] Mismatch in %s: Expected=%.2f, Actual=%.2f (Diff=%.4f)",
                             offerOrder, fieldName, expected.doubleValue(), actual.doubleValue(), diff.doubleValue()
                     )
             );

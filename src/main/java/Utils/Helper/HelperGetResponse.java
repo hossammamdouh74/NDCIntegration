@@ -26,11 +26,8 @@ public class HelperGetResponse {
      */
     public static Map<String, String> getPriceFieldMapping() {
         return Map.of(
-                "totalAmount", "passengerTotalAmount",
-                "taxesAmount", "passengerTaxesAmount",
-                "baseAmount", "passengerBaseAmount",
-                "discountAmount", "passengerDiscountAmount",
-                "beforeDiscountAmount", "passengerBeforeDiscountAmount"
+                "totalTaxAmount", "paxTotalTaxAmount",
+                "totalBaseAmount", "paxBaseAmount"
         );
     }
 
@@ -78,7 +75,7 @@ public class HelperGetResponse {
     /** Get offer by carrier code*/
     public static Map<String, Object> getOfferByCarrierCode(Response response, String carrierCode) {
         JsonPath jsonPath = response.jsonPath();
-        Map<String, Map<String, Object>> segments = jsonPath.getMap("segments");
+        Map<String, Map<String, Object>> segments = jsonPath.getMap("flightSegments");
 
         if (segments == null || segments.isEmpty()) {
             logger.warn("❌ No segments found in response.");
@@ -110,7 +107,7 @@ public class HelperGetResponse {
                         if (segmentDetails == null) continue;
 
                         for (Map<String, Object> detail : segmentDetails) {
-                            String segRefInOffer = (String) detail.get("segmentReferenceId");
+                            String segRefInOffer = (String) detail.get("segmentRefId");
                             if (segmentRefId.equals(segRefInOffer)) {
                                 return offer; // ✅ Return full offer map
                             }
@@ -190,7 +187,7 @@ public class HelperGetResponse {
     /** Get Offer ID by Carrier Code*/
     public static String getOfferIdByCarrierCode(Response response, String carrierCode) {
         JsonPath jsonPath = response.jsonPath();
-        Map<String, Map<String, Object>> segments = jsonPath.getMap("segments");
+        Map<String, Map<String, Object>> segments = jsonPath.getMap("flightSegments");
 
         if (segments == null || segments.isEmpty()) {
             return "❌ No segments found in response.";
@@ -222,7 +219,7 @@ public class HelperGetResponse {
                         if (segmentDetails == null) continue;
 
                         for (Map<String, Object> detail : segmentDetails) {
-                            String segRefInOffer = (String) detail.get("segmentReferenceId");
+                            String segRefInOffer = (String) detail.get("segmentRefId");
                             if (segmentRefId.equals(segRefInOffer)) {
                                 return offerId; // ✅ Found offer
                             }

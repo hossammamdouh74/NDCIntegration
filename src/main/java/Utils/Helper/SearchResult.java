@@ -24,6 +24,9 @@ public record SearchResult(
           Full parsed Search API offer response, stored as a Map<String, Object>.
           This allows other test steps to validate fields or reuse pricing details.
          */
-        Map<String, Object> offerResponseMap
+        Map<String, Object> offerResponseMap,
+
+        String responseId ,
+        String supplier
 ) {
 }

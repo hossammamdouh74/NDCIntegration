@@ -5,16 +5,15 @@ import com.aventstack.extentreports.ExtentTest;
 public class HelperTestData {
 
     // ✅ Base URL
-    public static final String baseUrl = "https://flight-engine-staging.azurewebsites.net";
+    public static final String baseUrl = "https://ndc-supplier-integration-staging.azurewebsites.net/";
 
     // ✅ API Endpoints
-    public static final String SearchEndPoint = baseUrl + "/api/Offers/GetAvailableOffers";
-    public static final String FareConfirmOfferEndPoint = baseUrl + "/api/Offers/FareConfirmOffer";
-    public static final String AddPaxEndPoint = baseUrl + "/api/Offers/AddPassengersDetails";
-    public static final String BookEndPoint = baseUrl + "/api/Order/BookAndPay";
-    public static final String HoldEndPoint = baseUrl + "/api/Order/Hold";
-    public static final String BookAfterHoldEndPoint = baseUrl + "/api/Order/BookAfterHold";
-    public static final String RetrieveEndPoint = baseUrl + "/api/Order/Retrieve";
+    public static final String SearchEndPoint = baseUrl + "api/FlightSearch/Search";
+    public static final String FareConfirmOfferEndPoint = baseUrl + "api/FlightSearch/FareConfirm";
+    public static final String BookEndPoint = baseUrl + "api/FlightBooking/Book";
+    public static final String HoldEndPoint = baseUrl + "api/FlightBooking/Hold";
+    public static final String BookAfterHoldEndPoint = baseUrl + "api/FlightBooking/BookAfterHold";
+    public static final String RetrieveEndPoint = baseUrl + "api/FlightBooking/RetrieveBooking";
 
     // ✅ Supplier Agencies
     public static final String AgencyName = "Aegean";

@@ -2,6 +2,9 @@ package Utils.Loader;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.math.BigInteger;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,9 +42,18 @@ public class FareConfirmFileManager {
      * @return sanitized offer identifier
      */
     private static String sanitizeFileName(String offerId) {
-        // Replace everything except letters, digits, dot, hyphen, underscore
-        return offerId.replaceAll("[^a-zA-Z0-9._-]", "_");
+        if (offerId == null || offerId.isEmpty()) {
+            throw new IllegalArgumentException("OfferId cannot be null or empty");
+        }
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(offerId.getBytes());
+            return new BigInteger(1, md.digest()).toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("MD5 algorithm not available", e);
+        }
     }
+
 
     /**
      * Loads a FareConfirm API response from disk for a given offerId.

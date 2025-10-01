@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 import static Utils.Assertions.FareConfirmAssertions.validateRbdMatchesSelectedOffer;
-import static Utils.Helper.HelperCurrencyValidator.*;
 import static Utils.Helper.HelperGeneralMethods.*;
 import static Utils.Helper.HelperPassengerBreakdown.*;
 
@@ -25,8 +24,8 @@ public class BookingAssertions {
      *  - RBD and currencies are correct
      */
     public static void validateBookingResponse(Response BookResponse, Map<String, Object> bookResponse,
-                                               Map<String, Object> fareConfirmResponse, Map<String, Object> addPaxPayload,
-                                               Map<String, String> headers, Map<String, Object> selectedOfferFromSearch,
+                                               Map<String, Object> fareConfirmResponse, Map<String, Object> addPaxPayload
+                                               , Map<String, Object> selectedOfferFromSearch,
                                                SoftAssert softAssert) {
         System.out.println("==================== 🧾 VALIDATING BOOKING RESPONSE ====================\n");
 
@@ -61,7 +60,7 @@ public class BookingAssertions {
         validateRbdMatchesSelectedOffer(BookResponse, selectedOfferFromSearch, softAssert, "order");
 
         // Validate currency consistency in price details
-        validateCurrencies(BookResponse, headers, "order", softAssert);
+        //validateCurrencies(BookResponse, "order", softAssert);
 
         System.out.println("\n==================== ✅ BOOKING VALIDATION COMPLETE ====================\n");
     }

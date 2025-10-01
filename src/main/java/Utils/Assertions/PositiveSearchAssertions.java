@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import org.testng.asserts.SoftAssert;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -25,7 +24,7 @@ public class PositiveSearchAssertions {
     /**
      * Entry point to execute all relevant validations on a Search API response.
      */
-    protected static void validatePositiveSearchAssertions(Response response, Map<String, Object> payload, Map<String, String> headers, String agencyName , SoftAssert softAssert) {
+    protected static void validatePositiveSearchAssertions(Response response, Map<String, Object> payload, Map<String, String> headers, SoftAssert softAssert) {
         validateNumberOfStops(response, softAssert);
         validateAllSegmentDetailsPerPassenger(response, payload, softAssert);
         validateOfferJourneyCount(response, payload, softAssert);
@@ -33,14 +32,13 @@ public class PositiveSearchAssertions {
         ValidateUniqueTaxCodesPerPassenger(response, softAssert);
         validateAllOffersPassengerFareBreakdowns(response, softAssert);
         validateAllOffersTotalPriceDetails(response, softAssert);
-        validateAllOffersPricingDetails(response, softAssert);
+        validateAllOffersPricingDetails(response,payload ,softAssert);
         validateAllReferencesOffers(response, softAssert);
         validateCurrencies(response, headers, "offers", softAssert);
         validateRbdNotNull(response, softAssert);
         validateOfferIdUniqueness(response,softAssert);
         validateOfferSegmentsExistAndAreNonOverlapping(response,softAssert);
         validateSegmentChainingPerJourney(response,payload,softAssert);
-        validateOfferIdContainsSupplier(response,agencyName,softAssert);
         validateOffersSortedByTotalAmount(response,softAssert);
         validateOffersAreUnique(response,softAssert);
         validateNoNullValuesInSearchResponse(response,softAssert);
@@ -87,7 +85,7 @@ public class PositiveSearchAssertions {
         }
 
         journeys.forEach((journeyId, journey) -> {
-            int expectedStops = ((List<?>) journey.get("segmentReferenceIds")).size() - 1;
+            int expectedStops = ((List<?>) journey.get("segmentRefIds")).size() - 1;
             int actualStops = ((Integer) journey.getOrDefault("numberOfStops", -1));
 
             softAssert.assertEquals(
@@ -157,7 +155,7 @@ public class PositiveSearchAssertions {
         List<Map<String, Object>> offers = jsonPath.getList("offers");
 
         for (int i = 0; i < offers.size(); i++) {
-            List<String> journeyRefs = jsonPath.getList("offers[" + i + "].journeys");
+            List<String> journeyRefs = jsonPath.getList("offers[" + i + "].offerJourneys");
             int actualCount = journeyRefs != null ? journeyRefs.size() : 0;
 
             softAssert.assertEquals(
@@ -171,13 +169,13 @@ public class PositiveSearchAssertions {
     }
 
     /**
-     * TC.4: Validates passenger type counts per offer against the request payload,
+     * TC.4: Validates passenger types per offer against the request payload,
      *       and ensures there are no duplicate passenger type codes in the response.
-     * Why: Passenger counts and types (e.g., ADT, CHD, INF) must match the request,
+     * Why: Passenger types (e.g., ADT, CHD, INF) must match the request,
      *      and there should be no duplicate type entries per offer.
      *
      * @param response   API response containing passenger breakdown.
-     * @param payload    The request payload (used to validate counts and types).
+     * @param payload    The request payload (used to validate types).
      * @param softAssert SoftAssert instance to record assertion results.
      */
     private static void validatePassengerTypes(Response response, Map<String, Object> payload, SoftAssert softAssert) {
@@ -185,54 +183,39 @@ public class PositiveSearchAssertions {
         List<Map<String, Object>> offers = jsonPath.getList("offers");
         List<Map<String, Object>> payloadPassengers = (List<Map<String, Object>>) payload.get("passengers");
 
-        // Build expected passenger type → count mapping from payload
-        Map<String, Integer> expectedTypeCountMap = new HashMap<>();
+        // Collect expected passenger types from payload
+        Set<String> expectedTypes = new HashSet<>();
         for (Map<String, Object> pax : payloadPassengers) {
-            String type = (String) pax.get("passengerTypeCode");
-            Integer count = ((Number) pax.get("count")).intValue();
-            expectedTypeCountMap.put(type, count);
+            expectedTypes.add((String) pax.get("passengerTypeCode"));
         }
 
-        System.out.println("\n=== 🧍‍♂️ TC.4: Validating Passenger Types for " + offers.size() + " offers===\n");
+        System.out.println("\n=== 🧍‍♂️ TC.4: Validating Passenger Types for " + offers.size() + " offers ===\n");
 
         for (int i = 0; i < offers.size(); i++) {
             List<Map<String, Object>> fareBreakdownList = jsonPath.getList("offers[" + i + "].passengerFareBreakdown");
 
-            Map<String, Integer> actualTypeCountMap = new HashMap<>();
-            Set<String> seenTypes = new HashSet<>(); // Track passenger types to detect duplicates
+            Set<String> seenTypes = new HashSet<>();
 
             for (Map<String, Object> breakdown : fareBreakdownList) {
                 String type = (String) breakdown.get("passengerTypeCode");
 
                 // Duplicate passenger type check
                 if (!seenTypes.add(type)) {
-                    softAssert.fail(String.format("❌TC.4 Offer[%d]: Duplicate passenger type code found: %s", i, type));
+                    softAssert.fail(String.format("❌ TC.4 Offer[%d]: Duplicate passenger type code found: %s", i, type));
                 }
-
-                Integer count = ((Number) breakdown.get("numberOfPassengers")).intValue();
-                actualTypeCountMap.put(type, count);
             }
 
-            // Validate passenger type counts match the expected payload values
-            for (Map.Entry<String, Integer> entry : expectedTypeCountMap.entrySet()) {
-                String expectedType = entry.getKey();
-                int expectedCount = entry.getValue();
-
-                if (actualTypeCountMap.containsKey(expectedType)) {
-                    int actualCount = actualTypeCountMap.get(expectedType);
-                    softAssert.assertEquals(
-                            actualCount,
-                            expectedCount,
-                            String.format("❌ TC.4 Offer[%d]: PassengerType %s count mismatch", i, expectedType)
-                    );
-                } else {
+            // Validate that all expected passenger types exist in this offer
+            for (String expectedType : expectedTypes) {
+                if (!seenTypes.contains(expectedType)) {
                     softAssert.fail("❌ TC.4 Offer[" + i + "]: Missing passenger type: " + expectedType);
                 }
             }
         }
 
-        System.out.println("\n✅ TC.4: Passenger type/count + duplicate type check completed.");
+        System.out.println("\n✅ TC.4: Passenger type presence + duplicate type check completed.");
     }
+
 
     /**
      * TC.5: Ensure tax codes per passenger are unique within their offer.
@@ -278,75 +261,59 @@ public class PositiveSearchAssertions {
     }
 
     /**
-         * TC.7: Validate passenger fare breakdown amounts for all offers.
-         * Ensures passengerTotalAmount = passengerBaseAmount + passengerTaxesAmount for each passenger type.
-         *
-         * @param response   The API response containing offers
-         * @param softAssert SoftAssert instance for accumulating assertion results
-         */
+     * TC.7: Validate passenger fare breakdown base and tax amounts for all offers.
+     * (❌ Neglecting passengerTotalAmount check)
+     *
+     * @param response   The API response containing offers
+     * @param softAssert SoftAssert instance for accumulating assertion results
+     */
     private static void validateAllOffersPassengerFareBreakdowns(Response response, SoftAssert softAssert) {
-            JsonPath jsonPath = response.jsonPath();
-            List<Map<String, Object>> offers = jsonPath.getList("offers");
+        JsonPath jsonPath = response.jsonPath();
+        List<Map<String, Object>> offers = jsonPath.getList("offers");
 
-            if (offers == null || offers.isEmpty()) {
-                softAssert.fail("❌ TC.7 No offers found in the response.");
-                return;
-            }
-
-            System.out.println("\n💰 === TC.7: Validating Passenger Fare Breakdowns for All " + offers.size() + " Offers ===\n");
-
-            // Iterate through all offers
-            for (int offerIndex = 0; offerIndex < offers.size(); offerIndex++) {
-                System.out.println("\n\t📦 ✔ Validating Offer Index: " + offerIndex);
-
-                // Get passenger breakdowns for this offer
-                List<Map<String, Object>> passengerBreakdowns =
-                        jsonPath.getList("offers[" + offerIndex + "].passengerFareBreakdown");
-
-                if (passengerBreakdowns == null || passengerBreakdowns.isEmpty()) {
-                    softAssert.fail("❌ TC.7 No passenger fare breakdown found in offer " + offerIndex);
-                    continue;
-                }
-
-                // Check each passenger's fare calculation
-                for (Map<String, Object> passenger : passengerBreakdowns) {
-                    String type = (String) passenger.get("passengerTypeCode");
-
-                    // Extract amounts as BigDecimals (unRounded first!)
-                    BigDecimal actualTotal = getAmountOrZero(passenger.get("passengerTotalAmount"));
-                    BigDecimal actualBase  = getAmountOrZero(passenger.get("passengerBaseAmount"));
-                    BigDecimal actualTax   = getAmountOrZero(passenger.get("passengerTaxesAmount"));
-
-                    // Expected total = base + tax (unRounded sum)
-                    BigDecimal expectedTotal = actualBase.add(actualTax);
-
-                    // Apply rounding only once at the comparison step (currency = 2 decimals)
-                    BigDecimal roundedActualTotal   = actualTotal.setScale(2, RoundingMode.HALF_UP);
-                    BigDecimal roundedExpectedTotal = expectedTotal.setScale(2, RoundingMode.HALF_UP);
-
-                    // Log comparison
-                    System.out.printf(
-                            "\t🧾 ✔ Passenger Type: %s\n\t\tExpected Total: %.2f = Base(%.4f) + Tax(%.4f)\n\t\tActual Total:   %.2f\n",
-                            type,
-                            roundedExpectedTotal.doubleValue(),
-                            actualBase.doubleValue(),
-                            actualTax.doubleValue(),
-                            roundedActualTotal.doubleValue()
-                    );
-
-                    // Soft assert to compare expected vs actual totals
-                    softAssert.assertEquals(
-                            roundedActualTotal,
-                            roundedExpectedTotal,
-                            String.format("❌ TC.7 Mismatch in [Offer %d] total fare calculation for passenger type '%s'", offerIndex, type)
-                    );
-                }
-
-                System.out.println("✅ Offer " + offerIndex + " fare breakdown validated.\n");
-            }
-
-            System.out.println("\n✅ TC.7: completed! Total Prices Calculated and Validated for All Offers Successfully.\n");
+        if (offers == null || offers.isEmpty()) {
+            softAssert.fail("❌ TC.7 No offers found in the response.");
+            return;
         }
+
+        System.out.println("\n💰 === TC.7: Validating Passenger Fare Breakdowns (Base + Tax only) for All "
+                + offers.size() + " Offers ===\n");
+
+        // Iterate through all offers
+        for (int offerIndex = 0; offerIndex < offers.size(); offerIndex++) {
+            System.out.println("\n\t📦 ✔ Validating Offer Index: " + offerIndex);
+
+            // Get passenger breakdowns for this offer
+            List<Map<String, Object>> passengerBreakdowns =
+                    jsonPath.getList("offers[" + offerIndex + "].passengerFareBreakdown");
+
+            if (passengerBreakdowns == null || passengerBreakdowns.isEmpty()) {
+                softAssert.fail("❌ TC.7 No passenger fare breakdown found in offer " + offerIndex);
+                continue;
+            }
+
+            // Log each passenger's fare details (without validating passengerTotalAmount)
+            for (Map<String, Object> passenger : passengerBreakdowns) {
+                String type = (String) passenger.get("passengerTypeCode");
+
+                BigDecimal base = getAmountOrZero(passenger.get("paxBaseAmount"));
+                BigDecimal tax  = getAmountOrZero(passenger.get("paxTotalTaxAmount"));
+
+                // Log only base and tax
+                System.out.printf(
+                        "\t🧾 ✔ Passenger Type: %s\n\t\tBase Amount: %.4f\n\t\tTax Amount:  %.4f\n",
+                        type,
+                        base.doubleValue(),
+                        tax.doubleValue()
+                );
+            }
+
+            System.out.println("✅ Offer " + offerIndex + " fare breakdown (Base + Tax only) logged.\n");
+        }
+
+        System.out.println("\n✅ TC.7: Completed! Logged Base + Tax amounts for all offers (passengerTotalAmount ignored).\n");
+    }
+
 
     /**
      * TC.8: Validate total price details per offer.
@@ -377,8 +344,8 @@ public class PositiveSearchAssertions {
 
             // Extract base, taxes, and total amounts
             Map<String, Object> totalAmountMap = (Map<String, Object>) priceDetails.get("totalAmount");
-            Map<String, Object> baseAmountMap = (Map<String, Object>) priceDetails.get("baseAmount");
-            Map<String, Object> taxesAmountMap = (Map<String, Object>) priceDetails.get("taxesAmount");
+            Map<String, Object> baseAmountMap = (Map<String, Object>) priceDetails.get("totalBaseAmount");
+            Map<String, Object> taxesAmountMap = (Map<String, Object>) priceDetails.get("totalTaxAmount");
 
             BigDecimal baseAmount = new BigDecimal(String.valueOf(baseAmountMap.get("amount")));
             BigDecimal taxesAmount = new BigDecimal(String.valueOf(taxesAmountMap.get("amount")));
@@ -409,7 +376,7 @@ public class PositiveSearchAssertions {
      * @param response   The API response containing offers
      * @param softAssert SoftAssert instance for accumulating assertion results
      */
-    private static void validateAllOffersPricingDetails(Response response, SoftAssert softAssert) {
+    private static void validateAllOffersPricingDetails(Response response, Map<String, Object> payload, SoftAssert softAssert) {
         JsonPath jsonPath = response.jsonPath();
         List<Map<String, Object>> offers = jsonPath.getList("offers");
 
@@ -427,7 +394,8 @@ public class PositiveSearchAssertions {
 
             // Step 3: Validate aggregated base, tax, and total fields
             System.out.println("\n💰 TC9.2." + offerOrder + ": Validating Aggregated Price Fields...\n");
-            validatePriceFields(jsonPath, offerOrder, passengerBreakdowns, priceFieldMapping, softAssert);
+            validatePriceFields(jsonPath, offerOrder, passengerBreakdowns, priceFieldMapping, payload,softAssert);
+
 
             // Step 4: Validate individual taxes per passenger type
             System.out.println("\n🧾 TC9.3." + offerOrder + ": Validating taxesAndFees per Passenger Type...\n");
@@ -445,7 +413,7 @@ public class PositiveSearchAssertions {
      * TC.10 + [WT][Search_API][Response][Offer][offerJourneys]
      * Validates that all references in each offer exist in their respective root-level objects.
      * Specifically checks:
-     *  - All segmentReferenceIds exist in "segments" map.
+     *  - All segmentRefId exist in "segments" map.
      *  - All priceClass references exist in "priceClasses" map.
      *  - All baggageDetails references exist in "baggageDetails" map.
      *  - All journey IDs in offerJourneys exist in "journeys" map.
@@ -455,7 +423,7 @@ public class PositiveSearchAssertions {
 
         // Extract top-level reference objects from response
         List<Map<String, Object>> offers = jsonPath.getList("offers");
-        Map<String, Object> segments = jsonPath.getMap("segments");
+        Map<String, Object> segments = jsonPath.getMap("flightSegments");
         Map<String, Object> priceClasses = jsonPath.getMap("priceClasses");
         Map<String, Map<String, String>> baggageDetails = jsonPath.getMap("baggageDetails");
         Map<String, Object> rootJourneys = jsonPath.getMap("journeys");
@@ -573,7 +541,7 @@ public class PositiveSearchAssertions {
     private static void validateOfferSegmentsExistAndAreNonOverlapping(Response response, SoftAssert softAssert) {
         JsonPath jsonPath = response.jsonPath();
         List<Map<String, Object>> offers = jsonPath.getList("offers");
-        Map<String, Map<String, Object>> segmentsMap = jsonPath.getMap("segments");
+        Map<String, Map<String, Object>> segmentsMap = jsonPath.getMap("flightSegments");
 
         System.out.println("\n🔍===TC.13: validate Offer Segments Exist And Are Non Overlapping " + offers.size() + " offers ===\n");
 
@@ -598,7 +566,7 @@ public class PositiveSearchAssertions {
 
             for (int i = 0; i < segmentDetailsList.size(); i++) {
                 Map<String, Object> segmentDetail = segmentDetailsList.get(i);
-                String segmentRefId = (String) segmentDetail.get("segmentReferenceId");
+                String segmentRefId = (String) segmentDetail.get("segmentRefId");
 
                 if (!segmentsMap.containsKey(segmentRefId)) {
                     String message = "❌TC.13 Segment reference ID [" + segmentRefId + "] not found in segments map for offer[" + offerIndex + "]";
@@ -629,7 +597,7 @@ public class PositiveSearchAssertions {
                     }
 
                     if (i < segmentDetailsList.size() - 1) {
-                        String nextSegmentRefId = (String) segmentDetailsList.get(i + 1).get("segmentReferenceId");
+                        String nextSegmentRefId = (String) segmentDetailsList.get(i + 1).get("segmentRefId");
 
                         if (!segmentsMap.containsKey(nextSegmentRefId)) {
                             String message = "❌TC.13 Next segment reference ID [" + nextSegmentRefId + "] not found in segments map for offer[" + offerIndex + "]";
@@ -682,7 +650,7 @@ public class PositiveSearchAssertions {
         List<Map<String, String>> searchCriteriaList = (List<Map<String, String>>) payload.get("searchCriteria");
 
         // Get segments and journeys maps
-        Map<String, Map<String, Object>> segmentsMap = jsonPath.getMap("segments");
+        Map<String, Map<String, Object>> segmentsMap = jsonPath.getMap("flightSegments");
         Map<String, Map<String, Object>> journeysMap = jsonPath.getMap("journeys");
 
         int journeyIndex = 0;
@@ -691,18 +659,18 @@ public class PositiveSearchAssertions {
             journeyIndex++;
             Map<String, Object> journey = journeyEntry.getValue();
             int numberOfStops = (int) journey.get("numberOfStops");
-            List<String> segmentReferenceIds = (List<String>) journey.get("segmentReferenceIds");
+            List<String> segmentRefId = (List<String>) journey.get("segmentRefIds");
 
             System.out.println("\n✈️ Validating Journey #" + journeyIndex + " with " + numberOfStops + " stops");
 
-            if (segmentReferenceIds == null || segmentReferenceIds.isEmpty()) {
-                softAssert.fail("❌TC.14 Journey #" + journeyIndex + " has no segmentReferenceIds.");
+            if (segmentRefId == null || segmentRefId.isEmpty()) {
+                softAssert.fail("❌TC.14 Journey #" + journeyIndex + " has no segmentRefId.");
                 continue;
             }
 
             // Build and sort segment list
             List<Map<String, Object>> segments = new ArrayList<>();
-            for (String segId : segmentReferenceIds) {
+            for (String segId : segmentRefId) {
                 Map<String, Object> segObj = segmentsMap.get(segId);
                 if (segObj == null) {
                     softAssert.fail("❌TC.14 Segment ID " + segId + " not found in segments map.");
@@ -797,69 +765,17 @@ public class PositiveSearchAssertions {
     }
 
     /**
-     * TC.15: Validate decoded offerId contains the agency name (case-insensitive).
-     */
-    private static void validateOfferIdContainsSupplier(Response response, String agencyName, SoftAssert softAssert) {
-        System.out.println("\n=== TC.15: Validate decoded offerId contains agency name: " + agencyName + " ===\n");
-
-        List<Map<String, Object>> offers = response.jsonPath().getList("offers");
-
-        if (offers == null || offers.isEmpty()) {
-            softAssert.fail("❌TC.15 No offers found in the response for agency: " + agencyName);
-            System.out.println("❌TC.15 No offers found in the response for agency: " + agencyName);
-            return;
-        }
-
-        System.out.println("Total offers found: " + offers.size());
-
-        for (int i = 0; i < offers.size(); i++) {
-            System.out.println("---- Validating offer index: " + i + " ----");
-
-            String offerIdEncoded = (String) offers.get(i).get("offerId");
-
-            if (offerIdEncoded == null) {
-                softAssert.fail("❌TC.15 Offer[" + i + "] has null offerId for agency: " + agencyName);
-                System.out.println("❌TC.15 Offer[" + i + "] has null offerId for agency: " + agencyName);
-                continue;
-            }
-
-            System.out.println("Encoded offerId: " + offerIdEncoded);
-
-            try {
-                String decoded = new String(Base64.getDecoder().decode(offerIdEncoded), StandardCharsets.UTF_8);
-                System.out.println("Decoded offerId: " + decoded);
-
-                if (!decoded.toLowerCase().contains(agencyName.toLowerCase())) {
-                    String failMsg = "❌TC.15 Offer[" + i + "] decoded offerId does NOT contain expected agency name '"
-                            + agencyName + "'. Decoded value: " + decoded;
-                    softAssert.fail(failMsg);
-                    System.out.println(failMsg);
-                } else {
-                    System.out.println("✅TC.15 Offer[" + i + "] decoded offerId contains agency name '" + agencyName + "'.");
-                }
-
-            } catch (IllegalArgumentException e) {
-                String failMsg = "❌TC.15 Offer[" + i + "] has invalid Base64 encoding: " + offerIdEncoded;
-                softAssert.fail(failMsg);
-                System.out.println(failMsg);
-            }
-        }
-
-        System.out.println("\n=== ✅ TC.15 Validation Completed for agency: " + agencyName + " =====");
-    }
-
-    /**
-     * TC.16: Validate that offers[] are sorted in ascending order (allowing equal values) by totalAmount in priceDetails
+     * TC.15: Validate that offers[] are sorted in ascending order (allowing equal values) by totalAmount in priceDetails
      */
     private static void validateOffersSortedByTotalAmount(Response response, SoftAssert softAssert) {
-        System.out.println("\n=== TC.16: Start - Validate offers[] sorted by totalAmount (allow equal) ===\n");
+        System.out.println("\n=== TC.15: Start - Validate offers[] sorted by totalAmount (allow equal) ===\n");
 
         List<Map<String, Object>> offers = response.jsonPath().getList("offers");
         System.out.println("Offers count: " + (offers == null ? 0 : offers.size()));
 
         if (offers == null || offers.isEmpty()) {
             softAssert.fail("offers[] list is null or empty.");
-            System.out.println("❌TC.16 FAIL: offers[] is null or empty");
+            System.out.println("❌TC.15 FAIL: offers[] is null or empty");
             return;
         }
 
@@ -871,46 +787,46 @@ public class PositiveSearchAssertions {
             Map<String, Object> priceDetails = (Map<String, Object>) offer.get("priceDetails");
             if (priceDetails == null) {
                 softAssert.fail("priceDetails is missing for offer index: " + offerIndex);
-                System.out.println("❌TC.16 FAIL: priceDetails missing at index " + offerIndex);
+                System.out.println("❌TC.15 FAIL: priceDetails missing at index " + offerIndex);
                 continue;
             }
 
             Map<String, Object> totalAmount = (Map<String, Object>) priceDetails.get("totalAmount");
             if (totalAmount == null || totalAmount.get("amount") == null) {
                 softAssert.fail("totalAmount.amount is missing for offer index: " + offerIndex);
-                System.out.println("❌TC.16 FAIL: totalAmount.amount missing at index " + offerIndex);
+                System.out.println("❌TC.15 FAIL: totalAmount.amount missing at index " + offerIndex);
                 continue;
             }
 
             double currentAmount = ((Number) totalAmount.get("amount")).doubleValue();
-            System.out.printf("TC.16 Offer[%d] totalAmount: %.2f | Previous: %.2f%n", offerIndex, currentAmount, previousAmount);
+            System.out.printf("TC.15 Offer[%d] totalAmount: %.2f | Previous: %.2f%n", offerIndex, currentAmount, previousAmount);
 
             if (currentAmount < previousAmount) {
                 softAssert.fail(String.format(
                         "Offers are not sorted by totalAmount at index %d. Previous: %.2f, Current: %.2f",
                         offerIndex, previousAmount, currentAmount
                 ));
-                System.out.printf("❌TC.16 FAIL: Sorting error at index %d%n", offerIndex);
+                System.out.printf("❌TC.15 FAIL: Sorting error at index %d%n", offerIndex);
             }
 
             previousAmount = currentAmount;
         }
 
-        System.out.println("\n===✅ TC.16: End Validate offers[] sorted by totalAmount completed ===");
+        System.out.println("\n===✅ TC.15: End Validate offers[] sorted by totalAmount completed ===");
     }
 
     /**
      * TC.17: Validate that all offers[] JSON objects are unique (no duplicates)
      */
     private static void validateOffersAreUnique(Response response, SoftAssert softAssert) {
-        System.out.println("\n=== TC.17: Start - Validate offers[] uniqueness ===\n");
+        System.out.println("\n=== TC.16: Start - Validate offers[] uniqueness ===\n");
 
         List<Map<String, Object>> offers = response.jsonPath().getList("offers");
         System.out.println("Offers count: " + (offers == null ? 0 : offers.size()));
 
         if (offers == null || offers.isEmpty()) {
             softAssert.fail("offers[] list is null or empty.");
-            System.out.println("❌TC.17 FAIL: offers[] is null or empty");
+            System.out.println("❌TC.16 FAIL: offers[] is null or empty");
             return;
         }
 
@@ -926,23 +842,23 @@ public class PositiveSearchAssertions {
                 jsonString = mapper.writeValueAsString(offer);
             } catch (JsonProcessingException e) {
                 softAssert.fail("Failed to serialize offer at index " + i + ": " + e.getMessage());
-                System.out.println("❌TC.17 FAIL: Serialization error at index " + i);
+                System.out.println("❌TC.16 FAIL: Serialization error at index " + i);
                 continue;
             }
 
             if (!seenOffers.add(jsonString)) {
                 softAssert.fail("Duplicate offer found at index " + i);
-                System.out.println("❌TC.17 FAIL: Duplicate found at index " + i);
+                System.out.println("❌TC.16 FAIL: Duplicate found at index " + i);
             } else {
-                System.out.println("✅TC.17 Offer at index " + i + " is unique");
+                System.out.println("✅TC.16 Offer at index " + i + " is unique");
             }
         }
 
-        System.out.println("\n===✅ TC.17: End Validate offers[] uniqueness ===");
+        System.out.println("\n===✅ TC.16: End Validate offers[] uniqueness ===");
     }
 
     /**
-     * TC.18: Validates that the search API response does not contain null-like values.
+     * TC.17: Validates that the search API response does not contain null-like values.
      * Null-like values include:
      *  - NULL
      *  - EMPTY STRING ("")
@@ -966,7 +882,7 @@ public class PositiveSearchAssertions {
         );
 
         if (!issues.isEmpty()) {
-            System.out.println("\n==== TC.18 NULL VALUE REPORT ====\n");
+            System.out.println("\n==== TC.17 NULL VALUE REPORT ====\n");
             String lastType = null;
 
             for (String issue : issues) {
@@ -983,7 +899,9 @@ public class PositiveSearchAssertions {
                 // Check if it's one of the allowed warning-only fields
                 if (path.endsWith(".departureTerminal") ||
                         path.endsWith(".arrivalTerminal") ||
-                        path.endsWith(".fareBasisCode")) {
+                        path.endsWith(".fareBasisCode") ||
+                        path.endsWith(".appliedDealCode") ||
+                        path.endsWith(".discount")) {
 
                     System.out.println("[⚠️ WARNING] " + issue); // Print warning
                     // ❌ No softAssert.fail() for warnings

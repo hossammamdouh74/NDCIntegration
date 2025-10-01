@@ -30,17 +30,11 @@ public class HelperPassengerBreakdown {
             Map<String, BigDecimal> typeMap = aggregated.get(type);
 
             // Accumulate amounts for each field, defaulting to zero if missing
-            typeMap.put("baseAmount", typeMap.getOrDefault("baseAmount", BigDecimal.ZERO)
-                    .add(getAmountOrZero(pax.get("passengerBaseAmount"))));
+            typeMap.put("totalBaseAmount", typeMap.getOrDefault("totalBaseAmount", BigDecimal.ZERO)
+                    .add(getAmountOrZero(pax.get("paxBaseAmount"))));
 
-            typeMap.put("taxesAmount", typeMap.getOrDefault("taxesAmount", BigDecimal.ZERO)
+            typeMap.put("totalTaxAmount", typeMap.getOrDefault("totalTaxAmount", BigDecimal.ZERO)
                     .add(getAmountOrZero(pax.get("passengerTaxesAmount"))));
-
-            typeMap.put("beforeDiscountAmount", typeMap.getOrDefault("beforeDiscountAmount", BigDecimal.ZERO)
-                    .add(getAmountOrZero(pax.get("passengerBeforeDiscountAmount"))));
-
-            typeMap.put("totalAmount", typeMap.getOrDefault("totalAmount", BigDecimal.ZERO)
-                    .add(getAmountOrZero(pax.get("passengerTotalAmount"))));
         }
 
         return aggregated;
@@ -132,9 +126,9 @@ public class HelperPassengerBreakdown {
             }
 
             for (Map<String, String> segment : segmentDetails) {
-                String segmentRefId = segment.get("segmentReferenceId");
-                String priceClassRefId = segment.get("priceClassReferenceId");
-                String baggageRefId = segment.get("baggageDetailsReferenceId");
+                String segmentRefId = segment.get("segmentRefId");
+                String priceClassRefId = segment.get("priceClassRefId");
+                String baggageRefId = segment.get("baggageDetailsRefId");
 
                 // Validate references exist
                 softAssert.assertTrue(segments.containsKey(segmentRefId),
@@ -164,7 +158,7 @@ public class HelperPassengerBreakdown {
                                              Map<String, Object> rootJourneys,
                                              SoftAssert softAssert,
                                              int offerIndex) {
-        List<?> offerJourneys = (List<?>) offer.get("journeys");
+        List<?> offerJourneys = (List<?>) offer.get("offerJourneys");
 
         // Fail if no journeys found in the offer
         if (offerJourneys == null || offerJourneys.isEmpty()) {
@@ -192,10 +186,8 @@ public class HelperPassengerBreakdown {
         Map<String, BigDecimal> result = new HashMap<>();
         BigDecimal countBD = BigDecimal.valueOf(count);
 
-        result.put("baseAmount", roundTo2Decimals(getAmountOrZero(fareConfirmPax.get("passengerBaseAmount")).multiply(countBD)));
-        result.put("taxesAmount", roundTo2Decimals(getAmountOrZero(fareConfirmPax.get("passengerTaxesAmount")).multiply(countBD)));
-        result.put("totalAmount", roundTo2Decimals(getAmountOrZero(fareConfirmPax.get("passengerTotalAmount")).multiply(countBD)));
-        result.put("beforeDiscountAmount", roundTo2Decimals(getAmountOrZero(fareConfirmPax.get("passengerBeforeDiscountAmount")).multiply(countBD)));
+        result.put("totalBaseAmount", roundTo2Decimals(getAmountOrZero(fareConfirmPax.get("paxBaseAmount")).multiply(countBD)));
+        result.put("totalTaxAmount", roundTo2Decimals(getAmountOrZero(fareConfirmPax.get("paxTotalTaxAmount")).multiply(countBD)));
 
         return result;
     }

@@ -3,6 +3,8 @@
   "description": "Test booking flow: Verify round-trip search from CAI to ATH with 1 ADT, 4 CHD, and 1 INF",
   "bookingFlow": "book",
   "expectedStatusCode": 200,
+  "supplier": "AegeanV21",
+  "credentialsSelector": "EGY",
   "searchCriteria": [
     {
       "origin": "FCO",
