@@ -1,0 +1,18 @@
+{
+  "testCaseId": "TC_8",
+  "description": "Running Negative assertion for scenario: BLANK DESTINATION",
+  "expectedStatusCode": 400,
+  "invalidScenarioType": "BLANK_DESTINATION",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  }
+  ]
+}

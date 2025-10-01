@@ -1,0 +1,48 @@
+{
+  "scenarioType":"GENDER_REQUIRED",
+  "OfferId": "{{fareConfirmId}}",
+  "Passengers": {
+    "ADT1": {
+      "PassengerTypeCode": "ADT",
+      "Title": "Mr",
+      "Gender": "",
+      "Name": {
+        "First": "Hossam",
+        "Middle": "",
+        "Last": "mamdouh"
+      },
+      "BirthDate": "1989-07-02T00:00:00",
+      "NationalityCountryCode": "EG",
+      "ResidenceCountryCode": "EG",
+      "TravelDocument": {
+        "DocumentNumber": "ADT1DOC",
+        "DocumentType": "Passport",
+        "Name": {
+          "First": "Hossam",
+          "Middle": "",
+          "Last": "Mamdouh"
+        },
+        "Gender": "Male",
+        "BirthDate": "1989-07-02T00:00:00",
+        "ExpirationDate": "2035-01-01T00:00:00",
+        "BirthCountryCode": "EG",
+        "NationalityCountryCode": "EG",
+        "IssuanceCountryCode": "EG"
+      },
+      "Contact": {
+        "Email": "Hossam@example.com",
+        "Phone": {
+          "CountryDialingCode": "+20",
+          "PhoneNumber": "1000000000",
+          "Type": "Personal"
+        },
+        "Address": {
+          "CountryCode": "EG",
+          "CityCode": "CAI",
+          "Line1": "Line1",
+          "Line2": "Line2"
+        }
+      }
+    }
+  }
+}

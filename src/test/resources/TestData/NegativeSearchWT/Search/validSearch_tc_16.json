@@ -1,0 +1,19 @@
+{
+  "testCaseId": "TC_16",
+  "expectedStatusCode": 400,
+  "description": "Running Negative assertion for scenario: WRONG DATE FORMAT",
+  "invalidScenarioType": "WRONG_DATE_FORMAT",
+  "searchCriteria": [
+      {
+        "origin": "CAI",
+        "destination": "JED",
+        "date": "2025-27-05"
+      }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  }
+  ]
+}

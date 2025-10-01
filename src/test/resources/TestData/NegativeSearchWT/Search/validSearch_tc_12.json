@@ -1,0 +1,19 @@
+{
+  "testCaseId": "TC_12",
+  "expectedStatusCode": 400,
+  "description": "Running Negative assertion for scenario: INVALID CODE LENGTH",
+  "invalidScenarioType": "INVALID_CODE_LENGTH",
+  "searchCriteria": [
+    {
+      "origin": "CAIA",
+      "destination": "JED",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  }
+  ]
+}

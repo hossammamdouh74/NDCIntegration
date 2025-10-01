@@ -1,0 +1,91 @@
+{
+  "scenarioType":"INF_REFER_TO_EXIST_ADT",
+  "OfferId": "{{fareConfirmId}}",
+  "Passengers": {
+    "ADT1": {
+      "PassengerTypeCode": "ADT",
+      "Title": "Mr",
+      "Gender": "Male",
+      "Name": {
+        "First": "Hossam",
+        "Middle": "",
+        "Last": "Mamdouh"
+      },
+      "BirthDate": "1989-07-02T00:00:00",
+      "NationalityCountryCode": "EG",
+      "ResidenceCountryCode": "EG",
+      "TravelDocument": {
+        "DocumentNumber": "ADT1DOC",
+        "DocumentType": "Passport",
+        "Name": {
+          "First": "Hossam",
+          "Middle": "",
+          "Last": "Mamdouh"
+        },
+        "Gender": "Male",
+        "BirthDate": "1989-07-02T00:00:00",
+        "ExpirationDate": "2035-01-01T00:00:00",
+        "BirthCountryCode": "EG",
+        "NationalityCountryCode": "EG",
+        "IssuanceCountryCode": "EG"
+      },
+      "Contact": {
+        "Email": "Hossam@example.com",
+        "Phone": {
+          "CountryDialingCode": "+20",
+          "PhoneNumber": "1000000000",
+          "Type": "Personal"
+        },
+        "Address": {
+          "CountryCode": "EG",
+          "CityCode": "CAI",
+          "Line1": "Line1",
+          "Line2": "Line2"
+        }
+      }
+    },
+    "INF2": {
+      "PassengerTypeCode": "INF",
+      "Title": "Mr",
+      "Gender": "Male",
+      "Name": {
+        "First": "INFTWO",
+        "Middle": "",
+        "Last": "Hossam"
+      },
+      "BirthDate": "2024-05-08T00:00:00",
+      "NationalityCountryCode": "EG",
+      "ResidenceCountryCode": "EG",
+      "TravelDocument": {
+        "DocumentNumber": "INF2DOC",
+        "DocumentType": "Passport",
+        "Name": {
+          "First": "INFTWO",
+          "Middle": "",
+          "Last": "Hossam"
+        },
+        "Gender": "Male",
+        "BirthDate": "2024-05-08T00:00:00",
+        "ExpirationDate": "2035-01-01T00:00:00",
+        "BirthCountryCode": "EG",
+        "NationalityCountryCode": "EG",
+        "IssuanceCountryCode": "EG"
+      },
+      "Contact": {
+        "Email": "Hossam@example.com",
+        "Phone": {
+          "CountryDialingCode": "+20",
+          "PhoneNumber": "1000000000",
+          "Type": "Personal"
+        },
+        "Address": {
+          "CountryCode": "EG",
+          "CityCode": "CAI",
+          "Line1": "Line1",
+          "Line2": "Line2"
+        }
+      },
+      "ParentPassengerReferenceId": "ADT2"
+    }
+  }
+}

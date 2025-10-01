@@ -1,0 +1,24 @@
+{
+  "testCaseId": "TC_09",
+  "description": "Running Negative assertion for scenario: INF_REFER_TO_ONLY_ONE_ADT",
+  "bookingFlow": "book",
+  "addPaxFlow": "fail",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin":"JED",
+      "destination": "CAI",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 2
+    },
+    {
+      "passengerTypeCode": "INF",
+      "count": 2
+    }
+  ]
+}

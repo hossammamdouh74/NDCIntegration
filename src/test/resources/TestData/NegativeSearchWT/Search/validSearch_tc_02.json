@@ -1,0 +1,18 @@
+{
+  "testCaseId": "TC_2",
+  "description": "Running Negative assertion for scenario: MISSING PASSENGER COUNT",
+  "expectedStatusCode": 400,
+  "invalidScenarioType": "BLANK_PASSENGER_COUNT",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "FCO",
+      "date": "2025-09-05"
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT"
+  }
+  ]
+}

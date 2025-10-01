@@ -1,0 +1,13 @@
+{
+  "testCaseId": "TC_6",
+  "description": "Running Negative assertion for scenario: BLANK CRITERIA",
+  "expectedStatusCode": 400,
+  "invalidScenarioType": "BLANK_CRITERIA",
+  "searchCriteria": [],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  }
+  ]
+}

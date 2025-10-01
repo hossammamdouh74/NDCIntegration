@@ -1,0 +1,26 @@
+{
+  "testCaseId": "TC_10",
+  "description": "Test booking flow: Verify one way search from CAI to DXB with  7 ADT, 1 CHD and 1 INF",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "credentialsSelector": "EGY",
+  "searchCriteria": [
+    {
+      "origin": "DEL",
+      "destination": "BLR",
+      "offsetDays": 24
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 7
+    },  {
+      "passengerTypeCode": "CHD",
+      "count": 1
+    },  {
+      "passengerTypeCode": "INF",
+      "count": 1
+    }
+  ]
+}

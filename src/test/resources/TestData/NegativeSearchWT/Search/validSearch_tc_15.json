@@ -1,0 +1,19 @@
+{
+  "testCaseId": "TC_15",
+  "expectedStatusCode": 400,
+  "description": "Running Negative assertion for scenario: ORIGIN DATA TYPE",
+  "invalidScenarioType": "ORIGIN_DATA_TYPE",
+  "searchCriteria": [
+    {
+      "origin": 213,
+      "destination": "JED",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  }
+  ]
+}

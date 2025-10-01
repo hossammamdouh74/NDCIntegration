@@ -1,0 +1,33 @@
+{
+  "testCaseId": "TC_02",
+  "description": "Verify Round-Trip search from DMM to CAI then DMM with 4 ADT, 2 CHD, and 3 INF",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin": "DMM",
+      "destination": "CAI",
+      "offsetDays": 25
+    }
+  ,
+    {
+      "origin": "CAI",
+      "destination": "DMM",
+      "offsetDays": 27
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 4
+    },
+    {
+      "passengerTypeCode": "CHD",
+      "count": 2
+    },
+    {
+      "passengerTypeCode": "INF",
+      "count": 3
+    }
+  ]
+}

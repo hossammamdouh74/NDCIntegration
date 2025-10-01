@@ -1,0 +1,31 @@
+{
+  "testCaseId": "TC_09",
+  "description": "Test hold booking flow: Verify Round trip search from CAI to LHR with  8 ADT and 1 INF",
+  "bookingFlow": "holdBook",
+  "expectedStatusCode": 200,
+  "credentialsSelector": "EGY",
+  "searchCriteria": [
+    {
+      "origin": "BOM",
+      "destination": "IXR",
+      "offsetDays": 20
+    }
+  ,
+    {
+      "origin": "IXR",
+      "destination": "BOM",
+      "offsetDays": 22
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 8
+    },
+
+    {
+      "passengerTypeCode": "INF",
+      "count": 1
+    }
+  ]
+}

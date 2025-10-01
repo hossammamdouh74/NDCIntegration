@@ -1,0 +1,19 @@
+{
+  "testCaseId": "TC_13",
+  "expectedStatusCode": 400,
+  "description": "Running Negative assertion for scenario: NON EXISTING PASSENGER CODE",
+  "invalidScenarioType": "NON_EXISTING_PASSENGER_CODE",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "JED",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "EWQ",
+    "count": 1
+  }
+  ]
+}

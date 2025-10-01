@@ -1,0 +1,18 @@
+{
+  "testCaseId": "TC_7",
+  "description": "Running Negative assertion for scenario: BLANK ORIGIN",
+  "expectedStatusCode": 400,
+  "invalidScenarioType": "BLANK_ORIGIN",
+  "searchCriteria": [
+    {
+      "destination": "FCO",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  }
+  ]
+}

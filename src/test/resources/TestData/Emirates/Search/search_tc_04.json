@@ -1,0 +1,27 @@
+{
+  "testCaseId": "TC_04",
+  "description": "Test hold booking flow: Verify one way search from JED to CAI with  3 ADT, 3 CHD, and 3 INF",
+  "bookingFlow": "holdBook",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin":"JED",
+      "destination": "CAI",
+      "offsetDays": 24
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 3
+    },
+    {
+      "passengerTypeCode": "CHD",
+      "count": 3
+    },
+    {
+      "passengerTypeCode": "INF",
+      "count": 3
+    }
+  ]
+}

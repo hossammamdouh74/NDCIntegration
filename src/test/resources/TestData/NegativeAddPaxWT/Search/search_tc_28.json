@@ -1,0 +1,20 @@
+{
+  "testCaseId": "TC_28",
+  "description": "Running Negative assertion for scenario: ISSUANCE_CODE_INVALID",
+  "addPaxFlow": "fail",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin":"CAI",
+      "destination": "JED",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 1
+    }
+  ]
+}

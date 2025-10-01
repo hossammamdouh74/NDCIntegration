@@ -1,0 +1,24 @@
+{
+  "testCaseId": "TC_14",
+  "description": "Running Negative assertion for scenario: PASSENGER_COUNT_MISMATCH",
+  "bookingFlow": "book",
+  "addPaxFlow": "fail",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin":"JED",
+      "destination": "CAI",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 1
+    },
+    {
+      "passengerTypeCode": "INF",
+      "count": 1
+    }
+  ]
+}

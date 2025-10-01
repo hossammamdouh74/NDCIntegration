@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AllAirlineAPITests" parallel="false">
+    <test name="AirlineTests">
+        <classes>
+
+            <!-- etc -->
+        </classes>
+    </test>
+</suite>

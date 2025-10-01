@@ -1,0 +1,31 @@
+{
+  "testCaseId": "TC_08",
+  "description": "Test Hold booking flow: Verify one way search from CAI to DXB with  7 ADT, 1 CHD and 1 INF",
+  "bookingFlow": "holdbook",
+  "expectedStatusCode": 200,
+  "credentialsSelector": "EGY",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "DXB",
+      "offsetDays": 24
+    },
+    {
+      "origin": "DXB",
+      "destination": "ATH",
+      "offsetDays": 26
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 7
+    },  {
+      "passengerTypeCode": "CHD",
+      "count": 1
+    },  {
+      "passengerTypeCode": "INF",
+      "count": 1
+    }
+  ]
+}

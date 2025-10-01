@@ -1,0 +1,32 @@
+{
+  "testCaseId": "TC_02",
+  "description": "Verify Multi-city search from HBE to KWI then CAI with 4 ADT, 2 CHD, and 3 INF",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin": "HBE",
+      "destination": "KWI",
+      "offsetDays": 20
+    },
+    {
+      "origin": "KWI",
+      "destination": "CAI",
+      "offsetDays": 22
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 4
+    },
+    {
+      "passengerTypeCode": "CHD",
+      "count": 2
+    },
+    {
+      "passengerTypeCode": "INF",
+      "count": 3
+    }
+  ]
+}

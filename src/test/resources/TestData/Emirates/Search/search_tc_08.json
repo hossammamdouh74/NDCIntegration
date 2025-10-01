@@ -1,0 +1,26 @@
+{
+  "testCaseId": "TC_08",
+  "description": "Test booking flow: Verify Round Trip search from CAI to DXB with  8 ADT",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "credentialsSelector": "EGY",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "DXB",
+      "offsetDays": 22
+    },
+    {
+      "origin": "DXB",
+      "destination": "CAI",
+      "offsetDays": 22
+    }
+
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 8
+    }
+  ]
+}

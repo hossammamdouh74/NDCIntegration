@@ -1,0 +1,20 @@
+{
+  "testCaseId": "TC_01",
+  "description": "Test booking flow: Verify one way search from CAI to DXB with  5 ADT",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "credentialsSelector": "EGY",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "DXB",
+      "offsetDays": 24
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 5
+    }
+  ]
+}

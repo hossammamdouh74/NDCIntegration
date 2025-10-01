@@ -1,0 +1,20 @@
+{
+  "testCaseId": "TC_16",
+  "description": "Running Negative assertion for scenario: FIRST_NAME_ONE_CHARACTER",
+  "bookingFlow": "book",
+  "addPaxFlow": "fail",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin":"CAI",
+      "destination": "JED",
+      "offsetDays": 27
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 1
+    }
+  ]
+}

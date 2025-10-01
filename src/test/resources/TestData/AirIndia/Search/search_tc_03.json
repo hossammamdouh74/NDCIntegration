@@ -1,0 +1,32 @@
+{
+  "testCaseId": "TC_03",
+  "description": "Test booking flow: Verify Multi-city search from DMM to CAI then JED with  4 ADT, 2 CHD, and 3 INF",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin":"BOM",
+      "destination": "IXR",
+      "offsetDays": 20
+    },
+    {
+      "origin": "IXR",
+      "destination": "DEL",
+      "offsetDays": 22
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count":1
+    },
+    {
+      "passengerTypeCode": "CHD",
+      "count": 1
+    },
+    {
+      "passengerTypeCode": "INF",
+      "count": 1
+    }
+  ]
+}

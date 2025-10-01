@@ -1,0 +1,24 @@
+{
+  "testCaseId": "TC_01",
+  "description": "Test booking flow: Verify round-trip search from JED to CAI with 1 ADT, 4 CHD, and 1 INF",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin":"CAI",
+      "destination": "JED",
+      "offsetDays": 25
+    },
+    {
+      "origin": "JED",
+      "destination": "CAI",
+      "offsetDays": 27
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  }
+]
+}

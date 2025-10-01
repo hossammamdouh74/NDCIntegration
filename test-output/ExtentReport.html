@@ -1,0 +1,2161 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title></title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report standard">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary"></span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Oct 1, 2025 10:34:49 AM</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('exception-view')">
+<a id="nav-exception" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bug"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="fail" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:34:50 AM</span> / <span>00:00:15:231</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:34:50 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:35:05 AM</span>
+<span class='badge badge-default'>00:00:15:231</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:34:50 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_01 - Test booking flow: Verify round-trip search from CAI to ATH with 1 ADT, 4 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:34:50 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:35:05 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: 1 expectation failed.
+Expected status code <200> but was <409>.
+
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:57)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:45)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)
+	at io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:49)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:135)
+	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:49)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:143)
+	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+	at Utils.Assertions.PositiveSearchAssertions.validateResponse(PositiveSearchAssertions.java:68)
+	at Utils.Assertions.PerformAssertions.PerformSearch(PerformAssertions.java:81)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testPositiveSearch(OneSupplierTests.java:53)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:35:05 AM</span> / <span>00:00:11:725</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:35:05 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:35:17 AM</span>
+<span class='badge badge-default'>00:00:11:725</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:05 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_02 - Verify Multi-city search from CAI to FCO then ATH with 4 ADT, 2 CHD, and 3 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:05 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:16 AM</td>
+        <td>
+          ✅ Currency validation completed against expected: EGP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:17 AM</td>
+        <td>
+          ✅ Selected Offer ID: QWVnZWFuVjIxI0VHWSNBNEMySTMjMWQzOWVhZWYtODM0ZS00M2RiLTgyNjctMTdhOTQ0OGM2ZmM1I1gxQkU2OTY0MC1BNjQ0LTQxNTEtOTM4OS4xLTEmbTd4WU1VSkZOamsyTkRBdFFUWTBOQzAwTVRVeExUa3pPRGt1TVMweG9rRXpsSktvTnpZM016Z3VNakNqUlVkUXdKS29NelV3TWpBdU1qQ2pSVWRRa3FnME1UY3hPQzR3TUtORlIxQ0R2bGd4UWtVMk9UWTBNQzFCTmpRMExUUXhOVEV0T1RNNE9TNHhMVEV0TVpTaVZER2lWREtpVkRPaVZEUytXREZDUlRZNU5qUXdMVUUyTkRRdE5ERTFNUzA1TXpnNUxqRXRNUzB5a3FKVU5hSlVOcjVZTVVKRk5qazJOREF0UVRZME5DMDBNVFV4TFRrek9Ea3VNUzB4TFRPVHBGUXhMakdrVkRJdU1hUlVNeTR4Z3ExTllYUmphRlI1Y0dWRGIyUmwwZ0FBQUFDeVJYaHdhWEpoZEdsdmJrUmhkR1ZVYVcxbDF2OW8zTjVjZzdCRVRWTXdNVEF3TTJGalpHTmtPV0ZqbktORFFVbWpRVlJJMXY5bzl3VkExdjlvOXlGZ29UUEFlS0pCTTZNNU16R2lRVE9qT1RNeHNETXlNU3dnUVdseVluVnpJRUV6TWpHd1JFMVRNREl3TUROaFkyUmpaRGxoWTV5alFWUklvMFpEVDliL2FQZXozTmIvYVBmREdNQ2hNMzJpUVRPak5qVTBva0V6b3pZMU5MTXpNbEVzSUVGcGNtSjFjeUJCTXpJeGJtVnZzRVJOVXpBME1EQXpZV05rWTJRNVlXT2NvMEZVU0tORFFVblcvMmo1Zk9UVy8yajVsOWpBb1ROem9rRXpvemt6TUtKQk02TTVNekN3TXpJeExDQkJhWEppZFhNZ1FUTXlNZGtrTmpObE9UaGhOV0l0TnpneFpTMDBaRE13TFdJNE1UWXRZekJtWW1NMU9XWTBOVEk0b0ptWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLSlVNYVJVTVM0eHdLTkJSRlNaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU1xUlVNaTR4d0tOQlJGU1p4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTTZSVU15NHh3S05CUkZTWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLSlVOTURBbzBGRVZKbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFExd01DalEwaEVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRiQXdLTkRTRVNaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tSVU1TNHh3TUNqU1U1R21jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2tWREl1TWNEQW8wbE9ScG5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBcEZRekxqSEF3S05KVGthb056WTNNemd1TWpEQQ==
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:35:17 AM</td>
+        <td>
+          Test passed
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:35:17 AM</span> / <span>00:00:10:710</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:35:17 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:35:27 AM</span>
+<span class='badge badge-default'>00:00:10:710</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:17 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_03 - Test booking flow: Verify Multi-city search from JED to CAI with  2 ADT, 3 CHD, and 2 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:17 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:27 AM</td>
+        <td>
+          ✅ Currency validation completed against expected: EGP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:27 AM</td>
+        <td>
+          ✅ Selected Offer ID: QWVnZWFuVjIxI0VHWSNBMkMySTIjYmU2NjNkYWQtNThlOS00ZjBhLWJmMGEtZmExMzEwYTFjMTBjI1g3N0YzRjA0QS01RTZFLTQxRTktQkY0Qy4xLTEmbTd4WU56ZEdNMFl3TkVFdE5VVTJSUzAwTVVVNUxVSkdORU11TVMweG9rRXpsSktvTmpJME56QXVNRENqUlVkUXdKS29NakUwTnpBdU1EQ2pSVWRRa3FnME1UQXdNQzR3TUtORlIxQ0R2bGczTjBZelJqQTBRUzAxUlRaRkxUUXhSVGt0UWtZMFF5NHhMVEV0TVpLaVZER2lWREsrV0RjM1JqTkdNRFJCTFRWRk5rVXROREZGT1MxQ1JqUkRMakV0TVMweWtxSlVNNkpVTkw1WU56ZEdNMFl3TkVFdE5VVTJSUzAwTVVVNUxVSkdORU11TVMweExUT1NwRlF4TGpHa1ZESXVNWUt0VFdGMFkyaFVlWEJsUTI5a1pkSUFBQUFBc2tWNGNHbHlZWFJwYjI1RVlYUmxWR2x0WmRiL2FOemVhWU93UkUxVE1ERXdNRFEyWTJSalpEbGlPWnlqUVZSSW8wTkJTZGIvYVBlOVBOYi9hUGZaWE1DaE0zaWlRVE9qT1RNMG9rRXpvemt6TkxBek1qQXNJRUZwY21KMWN5QkJNekl3c0VSTlV6QXpNREEwTm1Oa1kyUTVZam1jbzBOQlNhTkJWRWpXLzJqNmlCVFcvMmo2cFdDaE04Qjlva0V6b3prek5hSkJNNk01TXpXd016SXdMQ0JCYVhKaWRYTWdRVE15TUxCRVRWTXdOREF3TkRaalpHTmtPV0k1bktOQlZFaWpSa05QMXY5byt5d2sxdjlvK3pvMHdLRXplS0pCTTZNMk5UQ2lRVE9qTmpVd3N6TXlVU3dnUVdseVluVnpJRUV6TWpGdVpXL1pKR05tTldSaE1XWmtMV0kwTVRrdE5HUmhOeTA0T1RnMkxUTXlZbU5oWmpObVpqazVaYUNXbWNjTS93QUFBQUQvLy8veGlHNEpBTURBd01DaVZER2tWREV1TWNDalFVUlVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRLa1ZESXVNY0NqUVVSVW1jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2lWRFBBd0tORFNFU1p4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTk1EQW8wTklSSm5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBcEZReExqSEF3S05KVGthWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLUlVNaTR4d01DalNVNUdxRFl5TkRjd0xqQXd3QT09
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:35:27 AM</td>
+        <td>
+          Test passed
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:35:27 AM</span> / <span>00:00:11:655</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:35:27 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:35:39 AM</span>
+<span class='badge badge-default'>00:00:11:655</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:27 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_04 - Test  booking flow: Verify one way search from JED to CAI with  2 ADT, 2 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:27 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:35:39 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: 1 expectation failed.
+Expected status code <200> but was <409>.
+
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)
+	at io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:135)
+	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:143)
+	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+	at Utils.Assertions.PositiveSearchAssertions.validateResponse(PositiveSearchAssertions.java:68)
+	at Utils.Assertions.PerformAssertions.PerformSearch(PerformAssertions.java:81)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testPositiveSearch(OneSupplierTests.java:53)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:35:39 AM</span> / <span>00:00:05:899</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:35:39 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:35:45 AM</span>
+<span class='badge badge-default'>00:00:05:899</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:39 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_05 - Test hold booking flow: Verify Multi-City search from JED to CAI with  3 ADT, 3 CHD, and 2 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:39 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:45 AM</td>
+        <td>
+          ✅ Currency validation completed against expected: EGP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:45 AM</td>
+        <td>
+          ✅ Selected Offer ID: QWVnZWFuVjIxI0VHWSNBM0MzSTIjZTYzZmFjNzUtODllYi00MzIzLWIzN2EtNTYwODcyOWEyNjE1I1hCN0I2OURGRS04RkY5LTQ4NDktQjIzOC4xLTEmbTd4WVFqZENOamxFUmtVdE9FWkdPUzAwT0RRNUxVSXlNemd1TVMweG9rRXpsSktvTnpZMk1ETXVNRENqUlVkUXdKS29NekU0T0RVdU1EQ2pSVWRRa3FnME5EY3hPQzR3TUtORlIxQ0R2bGhDTjBJMk9VUkdSUzA0UmtZNUxUUTRORGt0UWpJek9DNHhMVEV0TVpPaVZER2lWREtpVkRPK1dFSTNRalk1UkVaRkxUaEdSamt0TkRnME9TMUNNak00TGpFdE1TMHlrNkpVTktKVU5hSlVOcjVZUWpkQ05qbEVSa1V0T0VaR09TMDBPRFE1TFVJeU16Z3VNUzB4TFRPU3BGUXhMakdrVkRJdU1ZS3RUV0YwWTJoVWVYQmxRMjlrWmRJQUFBQUFza1Y0Y0dseVlYUnBiMjVFWVhSbFZHbHRaZGIvYU56ZWZJT3dSRTFUTURFd01EVmpZMlJqWkRsalk1eWpSa05QbzBGVVNOYi9hUGZQL05iL2FQZjVBS0V4d0hPaVFUT2pOalUxb2tFem96WTFOYk16TWxFc0lFRnBjbUoxY3lCQk16SXhibVZ2c0VSTlV6QXlNREExWTJOa1kyUTVZMk9jbzBGVVNLTkRRVW5XLzJqNEsyVFcvMmo0UmxqQW9UTnpva0V6b3prek1LSkJNNk01TXpDd016SXhMQ0JCYVhKaWRYTWdRVE15TWJCRVRWTXdOREF3TldOalpHTmtPV05qbktORFFVbWpRVlJJMXY5bythaEExdjlvK2NSZ29UUEFlS0pCTTZNNU16R2lRVE9qT1RNeHNETXlNU3dnUVdseVluVnpJRUV6TWpIWkpEZ3pZelJpTWpZMExXWmhObVV0TkRjeFlTMWhOMkU0TFdZeVptTTNZVEk1TmpnM09LQ1ltY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRHa1ZERXVNY0NqUVVSVW1jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2lWREtrVkRJdU1jQ2pRVVJVbWNjTS93QUFBQUQvLy8veGlHNEpBTURBd01DaVZEUEF3S05CUkZTWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLSlVOTURBbzBOSVJKbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFExd01DalEwaEVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRiQXdLTkRTRVNaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tSVU1TNHh3TUNqU1U1R21jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2tWREl1TWNEQW8wbE9ScWczTmpZd015NHdNTUE9
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:35:45 AM</td>
+        <td>
+          Test passed
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:35:45 AM</span> / <span>00:00:09:853</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:35:45 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:35:55 AM</span>
+<span class='badge badge-default'>00:00:09:853</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:45 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_05 - Test booking flow: Verify Round Trip search from JED to CAI with  3 ADT, 3 CHD, and 2 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:45 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:35:55 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: 1 expectation failed.
+Expected status code <200> but was <409>.
+
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)
+	at io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:135)
+	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:143)
+	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+	at Utils.Assertions.PositiveSearchAssertions.validateResponse(PositiveSearchAssertions.java:68)
+	at Utils.Assertions.PerformAssertions.PerformSearch(PerformAssertions.java:81)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testPositiveSearch(OneSupplierTests.java:53)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:35:55 AM</span> / <span>00:00:17:187</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:35:55 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:36:12 AM</span>
+<span class='badge badge-default'>00:00:17:187</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:55 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_07 - Test hold booking flow: Verify Round Trip search from JED to CAI with  3 ADT, 3 CHD, and 2 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:35:55 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:10 AM</td>
+        <td>
+          ✅ Currency validation completed against expected: EGP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:12 AM</td>
+        <td>
+          ✅ Selected Offer ID: QWVnZWFuVjIxI0VHWSNBM0MzSTIjMWNmMDFhNDUtYWY4My00MmM1LTgxODItNTAwNDFkZmYwZmQ0I1g1MjUwODBFNy03NkYwLTQ4ODktODI0NS43LTdfWDUyNTA4MEU3LTc2RjAtNDg4OS04MjQ1LjI1LTI1Jm05azdXRFV5TlRBNE1FVTNMVGMyUmpBdE5EZzRPUzA0TWpRMUxqY3ROMTlZTlRJMU1EZ3dSVGN0TnpaR01DMDBPRGc1TFRneU5EVXVNalV0TWpXaVFUT1VrcWt4TURBd05UTXVPRENqUlVkUXdKS29OREl3TWpFdU9EQ2pSVWRRa3FnMU9EQXpNaTR3TUtORlIxQ0d2bGcxTWpVd09EQkZOeTAzTmtZd0xUUTRPRGt0T0RJME5TNDNMVGN0TVpPaVZER2lWREtpVkRPK1dEVXlOVEE0TUVVM0xUYzJSakF0TkRnNE9TMDRNalExTGpjdE55MHlrNkpVTktKVU5hSlVOcjVZTlRJMU1EZ3dSVGN0TnpaR01DMDBPRGc1TFRneU5EVXVOeTAzTFRPU3BGUXhMakdrVkRJdU1ka2dXRFV5TlRBNE1FVTNMVGMyUmpBdE5EZzRPUzA0TWpRMUxqSTFMVEkxTFRHVG9sUXhvbFF5b2xRejJTQllOVEkxTURnd1JUY3ROelpHTUMwME9EZzVMVGd5TkRVdU1qVXRNalV0TXBPaVZEU2lWRFdpVkRiWklGZzFNalV3T0RCRk55MDNOa1l3TFRRNE9Ea3RPREkwTlM0eU5TMHlOUzB6a3FSVU1TNHhwRlF5TGpHQ3JVMWhkR05vVkhsd1pVTnZaR1hTQUFBQUE3SkZlSEJwY21GMGFXOXVSR0YwWlZScGJXWFcvMmpjM28yRXNFUk5VekF4TURBMlpXTmtZMlE1WkdTY28wTkJTYU5CVkVqVy8yajNCVURXLzJqM0lXQ2hNOEI0b2tFem96a3pNYUpCTTZNNU16R3dNekl4TENCQmFYSmlkWE1nUVRNeU1iQkVUVk0yTVRBd05tVmpaR05rT1dSa25LTkJWRWlqUmtOUDF2OW85N1BjMXY5bzk4TVl3S0V6ZmFKQk02TTJOVFNpUVRPak5qVTBzek15VVN3Z1FXbHlZblZ6SUVFek1qRnVaVyt3UkUxVFpEY3dNRFpsWTJSalpEbGtaSnlqUmtOUG8wRlVTTmIvYVBweS9OYi9hUHFjQUtFeHdIT2lRVE9qTmpVMW9rRXpvelkxTmJNek1sRXNJRUZwY21KMWN5QkJNekl4Ym1WdnNFUk5VMlE0TURBMlpXTmtZMlE1WkdTY28wRlVTS05EUVVuVy8yajZ6bVRXLzJqNjZWakFvVE56b2tFem96a3pNS0pCTTZNNU16Q3dNekl4TENCQmFYSmlkWE1nUVRNeU1ka2tOalpqWW1NMU5XUXRPR0ZsWWkwME1qRmxMVGxpWWpBdE5UZ3laVEV6TlRWa01EQm1vSmlaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU1hUlVNUzR4d0tOQlJGU1p4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTXFSVU1pNHh3S05CUkZTWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLSlVNOERBbzBGRVZKbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFEwd01DalEwaEVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRYQXdLTkRTRVNaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU5zREFvME5JUkpuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQXBGUXhMakhBd0tOSlRrYVp4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S1JVTWk0eHdNQ2pTVTVHcURRNE5UazFMalF3d0E9PQ==
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:36:12 AM</td>
+        <td>
+          Test passed
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:36:12 AM</span> / <span>00:00:11:792</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:36:12 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:36:24 AM</span>
+<span class='badge badge-default'>00:00:11:792</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:12 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_08 - Test hold booking flow: Verify one way search from JED to CAI with  2 ADT, 2 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:12 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:36:24 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: 1 expectation failed.
+Expected status code <200> but was <409>.
+
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)
+	at io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:135)
+	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:143)
+	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+	at Utils.Assertions.PositiveSearchAssertions.validateResponse(PositiveSearchAssertions.java:68)
+	at Utils.Assertions.PerformAssertions.PerformSearch(PerformAssertions.java:81)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testPositiveSearch(OneSupplierTests.java:53)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="9"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:36:24 AM</span> / <span>00:00:09:149</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:36:24 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:36:33 AM</span>
+<span class='badge badge-default'>00:00:09:149</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:24 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_09 - Test hold booking flow: Verify one way search from JED to CAI with  2 ADT, 2 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:24 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:32 AM</td>
+        <td>
+          ✅ Currency validation completed against expected: EGP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:33 AM</td>
+        <td>
+          ✅ Selected Offer ID: QWVnZWFuVjIxI0VHWSNBMkMwSTAjNjQwMzY0ZDEtMDUwOC00ZThiLWExOGMtODBkMDgyNmFjOGNjI1hFQzExQzI0OC1GQUM5LTQyRDAtODQxQi42LTYmbTd4WVJVTXhNVU15TkRndFJrRkRPUzAwTWtRd0xUZzBNVUl1TmkwMm9rRXpsSktvTVRVME16TXVOakNqUlVkUXdKS25OakEzTXk0Mk1LTkZSMUNTcHprek5qQXVNRENqUlVkUWdiNVlSVU14TVVNeU5EZ3RSa0ZET1MwME1rUXdMVGcwTVVJdU5pMDJMVEdTb2xReG9sUXlncTFOWVhSamFGUjVjR1ZEYjJSbDBnQUFBQU95Ulhod2FYSmhkR2x2YmtSaGRHVlVhVzFsMXY5bzNONnBnckJFVFZNd01UQXdPRFpqWkdOa09XWTVuS05EUVVtalFWUkkxdjlvOXdWQTF2OW85eUZnb1RQQWVLSkJNNk01TXpHaVFUT2pPVE14c0RNeU1Td2dRV2x5WW5WeklFRXpNakd3UkUxVE5EQXdNRGcyWTJSalpEbG1PWnlqUVZSSW8wWkRUOWIvYVBlejNOYi9hUGZER01DaE0zMmlRVE9qTmpVMG9rRXpvelkxTkxNek1sRXNJRUZwY21KMWN5QkJNekl4Ym1WdjJTUmhNRFUxTXpreU5DMHpaR1poTFRRM1kyWXRZV1ZpTUMxa1lXWmxNV0UxTVdJeVpHR2drcG5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBb2xReHdNQ2pRVVJVbWNjTS93QUFBQUQvLy8veGlHNEpBTURBd01DaVZETEF3S05CUkZTb01UVTBNek11TmpEQQ==
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:36:33 AM</td>
+        <td>
+          Test passed
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="10"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:36:33 AM</span> / <span>00:00:07:365</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:36:33 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:36:40 AM</span>
+<span class='badge badge-default'>00:00:07:365</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:33 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_10 - Test hold booking flow: Verify one way search from JED to CAI with  2 ADT, 2 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:33 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:40 AM</td>
+        <td>
+          ✅ Currency validation completed against expected: EGP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:40 AM</td>
+        <td>
+          ✅ Selected Offer ID: QWVnZWFuVjIxI0VHWSNBMkMwSTAjOGRhNzUwNDYtNmM4ZC00MTRkLWI5N2ItOTU1NTYwN2E0YmViI1g1MDRBOTg3RC1GOEItNEIxOC1BREEyLjEtMSZtN3RZTlRBMFFUazROMFF0UmpoQ0xUUkNNVGd0UVVSQk1pNHhMVEdpUVRPVWtxYzNOVGs1TGpneW8wVkhVTUNTcHpNek1qQXVNRENqUlVkUWtxYzBNamM1TGpneW8wVkhVSUc5V0RVd05FRTVPRGRFTFVZNFFpMDBRakU0TFVGRVFUSXVNUzB4TFRHU29sUXhvbFF5Z3ExTllYUmphRlI1Y0dWRGIyUmwwZ0FBQUFPeVJYaHdhWEpoZEdsdmJrUmhkR1ZVYVcxbDF2OW8zTjZ5Z2JCRVRWTXdNVEF3T1RGalpHTmtZVEF5bktOQlZFaWpRMEZKMXY5bzl0bmsxdjlvOXZUWXdLRXpjNkpCTTZNNU16Q2lRVE9qT1RNd3NETXlNU3dnUVdseVluVnpJRUV6TWpIWkpEQmpZVEUwWlRWbUxUVTVPV1F0TkRGak1DMDRaVGhqTFRFMllUWXpZelppTm1FeU02Q1NtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRIQXdLTkJSRlNaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU1zREFvMEZFVktjM05UazVMamd5d0E9PQ==
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:36:40 AM</td>
+        <td>
+          Test passed
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="11"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:36:40 AM</span> / <span>00:00:07:235</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:36:40 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:36:47 AM</span>
+<span class='badge badge-default'>00:00:07:235</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=11</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:40 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_11 - Test hold booking flow: Verify one way search from JED to CAI with  2 ADT, 2 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:40 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:47 AM</td>
+        <td>
+          ✅ Currency validation completed against expected: EGP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:47 AM</td>
+        <td>
+          ✅ Selected Offer ID: QWVnZWFuVjIxI0VHWSNBMkMwSTAjYmI1YzFiNWItMDc3Yi00MzYyLWEwYzEtMDk2MjI2YTg2ZmYzI1g1NDkyNzc5LUE2MEMtNEMwQS05QkQ0LjEtMSZtN3RZTlRRNU1qYzNPUzFCTmpCRExUUkRNRUV0T1VKRU5DNHhMVEdpUVRPVWtxYzNPVFU1TGpZd28wVkhVTUNTcHpRd056VXVOakNqUlVkUWtxY3pPRGcwTGpBd28wVkhVSUc5V0RVME9USTNOemt0UVRZd1F5MDBRekJCTFRsQ1JEUXVNUzB4TFRHU29sUXhvbFF5Z3ExTllYUmphRlI1Y0dWRGIyUmwwZ0FBQUFPeVJYaHdhWEpoZEdsdmJrUmhkR1ZVYVcxbDF2OW8zTjY1Z2JCRVRWTXdNVEF3T1dGalpHTmtZVEE1bktORFFVbWpRVlJJMXY5bzl3VkExdjlvOXlGZ29UUEFlS0pCTTZNNU16R2lRVE9qT1RNeHNETXlNU3dnUVdseVluVnpJRUV6TWpIWkpESmpNbU0zTkRRMUxXVXlZelF0TkRnek5TMDVOV1kzTFdFNE1qUXhOVFV6WlRJeU5hQ1NtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRIQXdLTkJSRlNaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU1zREFvMEZFVktjM09UVTVMall3d0E9PQ==
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:36:47 AM</td>
+        <td>
+          Test passed
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="12"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:36:47 AM</span> / <span>00:00:03:082</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:36:47 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:36:50 AM</span>
+<span class='badge badge-default'>00:00:03:082</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=12</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:47 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_12 - Test hold booking flow: Verify one way search from JED to CAI with  2 ADT, 2 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:47 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:36:50 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: 1 expectation failed.
+Expected status code <200> but was <409>.
+
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)
+	at io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:135)
+	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:143)
+	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+	at Utils.Assertions.PositiveSearchAssertions.validateResponse(PositiveSearchAssertions.java:68)
+	at Utils.Assertions.PerformAssertions.PerformSearch(PerformAssertions.java:81)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testPositiveSearch(OneSupplierTests.java:53)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="13"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testPositiveSearch</p>
+            <p class="text-sm">
+              <span>10:36:50 AM</span> / <span>00:00:01:578</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testPositiveSearch</h5>
+<span class='badge badge-success'>10.01.2025 10:36:50 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:36:52 AM</span>
+<span class='badge badge-default'>00:00:01:578</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=13</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:50 AM</td>
+        <td>
+          Test Supplier: Aegean
+Running test case: TC_13 - Test hold booking flow: Verify one way search from JED to CAI with  2 ADT, 2 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:50 AM</td>
+        <td>
+          Search URL: https://flight-engine-staging.azurewebsites.net/api/Offers/GetAvailableOffers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:36:52 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: 1 expectation failed.
+Expected status code <200> but was <409>.
+
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)
+	at io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:135)
+	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:143)
+	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+	at Utils.Assertions.PositiveSearchAssertions.validateResponse(PositiveSearchAssertions.java:68)
+	at Utils.Assertions.PerformAssertions.PerformSearch(PerformAssertions.java:81)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testPositiveSearch(OneSupplierTests.java:53)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="14"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testFareConfirm</p>
+            <p class="text-sm">
+              <span>10:36:52 AM</span> / <span>00:00:02:917</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testFareConfirm</h5>
+<span class='badge badge-success'>10.01.2025 10:36:52 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:36:55 AM</span>
+<span class='badge badge-default'>00:00:02:917</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=14</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:52 AM</td>
+        <td>
+          Running FareConfirm for: TC_02 - Verify Multi-city search from CAI to FCO then ATH with 4 ADT, 2 CHD, and 3 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:36:55 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.RuntimeException: ❌ Failed to save FareConfirm response for offerId: QWVnZWFuVjIxI0VHWSNBNEMySTMjMWQzOWVhZWYtODM0ZS00M2RiLTgyNjctMTdhOTQ0OGM2ZmM1I1AxQkU2OTY0MC1BNjQ0LTQxNTEtOTM4OS0xJm03cFFNVUpGTmprMk5EQXRRVFkwTkMwME1UVXhMVGt6T0RrdE1hSkJNNVNTcURjMk56TTRMakl3bzBWSFVNQ1NxRE0xTURJd0xqSXdvMFZIVUpLb05ERTNNVGd1TURDalJVZFFnN3hRTVVKRk5qazJOREF0UVRZME5DMDBNVFV4TFRrek9Ea3RNUzB4bEtKVU1hSlVNNkpVTktKVU1yeFFNVUpGTmprMk5EQXRRVFkwTkMwME1UVXhMVGt6T0RrdE1TMHlrcUpVTmFKVU5yeFFNVUpGTmprMk5EQXRRVFkwTkMwME1UVXhMVGt6T0RrdE1TMHprNlJVTVM0eHBGUXlMakdrVkRNdU1ZR3lSWGh3YVhKaGRHbHZia1JoZEdWVWFXMWwxdjlvM043RWc3QkVUVk13TVRBd00yRmpaR05rT1dGam5LTkRRVW1qUVZSSTF2OW85d1ZBMXY5bzl5RmdvVFBBZUtKQk02TTVNekdpUVRPak9UTXhzRE15TVN3Z1FXbHlZblZ6SUVFek1qR3dSRTFUTURJd01ETmhZMlJqWkRsaFk1eWpRVlJJbzBaRFQ5Yi9hUGV6M05iL2FQZkRHTUNoTTMyaVFUT2pOalUwb2tFem96WTFOTE16TWxFc0lFRnBjbUoxY3lCQk16SXhibVZ2c0VSTlV6QTBNREF6WVdOa1kyUTVZV09jbzBGVVNLTkRRVW5XLzJqNWZPVFcvMmo1bDlqQW9UTnpva0V6b3prek1LSkJNNk01TXpDd016SXhMQ0JCYVhKaWRYTWdRVE15TWRra09XTTJPV0l5T1RrdE1HVTVaUzAwTnpNekxUbG1aVFF0WVRJNVlURXhPR0ZpT0RoaW9KbVp4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTWFSVU1TNHh3S05CUkZTWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLUlVNUzR4d01DalNVNUdtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRLa1ZESXVNY0NqUVVSVW1jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2tWREl1TWNEQW8wbE9ScG5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBb2xRenBGUXpMakhBbzBGRVZKbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFwRlF6TGpIQXdLTkpUa2FaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU5NREFvMEZFVkpuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQW9sUTF3TUNqUTBoRW1jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2lWRGJBd0tORFNFU29OelkzTXpndU1qQ1R1bEF4UWtVMk9UWTBNQzFCTmpRMExUUXhOVEV0T1RNNE9TMHhva0V6azVLOFVERkNSVFk1TmpRd0xVRTJORFF0TkRFMU1TMDVNemc1TFRFdE1hSkJNNUs4VURGQ1JUWTVOalF3TFVFMk5EUXROREUxTVMwNU16ZzVMVEV0TXFKQk01SzhVREZDUlRZNU5qUXdMVUUyTkRRdE5ERTFNUzA1TXpnNUxURXRNNkpCTXc9PQ==
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:94)
+	at Utils.Assertions.PerformAssertions.PerformFareConfirm(PerformAssertions.java:136)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testFareConfirm(OneSupplierTests.java:96)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+Caused by: java.io.FileNotFoundException: src\test\resources\TestData\FareConfirmResponses\QWVnZWFuVjIxI0VHWSNBNEMySTMjMWQzOWVhZWYtODM0ZS00M2RiLTgyNjctMTdhOTQ0OGM2ZmM1I1AxQkU2OTY0MC1BNjQ0LTQxNTEtOTM4OS0xJm03cFFNVUpGTmprMk5EQXRRVFkwTkMwME1UVXhMVGt6T0RrdE1hSkJNNVNTcURjMk56TTRMakl3bzBWSFVNQ1NxRE0xTURJd0xqSXdvMFZIVUpLb05ERTNNVGd1TURDalJVZFFnN3hRTVVKRk5qazJOREF0UVRZME5DMDBNVFV4TFRrek9Ea3RNUzB4bEtKVU1hSlVNNkpVTktKVU1yeFFNVUpGTmprMk5EQXRRVFkwTkMwME1UVXhMVGt6T0RrdE1TMHlrcUpVTmFKVU5yeFFNVUpGTmprMk5EQXRRVFkwTkMwME1UVXhMVGt6T0RrdE1TMHprNlJVTVM0eHBGUXlMakdrVkRNdU1ZR3lSWGh3YVhKaGRHbHZia1JoZEdWVWFXMWwxdjlvM043RWc3QkVUVk13TVRBd00yRmpaR05rT1dGam5LTkRRVW1qUVZSSTF2OW85d1ZBMXY5bzl5RmdvVFBBZUtKQk02TTVNekdpUVRPak9UTXhzRE15TVN3Z1FXbHlZblZ6SUVFek1qR3dSRTFUTURJd01ETmhZMlJqWkRsaFk1eWpRVlJJbzBaRFQ5Yi9hUGV6M05iL2FQZkRHTUNoTTMyaVFUT2pOalUwb2tFem96WTFOTE16TWxFc0lFRnBjbUoxY3lCQk16SXhibVZ2c0VSTlV6QTBNREF6WVdOa1kyUTVZV09jbzBGVVNLTkRRVW5XLzJqNWZPVFcvMmo1bDlqQW9UTnpva0V6b3prek1LSkJNNk01TXpDd016SXhMQ0JCYVhKaWRYTWdRVE15TWRra09XTTJPV0l5T1RrdE1HVTVaUzAwTnpNekxUbG1aVFF0WVRJNVlURXhPR0ZpT0RoaW9KbVp4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTWFSVU1TNHh3S05CUkZTWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLUlVNUzR4d01DalNVNUdtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRLa1ZESXVNY0NqUVVSVW1jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2tWREl1TWNEQW8wbE9ScG5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBb2xRenBGUXpMakhBbzBGRVZKbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFwRlF6TGpIQXdLTkpUa2FaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU5NREFvMEZFVkpuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQW9sUTF3TUNqUTBoRW1jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2lWRGJBd0tORFNFU29OelkzTXpndU1qQ1R1bEF4UWtVMk9UWTBNQzFCTmpRMExUUXhOVEV0T1RNNE9TMHhva0V6azVLOFVERkNSVFk1TmpRd0xVRTJORFF0TkRFMU1TMDVNemc1TFRFdE1hSkJNNUs4VURGQ1JUWTVOalF3TFVFMk5EUXROREUxTVMwNU16ZzVMVEV0TXFKQk01SzhVREZDUlRZNU5qUXdMVUUyTkRRdE5ERTFNUzA1TXpnNUxURXRNNkpCTXc9PQ__.json (The filename, directory name, or volume label syntax is incorrect)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:295)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:237)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:185)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileOutputStream(TokenStreamFactory.java:294)
+	at com.fasterxml.jackson.core.JsonFactory.createGenerator(JsonFactory.java:1428)
+	at com.fasterxml.jackson.databind.ObjectWriter.createGenerator(ObjectWriter.java:764)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1081)
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:91)
+	... 27 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="15"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testFareConfirm</p>
+            <p class="text-sm">
+              <span>10:36:55 AM</span> / <span>00:00:04:653</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testFareConfirm</h5>
+<span class='badge badge-success'>10.01.2025 10:36:55 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:37:00 AM</span>
+<span class='badge badge-default'>00:00:04:653</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=15</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:36:55 AM</td>
+        <td>
+          Running FareConfirm for: TC_03 - Test booking flow: Verify Multi-city search from JED to CAI with  2 ADT, 3 CHD, and 2 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:37:00 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.RuntimeException: ❌ Failed to save FareConfirm response for offerId: QWVnZWFuVjIxI0VHWSNBMkMySTIjYmU2NjNkYWQtNThlOS00ZjBhLWJmMGEtZmExMzEwYTFjMTBjI1A3N0YzRjA0QS01RTZFLTQxRTktQkY0Qy0xJm03cFFOemRHTTBZd05FRXROVVUyUlMwME1VVTVMVUpHTkVNdE1hSkJNNVNTcURZeU5EY3dMakF3bzBWSFVNQ1NxREl4TkRjd0xqQXdvMFZIVUpLb05ERXdNREF1TURDalJVZFFnN3hRTnpkR00wWXdORUV0TlVVMlJTMDBNVVU1TFVKR05FTXRNUzB4a3FKVU1hSlVNcnhRTnpkR00wWXdORUV0TlVVMlJTMDBNVVU1TFVKR05FTXRNUzB5a3FKVU02SlVOTHhRTnpkR00wWXdORUV0TlVVMlJTMDBNVVU1TFVKR05FTXRNUzB6a3FSVU1TNHhwRlF5TGpHQnNrVjRjR2x5WVhScGIyNUVZWFJsVkdsdFpkYi9hTnpleVlPd1JFMVRNREV3TURRMlkyUmpaRGxpT1p5alFWUklvME5CU2RiL2FQZTlQTmIvYVBmWlhNQ2hNM2lpUVRPak9UTTBva0V6b3prek5MQXpNakFzSUVGcGNtSjFjeUJCTXpJd3NFUk5VekF6TURBME5tTmtZMlE1WWptY28wTkJTYU5CVkVqVy8yajZpQlRXLzJqNnBXQ2hNOEI5b2tFem96a3pOYUpCTTZNNU16V3dNekl3TENCQmFYSmlkWE1nUVRNeU1MQkVUVk13TkRBd05EWmpaR05rT1dJNW5LTkJWRWlqUmtOUDF2OW8reXdrMXY5byt6bzB3S0V6ZUtKQk02TTJOVENpUVRPak5qVXdzek15VVN3Z1FXbHlZblZ6SUVFek1qRnVaVy9aSkRZMU1UZ3hOMkpoTFdZNFl6SXRORGxsWWkxaU16aGtMVGhoTkRCa1lqSm1abVppTktDV21jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2lWREdrVkRFdU1jQ2pRVVJVbWNjTS93QUFBQUQvLy8veGlHNEpBTURBd01Da1ZERXVNY0RBbzBsT1JwbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFF5cEZReUxqSEFvMEZFVkpuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQXBGUXlMakhBd0tOSlRrYVp4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTThEQW8wTklSSm5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBb2xRMHdNQ2pRMGhFcURZeU5EY3dMakF3azdwUU56ZEdNMFl3TkVFdE5VVTJSUzAwTVVVNUxVSkdORU10TWFKQk01T1N2RkEzTjBZelJqQTBRUzAxUlRaRkxUUXhSVGt0UWtZMFF5MHhMVEdpUVRPU3ZGQTNOMFl6UmpBMFFTMDFSVFpGTFRReFJUa3RRa1kwUXkweExUS2lRVE9TdkZBM04wWXpSakEwUVMwMVJUWkZMVFF4UlRrdFFrWTBReTB4TFRPaVFUTT0=
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:94)
+	at Utils.Assertions.PerformAssertions.PerformFareConfirm(PerformAssertions.java:136)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testFareConfirm(OneSupplierTests.java:96)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+Caused by: java.io.FileNotFoundException: src\test\resources\TestData\FareConfirmResponses\QWVnZWFuVjIxI0VHWSNBMkMySTIjYmU2NjNkYWQtNThlOS00ZjBhLWJmMGEtZmExMzEwYTFjMTBjI1A3N0YzRjA0QS01RTZFLTQxRTktQkY0Qy0xJm03cFFOemRHTTBZd05FRXROVVUyUlMwME1VVTVMVUpHTkVNdE1hSkJNNVNTcURZeU5EY3dMakF3bzBWSFVNQ1NxREl4TkRjd0xqQXdvMFZIVUpLb05ERXdNREF1TURDalJVZFFnN3hRTnpkR00wWXdORUV0TlVVMlJTMDBNVVU1TFVKR05FTXRNUzB4a3FKVU1hSlVNcnhRTnpkR00wWXdORUV0TlVVMlJTMDBNVVU1TFVKR05FTXRNUzB5a3FKVU02SlVOTHhRTnpkR00wWXdORUV0TlVVMlJTMDBNVVU1TFVKR05FTXRNUzB6a3FSVU1TNHhwRlF5TGpHQnNrVjRjR2x5WVhScGIyNUVZWFJsVkdsdFpkYi9hTnpleVlPd1JFMVRNREV3TURRMlkyUmpaRGxpT1p5alFWUklvME5CU2RiL2FQZTlQTmIvYVBmWlhNQ2hNM2lpUVRPak9UTTBva0V6b3prek5MQXpNakFzSUVGcGNtSjFjeUJCTXpJd3NFUk5VekF6TURBME5tTmtZMlE1WWptY28wTkJTYU5CVkVqVy8yajZpQlRXLzJqNnBXQ2hNOEI5b2tFem96a3pOYUpCTTZNNU16V3dNekl3TENCQmFYSmlkWE1nUVRNeU1MQkVUVk13TkRBd05EWmpaR05rT1dJNW5LTkJWRWlqUmtOUDF2OW8reXdrMXY5byt6bzB3S0V6ZUtKQk02TTJOVENpUVRPak5qVXdzek15VVN3Z1FXbHlZblZ6SUVFek1qRnVaVy9aSkRZMU1UZ3hOMkpoTFdZNFl6SXRORGxsWWkxaU16aGtMVGhoTkRCa1lqSm1abVppTktDV21jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2lWREdrVkRFdU1jQ2pRVVJVbWNjTS93QUFBQUQvLy8veGlHNEpBTURBd01Da1ZERXVNY0RBbzBsT1JwbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFF5cEZReUxqSEFvMEZFVkpuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQXBGUXlMakhBd0tOSlRrYVp4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTThEQW8wTklSSm5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBb2xRMHdNQ2pRMGhFcURZeU5EY3dMakF3azdwUU56ZEdNMFl3TkVFdE5VVTJSUzAwTVVVNUxVSkdORU10TWFKQk01T1N2RkEzTjBZelJqQTBRUzAxUlRaRkxUUXhSVGt0UWtZMFF5MHhMVEdpUVRPU3ZGQTNOMFl6UmpBMFFTMDFSVFpGTFRReFJUa3RRa1kwUXkweExUS2lRVE9TdkZBM04wWXpSakEwUVMwMVJUWkZMVFF4UlRrdFFrWTBReTB4TFRPaVFUTT0_.json (The filename, directory name, or volume label syntax is incorrect)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:295)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:237)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:185)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileOutputStream(TokenStreamFactory.java:294)
+	at com.fasterxml.jackson.core.JsonFactory.createGenerator(JsonFactory.java:1428)
+	at com.fasterxml.jackson.databind.ObjectWriter.createGenerator(ObjectWriter.java:764)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1081)
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:91)
+	... 27 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="16"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testFareConfirm</p>
+            <p class="text-sm">
+              <span>10:37:00 AM</span> / <span>00:00:01:781</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testFareConfirm</h5>
+<span class='badge badge-success'>10.01.2025 10:37:00 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:37:01 AM</span>
+<span class='badge badge-default'>00:00:01:781</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=16</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:37:00 AM</td>
+        <td>
+          Running FareConfirm for: TC_05 - Test hold booking flow: Verify Multi-City search from JED to CAI with  3 ADT, 3 CHD, and 2 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:37:01 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.RuntimeException: ❌ Failed to save FareConfirm response for offerId: QWVnZWFuVjIxI0VHWSNBM0MzSTIjZTYzZmFjNzUtODllYi00MzIzLWIzN2EtNTYwODcyOWEyNjE1I1BCN0I2OURGRS04RkY5LTQ4NDktQjIzOC0xJm03cFFRamRDTmpsRVJrVXRPRVpHT1MwME9EUTVMVUl5TXpndE1hSkJNNVNTcURjMk5qQXpMakF3bzBWSFVNQ1NxRE14T0RnMUxqQXdvMFZIVUpLb05EUTNNVGd1TURDalJVZFFnN3hRUWpkQ05qbEVSa1V0T0VaR09TMDBPRFE1TFVJeU16Z3RNUzB4azZKVU1hSlVNNkpVTXJ4UVFqZENOamxFUmtVdE9FWkdPUzAwT0RRNUxVSXlNemd0TVMweWs2SlVOS0pVTnFKVU5ieFFRamRDTmpsRVJrVXRPRVpHT1MwME9EUTVMVUl5TXpndE1TMHprcVJVTVM0eHBGUXlMakdCc2tWNGNHbHlZWFJwYjI1RVlYUmxWR2x0WmRiL2FOemV5NE93UkUxVE1ERXdNRFZqWTJSalpEbGpZNXlqUmtOUG8wRlVTTmIvYVBmUC9OYi9hUGY1QUtFeHdIT2lRVE9qTmpVMW9rRXpvelkxTmJNek1sRXNJRUZwY21KMWN5QkJNekl4Ym1WdnNFUk5VekF5TURBMVkyTmtZMlE1WTJPY28wRlVTS05EUVVuVy8yajRLMlRXLzJqNFJsakFvVE56b2tFem96a3pNS0pCTTZNNU16Q3dNekl4TENCQmFYSmlkWE1nUVRNeU1iQkVUVk13TkRBd05XTmpaR05rT1dOam5LTkRRVW1qUVZSSTF2OW8rYWhBMXY5bytjUmdvVFBBZUtKQk02TTVNekdpUVRPak9UTXhzRE15TVN3Z1FXbHlZblZ6SUVFek1qSFpKRGt6Wm1GaU9UTXlMV1kwTkRFdE5EWmhPUzFpTXpnMkxURXdZek5tWVRFNVl6YzJaYUNZbWNjTS93QUFBQUQvLy8veGlHNEpBTURBd01DaVZER2tWREV1TWNDalFVUlVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNrVkRFdU1jREFvMGxPUnBuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQW9sUXlwRlF5TGpIQW8wRkVWSm5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBcEZReUxqSEF3S05KVGthWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLSlVNOERBbzBGRVZKbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFEwd01DalEwaEVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRYQXdLTkRTRVNaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU5zREFvME5JUktnM05qWXdNeTR3TUpPNlVFSTNRalk1UkVaRkxUaEdSamt0TkRnME9TMUNNak00TFRHaVFUT1RrcnhRUWpkQ05qbEVSa1V0T0VaR09TMDBPRFE1TFVJeU16Z3RNUzB4b2tFemtyeFFRamRDTmpsRVJrVXRPRVpHT1MwME9EUTVMVUl5TXpndE1TMHlva0V6a3J4UVFqZENOamxFUmtVdE9FWkdPUzAwT0RRNUxVSXlNemd0TVMwem9rRXo=
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:94)
+	at Utils.Assertions.PerformAssertions.PerformFareConfirm(PerformAssertions.java:136)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testFareConfirm(OneSupplierTests.java:96)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+Caused by: java.io.FileNotFoundException: src\test\resources\TestData\FareConfirmResponses\QWVnZWFuVjIxI0VHWSNBM0MzSTIjZTYzZmFjNzUtODllYi00MzIzLWIzN2EtNTYwODcyOWEyNjE1I1BCN0I2OURGRS04RkY5LTQ4NDktQjIzOC0xJm03cFFRamRDTmpsRVJrVXRPRVpHT1MwME9EUTVMVUl5TXpndE1hSkJNNVNTcURjMk5qQXpMakF3bzBWSFVNQ1NxRE14T0RnMUxqQXdvMFZIVUpLb05EUTNNVGd1TURDalJVZFFnN3hRUWpkQ05qbEVSa1V0T0VaR09TMDBPRFE1TFVJeU16Z3RNUzB4azZKVU1hSlVNNkpVTXJ4UVFqZENOamxFUmtVdE9FWkdPUzAwT0RRNUxVSXlNemd0TVMweWs2SlVOS0pVTnFKVU5ieFFRamRDTmpsRVJrVXRPRVpHT1MwME9EUTVMVUl5TXpndE1TMHprcVJVTVM0eHBGUXlMakdCc2tWNGNHbHlZWFJwYjI1RVlYUmxWR2x0WmRiL2FOemV5NE93UkUxVE1ERXdNRFZqWTJSalpEbGpZNXlqUmtOUG8wRlVTTmIvYVBmUC9OYi9hUGY1QUtFeHdIT2lRVE9qTmpVMW9rRXpvelkxTmJNek1sRXNJRUZwY21KMWN5QkJNekl4Ym1WdnNFUk5VekF5TURBMVkyTmtZMlE1WTJPY28wRlVTS05EUVVuVy8yajRLMlRXLzJqNFJsakFvVE56b2tFem96a3pNS0pCTTZNNU16Q3dNekl4TENCQmFYSmlkWE1nUVRNeU1iQkVUVk13TkRBd05XTmpaR05rT1dOam5LTkRRVW1qUVZSSTF2OW8rYWhBMXY5bytjUmdvVFBBZUtKQk02TTVNekdpUVRPak9UTXhzRE15TVN3Z1FXbHlZblZ6SUVFek1qSFpKRGt6Wm1GaU9UTXlMV1kwTkRFdE5EWmhPUzFpTXpnMkxURXdZek5tWVRFNVl6YzJaYUNZbWNjTS93QUFBQUQvLy8veGlHNEpBTURBd01DaVZER2tWREV1TWNDalFVUlVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNrVkRFdU1jREFvMGxPUnBuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQW9sUXlwRlF5TGpIQW8wRkVWSm5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBcEZReUxqSEF3S05KVGthWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLSlVNOERBbzBGRVZKbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFEwd01DalEwaEVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRYQXdLTkRTRVNaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU5zREFvME5JUktnM05qWXdNeTR3TUpPNlVFSTNRalk1UkVaRkxUaEdSamt0TkRnME9TMUNNak00TFRHaVFUT1RrcnhRUWpkQ05qbEVSa1V0T0VaR09TMDBPRFE1TFVJeU16Z3RNUzB4b2tFemtyeFFRamRDTmpsRVJrVXRPRVpHT1MwME9EUTVMVUl5TXpndE1TMHlva0V6a3J4UVFqZENOamxFUmtVdE9FWkdPUzAwT0RRNUxVSXlNemd0TVMwem9rRXo_.json (The filename, directory name, or volume label syntax is incorrect)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:295)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:237)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:185)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileOutputStream(TokenStreamFactory.java:294)
+	at com.fasterxml.jackson.core.JsonFactory.createGenerator(JsonFactory.java:1428)
+	at com.fasterxml.jackson.databind.ObjectWriter.createGenerator(ObjectWriter.java:764)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1081)
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:91)
+	... 27 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="17"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testFareConfirm</p>
+            <p class="text-sm">
+              <span>10:37:01 AM</span> / <span>00:00:02:232</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testFareConfirm</h5>
+<span class='badge badge-success'>10.01.2025 10:37:01 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:37:04 AM</span>
+<span class='badge badge-default'>00:00:02:232</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=17</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:37:01 AM</td>
+        <td>
+          Running FareConfirm for: TC_07 - Test hold booking flow: Verify Round Trip search from JED to CAI with  3 ADT, 3 CHD, and 2 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:37:04 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.RuntimeException: ❌ Failed to save FareConfirm response for offerId: QWVnZWFuVjIxI0VHWSNBM0MzSTIjMWNmMDFhNDUtYWY4My00MmM1LTgxODItNTAwNDFkZmYwZmQ0I1A1MjUwODBFNy03NkYwLTQ4ODktODI0NS0xJm03cFFOVEkxTURnd1JUY3ROelpHTUMwME9EZzVMVGd5TkRVdE1hSkJNNVNTcURrNE56VXhMalF3bzBWSFVNQ1NxRFF3TnpFNUxqUXdvMFZIVUpLb05UZ3dNekl1TURDalJVZFFnN3hRTlRJMU1EZ3dSVGN0TnpaR01DMDBPRGc1TFRneU5EVXRNUzB4azZKVU1hSlVNNkpVTXJ4UU5USTFNRGd3UlRjdE56WkdNQzAwT0RnNUxUZ3lORFV0TVMweWs2SlVOS0pVTnFKVU5ieFFOVEkxTURnd1JUY3ROelpHTUMwME9EZzVMVGd5TkRVdE1TMHprcVJVTVM0eHBGUXlMakdCc2tWNGNHbHlZWFJwYjI1RVlYUmxWR2x0WmRiL2FOemV6WVN3UkUxVE5qQXdNRFpsWTJSalpEbGtaSnlqUTBGSm8wRlVTTmIvYVBjRlFOYi9hUGNoWUtFendIaWlRVE9qT1RNeG9rRXpvemt6TWJBek1qRXNJRUZwY21KMWN5QkJNekl4c0VSTlV6WXhNREEyWldOa1kyUTVaR1NjbzBGVVNLTkdRMC9XLzJqM3M5elcvMmozd3hqQW9UTjlva0V6b3pZMU5LSkJNNk0yTlRTek16SlJMQ0JCYVhKaWRYTWdRVE15TVc1bGI3QkVUVk5rTnpBd05tVmpaR05rT1dSa25LTkdRMCtqUVZSSTF2OW8rbkw4MXY5bytwd0FvVEhBYzZKQk02TTJOVFdpUVRPak5qVTFzek15VVN3Z1FXbHlZblZ6SUVFek1qRnVaVyt3UkUxVFpEZ3dNRFpsWTJSalpEbGtaSnlqUVZSSW8wTkJTZGIvYVByT1pOYi9hUHJwV01DaE0zT2lRVE9qT1RNd29rRXpvemt6TUxBek1qRXNJRUZwY21KMWN5QkJNekl4MlNRNU56ZzJOakl6TnkxbU1Ea3hMVFF5TkdNdFltUTROaTAxTkRCbU5qaGpaR1l3WWpTZ21KbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFF4cEZReExqSEFvMEZFVkpuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQXBGUXhMakhBd0tOSlRrYVp4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTXFSVU1pNHh3S05CUkZTWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLUlVNaTR4d01DalNVNUdtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRQQXdLTkJSRlNaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU5NREFvME5JUkpuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQW9sUTF3TUNqUTBoRW1jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2lWRGJBd0tORFNFU29PVGczTlRFdU5EQ1R1bEExTWpVd09EQkZOeTAzTmtZd0xUUTRPRGt0T0RJME5TMHhva0V6azVLOFVEVXlOVEE0TUVVM0xUYzJSakF0TkRnNE9TMDRNalExTFRFdE1hSkJNNUs4VURVeU5UQTRNRVUzTFRjMlJqQXRORGc0T1MwNE1qUTFMVEV0TXFKQk01SzhVRFV5TlRBNE1FVTNMVGMyUmpBdE5EZzRPUzA0TWpRMUxURXRNNkpCTXc9PQ==
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:94)
+	at Utils.Assertions.PerformAssertions.PerformFareConfirm(PerformAssertions.java:136)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testFareConfirm(OneSupplierTests.java:96)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+Caused by: java.io.FileNotFoundException: src\test\resources\TestData\FareConfirmResponses\QWVnZWFuVjIxI0VHWSNBM0MzSTIjMWNmMDFhNDUtYWY4My00MmM1LTgxODItNTAwNDFkZmYwZmQ0I1A1MjUwODBFNy03NkYwLTQ4ODktODI0NS0xJm03cFFOVEkxTURnd1JUY3ROelpHTUMwME9EZzVMVGd5TkRVdE1hSkJNNVNTcURrNE56VXhMalF3bzBWSFVNQ1NxRFF3TnpFNUxqUXdvMFZIVUpLb05UZ3dNekl1TURDalJVZFFnN3hRTlRJMU1EZ3dSVGN0TnpaR01DMDBPRGc1TFRneU5EVXRNUzB4azZKVU1hSlVNNkpVTXJ4UU5USTFNRGd3UlRjdE56WkdNQzAwT0RnNUxUZ3lORFV0TVMweWs2SlVOS0pVTnFKVU5ieFFOVEkxTURnd1JUY3ROelpHTUMwME9EZzVMVGd5TkRVdE1TMHprcVJVTVM0eHBGUXlMakdCc2tWNGNHbHlZWFJwYjI1RVlYUmxWR2x0WmRiL2FOemV6WVN3UkUxVE5qQXdNRFpsWTJSalpEbGtaSnlqUTBGSm8wRlVTTmIvYVBjRlFOYi9hUGNoWUtFendIaWlRVE9qT1RNeG9rRXpvemt6TWJBek1qRXNJRUZwY21KMWN5QkJNekl4c0VSTlV6WXhNREEyWldOa1kyUTVaR1NjbzBGVVNLTkdRMC9XLzJqM3M5elcvMmozd3hqQW9UTjlva0V6b3pZMU5LSkJNNk0yTlRTek16SlJMQ0JCYVhKaWRYTWdRVE15TVc1bGI3QkVUVk5rTnpBd05tVmpaR05rT1dSa25LTkdRMCtqUVZSSTF2OW8rbkw4MXY5bytwd0FvVEhBYzZKQk02TTJOVFdpUVRPak5qVTFzek15VVN3Z1FXbHlZblZ6SUVFek1qRnVaVyt3UkUxVFpEZ3dNRFpsWTJSalpEbGtaSnlqUVZSSW8wTkJTZGIvYVByT1pOYi9hUHJwV01DaE0zT2lRVE9qT1RNd29rRXpvemt6TUxBek1qRXNJRUZwY21KMWN5QkJNekl4MlNRNU56ZzJOakl6TnkxbU1Ea3hMVFF5TkdNdFltUTROaTAxTkRCbU5qaGpaR1l3WWpTZ21KbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFF4cEZReExqSEFvMEZFVkpuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQXBGUXhMakhBd0tOSlRrYVp4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTXFSVU1pNHh3S05CUkZTWnh3ei9BQUFBQVAvLy8vR0liZ2tBd01EQXdLUlVNaTR4d01DalNVNUdtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRQQXdLTkJSRlNaeHd6L0FBQUFBUC8vLy9HSWJna0F3TURBd0tKVU5NREFvME5JUkpuSERQOEFBQUFBLy8vLzhZaHVDUURBd01EQW9sUTF3TUNqUTBoRW1jY00vd0FBQUFELy8vL3hpRzRKQU1EQXdNQ2lWRGJBd0tORFNFU29PVGczTlRFdU5EQ1R1bEExTWpVd09EQkZOeTAzTmtZd0xUUTRPRGt0T0RJME5TMHhva0V6azVLOFVEVXlOVEE0TUVVM0xUYzJSakF0TkRnNE9TMDRNalExTFRFdE1hSkJNNUs4VURVeU5UQTRNRVUzTFRjMlJqQXRORGc0T1MwNE1qUTFMVEV0TXFKQk01SzhVRFV5TlRBNE1FVTNMVGMyUmpBdE5EZzRPUzA0TWpRMUxURXRNNkpCTXc9PQ__.json (The filename, directory name, or volume label syntax is incorrect)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:295)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:237)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:185)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileOutputStream(TokenStreamFactory.java:294)
+	at com.fasterxml.jackson.core.JsonFactory.createGenerator(JsonFactory.java:1428)
+	at com.fasterxml.jackson.databind.ObjectWriter.createGenerator(ObjectWriter.java:764)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1081)
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:91)
+	... 27 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="18"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testFareConfirm</p>
+            <p class="text-sm">
+              <span>10:37:04 AM</span> / <span>00:00:01:578</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testFareConfirm</h5>
+<span class='badge badge-success'>10.01.2025 10:37:04 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:37:05 AM</span>
+<span class='badge badge-default'>00:00:01:578</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=18</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:37:04 AM</td>
+        <td>
+          Running FareConfirm for: TC_09 - Test hold booking flow: Verify one way search from JED to CAI with  2 ADT, 2 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:37:05 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.RuntimeException: ❌ Failed to save FareConfirm response for offerId: QWVnZWFuVjIxI0VHWSNBMkMwSTAjNjQwMzY0ZDEtMDUwOC00ZThiLWExOGMtODBkMDgyNmFjOGNjI1BFQzExQzI0OC1GQUM5LTQyRDAtODQxQi0xJm03cFFSVU14TVVNeU5EZ3RSa0ZET1MwME1rUXdMVGcwTVVJdE1hSkJNNVNTcURFMU5ETXpMall3bzBWSFVNQ1Nwell3TnpNdU5qQ2pSVWRRa3FjNU16WXdMakF3bzBWSFVJRzhVRVZETVRGRE1qUTRMVVpCUXprdE5ESkVNQzA0TkRGQ0xURXRNWktpVkRHaVZES0Jza1Y0Y0dseVlYUnBiMjVFWVhSbFZHbHRaZGIvYU56ZXo0S3dSRTFUTTJZd01EZzJZMlJqWkRsbU9aeWpRMEZKbzBGVVNOYi9hUGNGUU5iL2FQY2hZS0V6d0hpaVFUT2pPVE14b2tFem96a3pNYkF6TWpFc0lFRnBjbUoxY3lCQk16SXhzRVJOVXpRd01EQTRObU5rWTJRNVpqbWNvMEZVU0tOR1EwL1cvMmozczl6Vy8yajN3eGpBb1ROOW9rRXpvelkxTktKQk02TTJOVFN6TXpKUkxDQkJhWEppZFhNZ1FUTXlNVzVsYjlra1pqUTJZVGxtTTJZdE9XTmpNUzAwTnpKaExUbGxaV010TVdWaU9ESTBZMk16WVRBM29KS1p4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTWNEQW8wRkVWSm5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBb2xReXdNQ2pRVVJVcURFMU5ETXpMall3azdwUVJVTXhNVU15TkRndFJrRkRPUzAwTWtRd0xUZzBNVUl0TWFKQk01R1N2RkJGUXpFeFF6STBPQzFHUVVNNUxUUXlSREF0T0RReFFpMHhMVEdpUVRNPQ==
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:94)
+	at Utils.Assertions.PerformAssertions.PerformFareConfirm(PerformAssertions.java:136)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testFareConfirm(OneSupplierTests.java:96)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+Caused by: java.io.FileNotFoundException: src\test\resources\TestData\FareConfirmResponses\QWVnZWFuVjIxI0VHWSNBMkMwSTAjNjQwMzY0ZDEtMDUwOC00ZThiLWExOGMtODBkMDgyNmFjOGNjI1BFQzExQzI0OC1GQUM5LTQyRDAtODQxQi0xJm03cFFSVU14TVVNeU5EZ3RSa0ZET1MwME1rUXdMVGcwTVVJdE1hSkJNNVNTcURFMU5ETXpMall3bzBWSFVNQ1Nwell3TnpNdU5qQ2pSVWRRa3FjNU16WXdMakF3bzBWSFVJRzhVRVZETVRGRE1qUTRMVVpCUXprdE5ESkVNQzA0TkRGQ0xURXRNWktpVkRHaVZES0Jza1Y0Y0dseVlYUnBiMjVFWVhSbFZHbHRaZGIvYU56ZXo0S3dSRTFUTTJZd01EZzJZMlJqWkRsbU9aeWpRMEZKbzBGVVNOYi9hUGNGUU5iL2FQY2hZS0V6d0hpaVFUT2pPVE14b2tFem96a3pNYkF6TWpFc0lFRnBjbUoxY3lCQk16SXhzRVJOVXpRd01EQTRObU5rWTJRNVpqbWNvMEZVU0tOR1EwL1cvMmozczl6Vy8yajN3eGpBb1ROOW9rRXpvelkxTktKQk02TTJOVFN6TXpKUkxDQkJhWEppZFhNZ1FUTXlNVzVsYjlra1pqUTJZVGxtTTJZdE9XTmpNUzAwTnpKaExUbGxaV010TVdWaU9ESTBZMk16WVRBM29KS1p4d3ovQUFBQUFQLy8vL0dJYmdrQXdNREF3S0pVTWNEQW8wRkVWSm5IRFA4QUFBQUEvLy8vOFlodUNRREF3TURBb2xReXdNQ2pRVVJVcURFMU5ETXpMall3azdwUVJVTXhNVU15TkRndFJrRkRPUzAwTWtRd0xUZzBNVUl0TWFKQk01R1N2RkJGUXpFeFF6STBPQzFHUVVNNUxUUXlSREF0T0RReFFpMHhMVEdpUVRNPQ__.json (The filename, directory name, or volume label syntax is incorrect)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:295)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:237)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:185)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileOutputStream(TokenStreamFactory.java:294)
+	at com.fasterxml.jackson.core.JsonFactory.createGenerator(JsonFactory.java:1428)
+	at com.fasterxml.jackson.databind.ObjectWriter.createGenerator(ObjectWriter.java:764)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1081)
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:91)
+	... 27 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="19"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testFareConfirm</p>
+            <p class="text-sm">
+              <span>10:37:05 AM</span> / <span>00:00:01:768</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testFareConfirm</h5>
+<span class='badge badge-success'>10.01.2025 10:37:05 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:37:07 AM</span>
+<span class='badge badge-default'>00:00:01:768</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=19</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:37:05 AM</td>
+        <td>
+          Running FareConfirm for: TC_10 - Test hold booking flow: Verify one way search from JED to CAI with  2 ADT, 2 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:37:07 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.RuntimeException: ❌ Failed to save FareConfirm response for offerId: QWVnZWFuVjIxI0VHWSNBMkMwSTAjOGRhNzUwNDYtNmM4ZC00MTRkLWI5N2ItOTU1NTYwN2E0YmViI1A1MDRBOTg3RC1GOEItNEIxOC1BREEyLTEmbTdsUU5UQTBRVGs0TjBRdFJqaENMVFJDTVRndFFVUkJNaTB4b2tFemxKS25Oell3TUM0d01LTkZSMURBa3Fjek16SXdMakF3bzBWSFVKS25OREk0TUM0d01LTkZSMUNCdTFBMU1EUkJPVGczUkMxR09FSXRORUl4T0MxQlJFRXlMVEV0TVpLaVZER2lWREtCc2tWNGNHbHlZWFJwYjI1RVlYUmxWR2x0WmRiL2FOemUwSUd3UkUxVE1ERXdNRGt4WTJSalpHRXdNcHlqUVZSSW8wTkJTZGIvYVBiWjVOYi9hUGIwMk1DaE0zT2lRVE9qT1RNd29rRXpvemt6TUxBek1qRXNJRUZwY21KMWN5QkJNekl4MlNSalltVTROakUxT0MwNU4yUm1MVFJrT0dFdE9XVTRPUzB5TVRka09URXdOVGhoTUdhZ2twbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFF4d01DalFVUlVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRMQXdLTkJSRlNuTnpZd01DNHdNSk81VURVd05FRTVPRGRFTFVZNFFpMDBRakU0TFVGRVFUSXRNYUpCTTVHU3UxQTFNRFJCT1RnM1JDMUdPRUl0TkVJeE9DMUJSRUV5TFRFdE1hSkJNdz09
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:94)
+	at Utils.Assertions.PerformAssertions.PerformFareConfirm(PerformAssertions.java:136)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testFareConfirm(OneSupplierTests.java:96)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+Caused by: java.io.FileNotFoundException: src\test\resources\TestData\FareConfirmResponses\QWVnZWFuVjIxI0VHWSNBMkMwSTAjOGRhNzUwNDYtNmM4ZC00MTRkLWI5N2ItOTU1NTYwN2E0YmViI1A1MDRBOTg3RC1GOEItNEIxOC1BREEyLTEmbTdsUU5UQTBRVGs0TjBRdFJqaENMVFJDTVRndFFVUkJNaTB4b2tFemxKS25Oell3TUM0d01LTkZSMURBa3Fjek16SXdMakF3bzBWSFVKS25OREk0TUM0d01LTkZSMUNCdTFBMU1EUkJPVGczUkMxR09FSXRORUl4T0MxQlJFRXlMVEV0TVpLaVZER2lWREtCc2tWNGNHbHlZWFJwYjI1RVlYUmxWR2x0WmRiL2FOemUwSUd3UkUxVE1ERXdNRGt4WTJSalpHRXdNcHlqUVZSSW8wTkJTZGIvYVBiWjVOYi9hUGIwMk1DaE0zT2lRVE9qT1RNd29rRXpvemt6TUxBek1qRXNJRUZwY21KMWN5QkJNekl4MlNSalltVTROakUxT0MwNU4yUm1MVFJrT0dFdE9XVTRPUzB5TVRka09URXdOVGhoTUdhZ2twbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFF4d01DalFVUlVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRMQXdLTkJSRlNuTnpZd01DNHdNSk81VURVd05FRTVPRGRFTFVZNFFpMDBRakU0TFVGRVFUSXRNYUpCTTVHU3UxQTFNRFJCT1RnM1JDMUdPRUl0TkVJeE9DMUJSRUV5TFRFdE1hSkJNdz09.json (The filename, directory name, or volume label syntax is incorrect)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:295)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:237)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:185)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileOutputStream(TokenStreamFactory.java:294)
+	at com.fasterxml.jackson.core.JsonFactory.createGenerator(JsonFactory.java:1428)
+	at com.fasterxml.jackson.databind.ObjectWriter.createGenerator(ObjectWriter.java:764)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1081)
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:91)
+	... 27 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="20"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">testFareConfirm</p>
+            <p class="text-sm">
+              <span>10:37:07 AM</span> / <span>00:00:01:890</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">testFareConfirm</h5>
+<span class='badge badge-success'>10.01.2025 10:37:07 AM</span>
+<span class='badge badge-danger'>10.01.2025 10:37:09 AM</span>
+<span class='badge badge-default'>00:00:01:890</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=20</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+<div class="m-t-10 m-l-5">API Test Execution</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:37:07 AM</td>
+        <td>
+          Running FareConfirm for: TC_11 - Test hold booking flow: Verify one way search from JED to CAI with  2 ADT, 2 CHD, and 1 INF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>10:37:09 AM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.RuntimeException: ❌ Failed to save FareConfirm response for offerId: QWVnZWFuVjIxI0VHWSNBMkMwSTAjYmI1YzFiNWItMDc3Yi00MzYyLWEwYzEtMDk2MjI2YTg2ZmYzI1A1NDkyNzc5LUE2MEMtNEMwQS05QkQ0LTEmbTdsUU5UUTVNamMzT1MxQk5qQkRMVFJETUVFdE9VSkVOQzB4b2tFemxKS25OemsxT1M0Mk1LTkZSMURBa3FjME1EYzFMall3bzBWSFVKS25Nemc0TkM0d01LTkZSMUNCdTFBMU5Ea3lOemM1TFVFMk1FTXRORU13UVMwNVFrUTBMVEV0TVpLaVZER2lWREtCc2tWNGNHbHlZWFJwYjI1RVlYUmxWR2x0WmRiL2FOemUwb0d3UkUxVE1ERXdNRGxoWTJSalpHRXdPWnlqUTBGSm8wRlVTTmIvYVBjRlFOYi9hUGNoWUtFendIaWlRVE9qT1RNeG9rRXpvemt6TWJBek1qRXNJRUZwY21KMWN5QkJNekl4MlNRek1UUTJPREJoWWkweE5EZG1MVFF6WVdZdE9UZzJaQzAzTnpZM1ptTTVNalEyT0dTZ2twbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFF4d01DalFVUlVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRMQXdLTkJSRlNuTnprMU9TNDJNSk81VURVME9USTNOemt0UVRZd1F5MDBRekJCTFRsQ1JEUXRNYUpCTTVHU3UxQTFORGt5TnpjNUxVRTJNRU10TkVNd1FTMDVRa1EwTFRFdE1hSkJNdz09
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:94)
+	at Utils.Assertions.PerformAssertions.PerformFareConfirm(PerformAssertions.java:136)
+	at AgenciesTest.LCC.OneSupplierTest.OneSupplierTests.testFareConfirm(OneSupplierTests.java:96)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+Caused by: java.io.FileNotFoundException: src\test\resources\TestData\FareConfirmResponses\QWVnZWFuVjIxI0VHWSNBMkMwSTAjYmI1YzFiNWItMDc3Yi00MzYyLWEwYzEtMDk2MjI2YTg2ZmYzI1A1NDkyNzc5LUE2MEMtNEMwQS05QkQ0LTEmbTdsUU5UUTVNamMzT1MxQk5qQkRMVFJETUVFdE9VSkVOQzB4b2tFemxKS25OemsxT1M0Mk1LTkZSMURBa3FjME1EYzFMall3bzBWSFVKS25Nemc0TkM0d01LTkZSMUNCdTFBMU5Ea3lOemM1TFVFMk1FTXRORU13UVMwNVFrUTBMVEV0TVpLaVZER2lWREtCc2tWNGNHbHlZWFJwYjI1RVlYUmxWR2x0WmRiL2FOemUwb0d3UkUxVE1ERXdNRGxoWTJSalpHRXdPWnlqUTBGSm8wRlVTTmIvYVBjRlFOYi9hUGNoWUtFendIaWlRVE9qT1RNeG9rRXpvemt6TWJBek1qRXNJRUZwY21KMWN5QkJNekl4MlNRek1UUTJPREJoWWkweE5EZG1MVFF6WVdZdE9UZzJaQzAzTnpZM1ptTTVNalEyT0dTZ2twbkhEUDhBQUFBQS8vLy84WWh1Q1FEQXdNREFvbFF4d01DalFVUlVtY2NNL3dBQUFBRC8vLy94aUc0SkFNREF3TUNpVkRMQXdLTkJSRlNuTnprMU9TNDJNSk81VURVME9USTNOemt0UVRZd1F5MDBRekJCTFRsQ1JEUXRNYUpCTTVHU3UxQTFORGt5TnpjNUxVRTJNRU10TkVNd1FTMDVRa1EwTFRFdE1hSkJNdz09.json (The filename, directory name, or volume label syntax is incorrect)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:295)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:237)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:185)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileOutputStream(TokenStreamFactory.java:294)
+	at com.fasterxml.jackson.core.JsonFactory.createGenerator(JsonFactory.java:1428)
+	at com.fasterxml.jackson.databind.ObjectWriter.createGenerator(ObjectWriter.java:764)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1081)
+	at Utils.Loader.FareConfirmFileManager.saveFareConfirmResponse(FareConfirmFileManager.java:91)
+	... 27 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="test-wrapper row view exception-view attributes-view">
+<div class="test-list">
+<div class="test-list-tools">
+<ul class="tools pull-left"><li><a href=""><span class="font-size-14">Exception</span></a></li></ul>
+<ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">2</span></a></li></ul>
+</div>
+<div class="test-list-wrapper scrollable">
+<ul class="test-list-item">
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log badge-danger'>6</span>
+</span>
+<p class="name">java.lang.AssertionError</p>
+<p class="duration text-sm">6 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>java.lang.AssertionError</h4>
+<span status="fail" class='badge log badge-danger'>6 failed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:34:50 AM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='1'>testPositiveSearch</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:35:27 AM</td>
+<td>
+<a href="#" class="linked" test-id='4' id='4'>testPositiveSearch</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:35:45 AM</td>
+<td>
+<a href="#" class="linked" test-id='6' id='6'>testPositiveSearch</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:36:12 AM</td>
+<td>
+<a href="#" class="linked" test-id='8' id='8'>testPositiveSearch</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:36:47 AM</td>
+<td>
+<a href="#" class="linked" test-id='12' id='12'>testPositiveSearch</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:36:50 AM</td>
+<td>
+<a href="#" class="linked" test-id='13' id='13'>testPositiveSearch</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log badge-danger'>7</span>
+</span>
+<p class="name">java.lang.RuntimeException</p>
+<p class="duration text-sm">7 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>java.lang.RuntimeException</h4>
+<span status="fail" class='badge log badge-danger'>7 failed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:36:52 AM</td>
+<td>
+<a href="#" class="linked" test-id='14' id='14'>testFareConfirm</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:36:55 AM</td>
+<td>
+<a href="#" class="linked" test-id='15' id='15'>testFareConfirm</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:37:00 AM</td>
+<td>
+<a href="#" class="linked" test-id='16' id='16'>testFareConfirm</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:37:01 AM</td>
+<td>
+<a href="#" class="linked" test-id='17' id='17'>testFareConfirm</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:37:04 AM</td>
+<td>
+<a href="#" class="linked" test-id='18' id='18'>testFareConfirm</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:37:05 AM</td>
+<td>
+<a href="#" class="linked" test-id='19' id='19'>testFareConfirm</a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>10:37:07 AM</td>
+<td>
+<a href="#" class="linked" test-id='20' id='20'>testFareConfirm</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="test-content scrollable">
+<div class="test-content-detail">
+<div class="detail-body"></div>
+</div>
+</div>
+</div><div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Oct 1, 2025 10:34:49 AM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Oct 1, 2025 10:37:09 AM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>7</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>13</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='35%'>
+<b>7</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='65%'><b>13</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='10%'><b>7</b> events passed</small></div>
+<div>
+<small data-tooltip='19%'><b>13</b> events failed,
+<b data-tooltip='%'>47</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"testPositiveSearch":15.231,"testPositiveSearch":11.725,"testPositiveSearch":10.71,"testPositiveSearch":11.655,"testPositiveSearch":5.899,"testPositiveSearch":9.853,"testPositiveSearch":17.187,"testPositiveSearch":11.792,"testPositiveSearch":9.149,"testPositiveSearch":7.365,"testPositiveSearch":7.235,"testPositiveSearch":3.082,"testPositiveSearch":1.578,"testFareConfirm":2.917,"testFareConfirm":4.653,"testFareConfirm":1.781,"testFareConfirm":2.232,"testFareConfirm":1.578,"testFareConfirm":1.768,"testFareConfirm":1.89
+};
+</script>
+<div class="row">
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 7,
+failParent: 13,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 7,
+failEvents: 13,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 47
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "testCaseId": "TC_01",
+  "description": "Test booking flow: One Way search from BOM to DEL with 3 ADT, 4 CHD, and 2 INF",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin": "BOM",
+      "destination": "DEL",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 3
+  },
+    {
+      "passengerTypeCode": "CHD",
+      "count": 4
+    },  {
+      "passengerTypeCode": "INF",
+      "count": 2
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "testCaseId": "TC_10",
+  "expectedStatusCode": 400,
+  "description": "Running Negative assertion for scenario: SAME ORIGIN DESTINATION",
+  "invalidScenarioType": "SAME_ORIGIN_DESTINATION",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "CAI",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  }
+  ]
+}

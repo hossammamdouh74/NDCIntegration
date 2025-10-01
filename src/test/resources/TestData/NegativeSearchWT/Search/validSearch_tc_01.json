@@ -1,0 +1,26 @@
+{
+  "testCaseId": "TC_1",
+  "description": "Running Negative assertion for scenario: No Of INF > No Of ADT",
+  "expectedStatusCode": 400,
+  "invalidScenarioType": "INFANT_TO_ADULT_RATIO",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "JED",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  },
+    {
+      "passengerTypeCode": "CHD",
+      "count": 2
+    },  {
+      "passengerTypeCode": "INF",
+      "count": 2
+    }
+  ]
+}

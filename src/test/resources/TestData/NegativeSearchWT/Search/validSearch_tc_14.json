@@ -1,0 +1,19 @@
+{
+  "testCaseId": "TC_14",
+  "expectedStatusCode": 400,
+  "description": "Running Negative assertion for scenario: FUTURE DATE ONLY",
+  "invalidScenarioType": "FUTURE_DATE_ONLY",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "JED",
+      "offsetDays": -1
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  }
+  ]
+}

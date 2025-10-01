@@ -1,0 +1,33 @@
+{
+  "testCaseId": "TC_05",
+  "description": "Test booking flow: Verify Multi-city search from CAI to LHR with  2 ADT, 2 CHD, and 1 INF",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "credentialsSelector": "EGY",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "DXB",
+      "offsetDays": 25
+    },
+    {
+      "origin": "DXB",
+      "destination": "LHR",
+      "offsetDays": 27
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 2
+    },
+    {
+      "passengerTypeCode": "CHD",
+      "count": 2
+    },
+    {
+      "passengerTypeCode": "INF",
+      "count": 1
+    }
+  ]
+}

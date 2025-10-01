@@ -1,0 +1,26 @@
+{
+  "testCaseId": "TC_01",
+  "description": "Test booking flow: One Way search from ATH to CAI with 3 ADT, 4 CHD, and 2 INF",
+  "bookingFlow": "book",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin": "JED",
+      "destination": "CAI",
+      "offsetDays": 10
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  },
+    {
+      "passengerTypeCode": "CHD",
+      "count": 1
+    },  {
+      "passengerTypeCode": "INF",
+      "count": 1
+    }
+  ]
+}

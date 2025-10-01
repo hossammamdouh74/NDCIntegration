@@ -1,0 +1,22 @@
+{
+  "testCaseId": "TC_05",
+  "description": "Test hold booking flow: Verify one way search from ATH to CAI with 7 ADT and 2 CHD",
+  "bookingFlow": "holdbook",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin":"ATH",
+      "destination": "CAI",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 7
+    },  {
+      "passengerTypeCode": "CHD",
+      "count": 2
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "testCaseId": "TC_10",
+  "description": "Running Negative assertion for scenario: DUPLICATE_PASSENGER_DATA",
+  "bookingFlow": "book",
+  "addPaxFlow": "fail",
+  "expectedStatusCode": 200,
+  "searchCriteria": [
+    {
+      "origin":"JED",
+      "destination": "CAI",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+    {
+      "passengerTypeCode": "ADT",
+      "count": 2
+    }
+  ]
+}

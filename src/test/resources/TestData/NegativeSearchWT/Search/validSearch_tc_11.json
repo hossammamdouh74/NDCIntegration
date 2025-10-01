@@ -1,0 +1,24 @@
+{
+  "testCaseId": "TC_11",
+  "expectedStatusCode": 400,
+  "description": "Running Negative assertion for scenario: INVALID RETURN JOURNEY DATE",
+  "invalidScenarioType": "INVALID_RETURN_JOURNEY_DATE",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "JED",
+      "offsetDays": 20
+    },
+    {
+      "origin": "JED",
+      "destination": "CAI",
+      "offsetDays": 18
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "ADT",
+    "count": 1
+  }
+  ]
+}

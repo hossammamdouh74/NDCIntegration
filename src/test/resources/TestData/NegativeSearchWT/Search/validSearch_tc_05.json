@@ -1,0 +1,19 @@
+{
+  "testCaseId": "TC_5",
+  "description": "Running Negative assertion for scenario: EMPTY PASSENGER TYPE CODE",
+  "expectedStatusCode": 400,
+  "invalidScenarioType": "EMPTY_PASSENGER_TYPE_CODE",
+  "searchCriteria": [
+    {
+      "origin": "CAI",
+      "destination": "FCO",
+      "offsetDays": 20
+    }
+  ],
+  "passengers": [
+  {
+    "passengerTypeCode": "",
+    "count": 1
+  }
+  ]
+}
