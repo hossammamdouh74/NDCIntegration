@@ -42,7 +42,12 @@ public class HelperGetResponse {
     /* Get the offer ID from fare confirm response**/
     public static String getFareConfirmOfferId(Response response) {
         JsonPath jsonPath = response.jsonPath();
-        return jsonPath.getString("selectedOfferOptions[0].offerId");
+        return jsonPath.getString("selectedOffer.offerId");
+    }
+    /* Get the offer ID from fare confirm response**/
+    public static String getFareConfirmResponseId(Response response) {
+        JsonPath jsonPath = response.jsonPath();
+        return jsonPath.getString("responseId");
     }
 
     /** Get the offer ID from AddPax response*/

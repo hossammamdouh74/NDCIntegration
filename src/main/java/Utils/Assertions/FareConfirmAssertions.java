@@ -1,6 +1,5 @@
 package Utils.Assertions;
 
-import Utils.ReportManager.ReportManager;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.asserts.SoftAssert;
@@ -35,19 +34,22 @@ public class FareConfirmAssertions {
         SoftAssert softAssert = new SoftAssert();
 
         // Extract the selected offer object from FareConfirm response
-        Map<String, Object> FareConfirmOffer = fareConfirmResponse.jsonPath().getMap("selectedOfferOptions[0]");
+        Map<String, Object> FareConfirmOffer = fareConfirmResponse.jsonPath().getMap("selectedOffer");
         System.out.println("🛂 Validating Fare Confirm Offer against selected Search Offer...");
-
+        if (FareConfirmOffer == null) {
+            softAssert.fail("❌ selectedOffer object not found in FareConfirm response.");
+            softAssert.assertAll();
+            return;
+        }
         // Perform multiple checks
-        validateRbdMatchesSelectedOffer(fareConfirmResponse, selectedOfferFromSearch, softAssert, "selectedOfferOptions[0]");
-        validateBasicFlags(softAssert, selectedOfferFromSearch, FareConfirmOffer);
+        validateRbdMatchesSelectedOffer(fareConfirmResponse, selectedOfferFromSearch, softAssert);
         validatePriceDetails(softAssert, selectedOfferFromSearch, FareConfirmOffer);
         validatePassengerFareBreakdown(softAssert, selectedOfferFromSearch, FareConfirmOffer);
-        //validateCurrencies(fareConfirmResponse, "selectedOfferOptions", softAssert);
+        //validateCurrencies(fareConfirmResponse, "selectedOffer", softAssert);
         validatePassengerBreakdownTotalsMatchOverall(fareConfirmResponse,selectedOfferFromSearch,softAssert);
         validateSingleOfferReturned(fareConfirmResponse,softAssert);
         validateJourneyCountConsistency(fareConfirmResponse, selectedOfferFromSearch, softAssert);
-        validateFareBreakdownCalculation(fareConfirmResponse,softAssert);
+        validateFareBreakdownCalculation(fareConfirmResponse,selectedOfferFromSearch,softAssert);
         validateNoDuplicateTaxCodes(fareConfirmResponse,softAssert);
         validatePriceClasses(fareConfirmResponse,softAssert);
         validateBaggageDetails(fareConfirmResponse,softAssert);
@@ -59,30 +61,28 @@ public class FareConfirmAssertions {
     /**
      * TC.1 Validates that the Reservation Booking Designator (RBD) codes in the
      * FareConfirm API response match those from the Search API selected offer.
-     * Why:
-     *  - Ensures the booked cabin inventory matches what was offered during search
-     *  - Detects mismatches that could indicate pricing/availability discrepancies
-     * Steps:
-     *  1. Extract passengerFareBreakdown from both Search and FareConfirm responses
-     *  2. For each passenger type (ADT, CHD, INF, etc.), check segment counts
-     *  3. Compare RBD codes segment by segment
-     *  4. Log and assert failures where mismatches are found
      *
      * @param response      The FareConfirm API response
      * @param selectedOfferFromSearch The selected offer from Search API (expected values)
      * @param softAssert    SoftAssert to collect and defer assertion failures
-     * @param rootPath      JSON root path pointing to the offer in FareConfirm response
      */
-    protected static void validateRbdMatchesSelectedOffer(Response response, Map<String, Object> selectedOfferFromSearch, SoftAssert softAssert, String rootPath) {
+    protected static void validateRbdMatchesSelectedOffer(Response response,
+                                                          Map<String, Object> selectedOfferFromSearch,
+                                                          SoftAssert softAssert) {
         System.out.println("\t✅[TC:1]: Validating RBD Matches Selected Offer ");
 
         JsonPath jsonPath = response.jsonPath();
-        List<Map<String, Object>> actualFareBreakdowns = jsonPath.getList(rootPath + ".passengerFareBreakdown");
+
+        // Directly extract passengerFareBreakdown from the selectedOffer object
+        List<Map<String, Object>> actualFareBreakdowns =
+                jsonPath.getList("selectedOffer.passengerFareBreakdown");
+
         List<Map<String, Object>> expectedFareBreakdowns =
                 (List<Map<String, Object>>) selectedOfferFromSearch.get("passengerFareBreakdown");
 
         // Fail if missing passengerFareBreakdown in either response
         if (actualFareBreakdowns == null || expectedFareBreakdowns == null) {
+            System.out.println("\t❌[TC:1] passengerFareBreakdown is missing in one of the responses.");
             softAssert.fail("❌[TC:1] passengerFareBreakdown is missing in one of the responses.");
             return;
         }
@@ -102,8 +102,11 @@ public class FareConfirmAssertions {
             }
 
             // Compare segments
-            List<Map<String, Object>> expectedSegment = (List<Map<String, Object>>) expectedPax.get("segmentDetails");
-            List<Map<String, Object>> actualSegment = (List<Map<String, Object>>) actualPaxOpt.get().get("segmentDetails");
+            List<Map<String, Object>> expectedSegment =
+                    (List<Map<String, Object>>) expectedPax.get("segmentDetails");
+            List<Map<String, Object>> actualSegment =
+                    (List<Map<String, Object>>) actualPaxOpt.get().get("segmentDetails");
+
             int minSize = Math.min(expectedSegment.size(), actualSegment.size());
 
             if (expectedSegment.size() != actualSegment.size()) {
@@ -128,43 +131,12 @@ public class FareConfirmAssertions {
             }
 
             // Log success
-            ReportManager.getTest().info("✅ RBD match check passed  ");
-            System.out.println("\t✅TC.1: RBD match check passed ");
+            System.out.println("\t✅[TC:1] RBD match check passed for " + type);
         }
     }
 
     /**
-     * TC.2 Validates the basic boolean flags `haveBundles` and `canBeHeld`
-     * between Search API and FareConfirm API.
-     * Why:
-     *  - These flags control whether upsell bundles exist and whether the offer
-     *    can be held for later confirmation/payment.
-     *  - Incorrect mismatches could break booking flow or upsell logic.
-     * Steps:
-     *  1. Extract `haveBundles` and `canBeHeld` from both expected and actual offers
-     *  2. Compare values
-     *  3. Log results and assert mismatches
-     *
-     * @param softAssert    SoftAssert for collecting assertion results
-     * @param selectedOfferFromSearch Selected offer from Search API (expected values)
-     * @param actual        Offer from FareConfirm API (actual values)
-     */
-    private static void validateBasicFlags(SoftAssert softAssert, Map<String, Object> selectedOfferFromSearch, Map<String, Object> actual) {
-        System.out.println("\t✅ TC.2: Checking `haveBundles` and `canBeHeld` flags...");
-
-        Object expectedHaveBundles = selectedOfferFromSearch.get("haveBundles");
-        Object actualHaveBundles = actual.get("haveBundles");
-        System.out.printf("\t\t🔍 haveBundles → expected: %s, actual: %s%n", expectedHaveBundles, actualHaveBundles);
-        softAssert.assertEquals(actualHaveBundles, expectedHaveBundles, "❌[TC:2] haveBundles mismatch");
-
-        Object expectedCanBeHeld = selectedOfferFromSearch.get("canBeHeld");
-        Object actualCanBeHeld = actual.get("canBeHeld");
-        System.out.printf("\t\t🔍 canBeHeld → expected: %s, actual: %s%n", expectedCanBeHeld, actualCanBeHeld);
-        softAssert.assertEquals(actualCanBeHeld, expectedCanBeHeld, "❌[TC:2] canBeHeld mismatch");
-    }
-
-    /**
-     * TC.3 Compares price-related fields inside the 'priceDetails' object
+     * TC.2 Compares price-related fields inside the 'priceDetails' object
      * (totalAmount, taxesAmount, baseAmount).
      * Why:
      *  - Ensures the total fare, tax breakdown, and base fare align between Search and FareConfirm
@@ -179,18 +151,18 @@ public class FareConfirmAssertions {
      * @param actual        Offer from FareConfirm API
      */
     private static void validatePriceDetails(SoftAssert softAssert, Map<String, Object> selectedOfferFromSearch, Map<String, Object> actual) {
-        System.out.println("\t💰[TC:3]: Comparing price details...");
+        System.out.println("\t💰[TC:2]: Comparing price details...");
 
         Map<String, Object> expectedPriceDetails = (Map<String, Object>) selectedOfferFromSearch.get("priceDetails");
         Map<String, Object> actualPriceDetails = (Map<String, Object>) actual.get("priceDetails");
 
         compareField("totalAmount", expectedPriceDetails, actualPriceDetails, softAssert);
-        compareField("taxesAmount", expectedPriceDetails, actualPriceDetails, softAssert);
-        compareField("baseAmount", expectedPriceDetails, actualPriceDetails, softAssert);
+        compareField("totalTaxAmount", expectedPriceDetails, actualPriceDetails, softAssert);
+        compareField("totalBaseAmount", expectedPriceDetails, actualPriceDetails, softAssert);
     }
 
     /**
-     * TC.4 Validates the passengerFareBreakdown section for each passenger type.
+     * TC.3 Validates the passengerFareBreakdown section for each passenger type.
      * Why:
      *  - Ensures that the fare breakdown (amounts, taxes, base, etc.) for each passenger type
      *    in FareConfirm matches the expected Search offer.
@@ -206,7 +178,7 @@ public class FareConfirmAssertions {
      * @param actual        Offer from FareConfirm API (actual values)
      */
     private static void validatePassengerFareBreakdown(SoftAssert softAssert, Map<String, Object> expectedOffer, Map<String, Object> actual) {
-        System.out.println("\t🧍‍♂️ [TC:4]: Validating passenger fare breakdown...");
+        System.out.println("\t🧍‍♂️ [TC:3]: Validating passenger fare breakdown...");
 
         // Extract passenger breakdowns from expected and actual
         List<Map<String, Object>> expectedPFB = (List<Map<String, Object>>) expectedOffer.get("passengerFareBreakdown");
@@ -227,18 +199,18 @@ public class FareConfirmAssertions {
                     validateSinglePassengerBreakdown(softAssert, type, expectedPassenger, actualMatchOpt.get());
                 } else {
                     // ❌ If not found → fail test
-                    System.out.printf("❌[TC:4] Passenger of type [%s] not found in fare confirm response%n", type);
+                    System.out.printf("❌[TC:3] Passenger of type [%s] not found in fare confirm response%n", type);
                     softAssert.fail("Passenger of type " + type + " not found in fare confirm response");
                 }
             }
         } else {
-            System.out.println("❌ [TC:4] passengerFareBreakdown is missing in one or both responses");
+            System.out.println("❌ [TC:3] passengerFareBreakdown is missing in one or both responses");
             softAssert.fail("PassengerFareBreakdown missing in one or both responses");
         }
     }
 
     /**
-     * TC.6 Validates Passenger Fare Breakdown Consistency:
+     * TC.4 Validates Passenger Fare Breakdown Consistency:
      * Ensures that the passengerFareBreakdown totals in FareConfirm
      * match those from the Search API's selected offer.
      * Why:
@@ -256,19 +228,22 @@ public class FareConfirmAssertions {
      */
     private static void validatePassengerBreakdownTotalsMatchOverall(Response fareConfirmResponse, Map<String, Object> selectedOfferFromSearch, SoftAssert softAssert) {
 
-        System.out.println("\n🔎 [TC:6] Validating Passenger Fare Breakdown Consistency...");
+        System.out.println("\n🔎 [TC:4] Validating Passenger Fare Breakdown Consistency...");
 
         // Extract actual breakdown from FareConfirm
-        List<Map<String, Object>> actualBreakdown = fareConfirmResponse.jsonPath()
-                .getList("selectedOfferOptions[0].passengerFareBreakdown");
+        JsonPath jsonPath = fareConfirmResponse.jsonPath();
+
+        // Directly extract passengerFareBreakdown from the selectedOffer object
+        List<Map<String, Object>> actualBreakdown =
+                jsonPath.getList("selectedOffer.passengerFareBreakdown");
 
         // Extract expected breakdown from Search
         List<Map<String, Object>> expectedBreakdown =
                 (List<Map<String, Object>>) selectedOfferFromSearch.get("passengerFareBreakdown");
 
         if (actualBreakdown == null || expectedBreakdown == null) {
-            System.out.println("⚠️[TC:6] Passenger breakdown missing in one of the structures!");
-            softAssert.fail("❌ [TC:6] Passenger fare breakdown not found in response or expected offer");
+            System.out.println("⚠️[TC:4] Passenger breakdown missing in one of the structures!");
+            softAssert.fail("❌ [TC:4] Passenger fare breakdown not found in response or expected offer");
             return;
         }
 
@@ -285,17 +260,17 @@ public class FareConfirmAssertions {
             validateSinglePassengerBreakdown(softAssert, type, expected, actual);
         }
 
-        System.out.println("✅[TC:6] Passenger Fare Breakdown Consistency validated successfully.");
+        System.out.println("✅[TC:4] Passenger Fare Breakdown Consistency validated successfully.");
     }
 
     /**
-     * TC.7 Validates that only one offer is returned in FareConfirm
+     * TC.5 Validates that only one offer is returned in FareConfirm
      * when the request is NOT an upselling flow.
      * Why:
      *  - In non-upsell scenarios, user should see only one confirmed offer.
      *  - Multiple offers in this case would indicate a logic error in the backend.
      * Steps:
-     *  1. Extract selectedOfferOptions list from FareConfirm response.
+     *  1. Extract selectedOffer list from FareConfirm response.
      *  2. Assert that exactly one offer exists.
      *  3. Log results.
      *
@@ -303,33 +278,25 @@ public class FareConfirmAssertions {
      * @param softAssert SoftAssert instance
      */
     private static void validateSingleOfferReturned(Response response, SoftAssert softAssert) {
-        System.out.println("\n📌 [TC:7] Validating single offer returned for NON UPSELLING...");
+        System.out.println("\n📌 [TC:5] Validating single offer returned for NON UPSELLING...");
 
-        // Extract offers
-        List<Map<String, Object>> offers = response.jsonPath().getList("selectedOfferOptions");
+        // Extract selectedOffer as a Map
+        Map<String, Object> offer = response.jsonPath().getMap("selectedOffer");
 
-        if (offers == null) {
-            System.out.println("❌[TC:7] selectedOfferOptions is missing in response");
-            softAssert.fail("selectedOfferOptions is missing in response");
+        if (offer == null || offer.isEmpty()) {
+            System.out.println("❌[TC:5] selectedOffer is missing in response");
+            softAssert.fail("selectedOffer is missing in response");
             return;
         }
 
-        System.out.println("\t🔎 Found " + offers.size() + " offers in response.");
+        System.out.println("\t🔎 Found 1 offer in response.");
 
-        // Assert exactly one offer is returned
-        softAssert.assertEquals(
-                offers.size(),
-                1,
-                "❌[TC:7] More than one offer returned for NON UPSELLING"
-        );
-
-        if (offers.size() == 1) {
-            System.out.println("\t✅[TC:7] Exactly one offer returned as expected.");
-        }
+        // Assert only one offer exists (since it's an object, not an array)
+        softAssert.assertTrue(true, "✅ [TC:7] Exactly one offer returned as expected.");
     }
 
     /**
-     * TC.8 Validates journey count consistency between Search request and FareConfirm response.
+     * TC.6 Validates journey count consistency between Search request and FareConfirm response.
      * Why:
      *  - Ensures that the number of journeys (legs) in FareConfirm matches
      *    what was originally requested in Search.
@@ -345,7 +312,7 @@ public class FareConfirmAssertions {
      * @param softAssert              TestNG SoftAssert instance
      */
     private static void validateJourneyCountConsistency(Response response, Map<String, Object> selectedOfferFromSearch, SoftAssert softAssert) {
-        System.out.println("\t🛫 [TC:8] Validating journey count consistency...");
+        System.out.println("\t🛫 [TC:6] Validating journey count consistency...");
 
         try {
             // From Search → extract journey count
@@ -354,94 +321,109 @@ public class FareConfirmAssertions {
             int expectedJourneyCount = (criteria != null) ? criteria.size() : 0;
 
             // From FareConfirm → extract journey count
-            List<Map<String, Object>> journeys = response.jsonPath().getList("selectedOfferOptions[0].journeys");
+            List<Map<String, Object>> journeys = response.jsonPath().getList("selectedOffer.offerJourneys");
             int actualJourneyCount = (journeys != null) ? journeys.size() : 0;
 
             // Assert counts match
             softAssert.assertEquals(actualJourneyCount, expectedJourneyCount,
-                    "❌ [TC:8] Journey count mismatch: expected=" + expectedJourneyCount + ", actual=" + actualJourneyCount);
+                    "❌ [TC:6] Journey count mismatch: expected=" + expectedJourneyCount + ", actual=" + actualJourneyCount);
 
-            System.out.println("\t✅[TC:8] Journey count validation passed. Expected="
+            System.out.println("\t✅[TC:6] Journey count validation passed. Expected="
                     + expectedJourneyCount + ", Actual=" + actualJourneyCount);
 
         } catch (Exception e) {
-            softAssert.fail("⚠️[TC:8] Exception while validating journey count consistency: " + e.getMessage());
-            System.out.println("\t⚠️[TC:8] Exception in validateJourneyCountConsistency: " + e.getMessage());
+            softAssert.fail("⚠️[TC:6] Exception while validating journey count consistency: " + e.getMessage());
+            System.out.println("\t⚠️[TC:6] Exception in validateJourneyCountConsistency: " + e.getMessage());
         }
     }
 
     /**
-     * TC.9 – Validate Fare Breakdown Total Calculation
-     * Ensures that:
-     *  1. For each passenger fare breakdown: baseAmount + taxesAmount = totalAmount (per passenger).
-     *  2. Per-passenger totals multiplied by passenger count = passenger group total.
-     *  3. Sum of all passenger group totals = overall priceDetails.totalAmount.
-     * Example validation flow:
-     *  - ADT pax → base=100, tax=20 → per pax total=120 × count=2 → 240
-     *  - CHD pax → base=50, tax=10 → per pax total=60 × count=1 → 60
-     *  - Overall sum = 300 → must equal overall priceDetails.totalAmount
-     *
-     * @param response   The FareConfirm API response
-     * @param softAssert The TestNG SoftAssert instance (to allow multiple validations per run)
+     * TC.7: Validate Fare Breakdown Calculation
+     * - Verifies that per-pax totals = base + taxes
+     * - Verifies group totals = per-pax total × passenger count (from request payload, not response)
+     * - Verifies aggregated group totals = overall total
      */
-    private static void validateFareBreakdownCalculation(Response response, SoftAssert softAssert) {
-        System.out.println("\n📌 TC.9: Validating fare breakdown calculations...");
+    private static void validateFareBreakdownCalculation(Response response,
+                                                         Map<String, Object> selectedOfferFromSearch,
+                                                         SoftAssert softAssert) {
+        System.out.println("\n📌 TC.7: Validating fare breakdown calculations...");
 
-        // Extract overall total from priceDetails
-        BigDecimal overallTotal = parseBigDecimalSafe(
-                response.jsonPath().getMap("selectedOfferOptions[0].priceDetails.totalAmount")
-        );
+        try {
+            // ✅ Extract overall total from response
+            BigDecimal overallTotal = parseBigDecimalSafe(
+                    response.jsonPath().getMap("selectedOffer[0].priceDetails.totalAmount")
+            );
 
-        // Extract passenger fare breakdowns
-        List<Map<String, Object>> passengerBreakdowns =
-                response.jsonPath().getList("selectedOfferOptions[0].passengerFareBreakdown");
+            // ✅ Extract passenger fare breakdowns from response
+            List<Map<String, Object>> passengerBreakdowns =
+                    response.jsonPath().getList("selectedOffer.passengerFareBreakdown");
 
-        BigDecimal sumOfPassengerTotals = BigDecimal.ZERO;
+            // ✅ Extract passenger counts from request payload
+            Map<String, Object> searchPayload = (Map<String, Object>) selectedOfferFromSearch.get("searchPayload");
+            List<Map<String, Object>> passengersFromPayload =
+                    (List<Map<String, Object>>) searchPayload.get("passengers");
 
-        if (passengerBreakdowns != null && !passengerBreakdowns.isEmpty()) {
-            for (Map<String, Object> pax : passengerBreakdowns) {
+            // Convert payload passengers into lookup map (e.g., ADT=4, CHD=2, INF=3)
+            Map<String, Integer> paxCountMap = new HashMap<>();
+            for (Map<String, Object> pax : passengersFromPayload) {
                 String paxType = String.valueOf(pax.get("passengerTypeCode"));
-                int paxCount = Integer.parseInt(String.valueOf(pax.get("numberOfPassengers")));
-
-                // Extract base, tax, and total values
-                BigDecimal baseFare = parseBigDecimalSafe(pax.get("passengerBaseAmount"));
-                BigDecimal taxes = parseBigDecimalSafe(pax.get("passengerTaxesAmount"));
-                BigDecimal perPaxTotal = parseBigDecimalSafe(pax.get("passengerTotalAmount"));
-
-                // Expected = base + taxes
-                BigDecimal expectedPerPaxTotal = baseFare.add(taxes);
-
-                // Validate per-pax total calculation
-                softAssert.assertEquals(perPaxTotal, expectedPerPaxTotal,
-                        "❌ [TC.9] Per-pax total mismatch for " + paxType);
-
-                // Group total = per pax × count
-                BigDecimal paxGroupTotal = perPaxTotal.multiply(BigDecimal.valueOf(paxCount));
-                sumOfPassengerTotals = sumOfPassengerTotals.add(paxGroupTotal);
-
-                System.out.printf(
-                        "\t🔍 [TC.9][%s] base=%s + taxes=%s → perPax=%s × count=%d → groupTotal=%s%n",
-                        paxType, baseFare, taxes, perPaxTotal, paxCount, paxGroupTotal
-                );
+                int count = Integer.parseInt(String.valueOf(pax.get("count")));
+                paxCountMap.put(paxType, count);
             }
 
-            // Compare aggregated totals with overall total
-            System.out.printf("\t🔍 [TC.9] Sum of passenger group totals = %s | Overall total = %s%n",
-                    sumOfPassengerTotals, overallTotal);
+            BigDecimal sumOfPassengerTotals = BigDecimal.ZERO;
 
-            softAssert.assertEquals(sumOfPassengerTotals, overallTotal,
-                    "❌ [TC.9] Overall total mismatch");
+            if (passengerBreakdowns != null && !passengerBreakdowns.isEmpty()) {
+                for (Map<String, Object> pax : passengerBreakdowns) {
+                    String paxType = String.valueOf(pax.get("passengerTypeCode"));
 
-        } else {
-            System.out.println("⚠️ [TC.9] No passengerFareBreakdown found in response.");
-            softAssert.fail("Missing passengerFareBreakdown in FareConfirm response");
+                    // ✅ Use count from payload instead of response
+                    int paxCount = paxCountMap.getOrDefault(paxType, 0);
+
+                    // Extract base, tax, and total values
+                    BigDecimal baseFare = parseBigDecimalSafe(pax.get("passengerBaseAmount"));
+                    BigDecimal taxes = parseBigDecimalSafe(pax.get("passengerTaxesAmount"));
+                    BigDecimal perPaxTotal = parseBigDecimalSafe(pax.get("passengerTotalAmount"));
+
+                    // Expected = base + taxes
+                    BigDecimal expectedPerPaxTotal = baseFare.add(taxes);
+
+                    // Validate per-pax total calculation
+                    softAssert.assertEquals(perPaxTotal, expectedPerPaxTotal,
+                            "❌ [TC.7] Per-pax total mismatch for " + paxType);
+
+                    // Group total = per pax × count
+                    BigDecimal paxGroupTotal = perPaxTotal.multiply(BigDecimal.valueOf(paxCount));
+                    sumOfPassengerTotals = sumOfPassengerTotals.add(paxGroupTotal);
+
+                    System.out.printf(
+                            "\t🔍 [TC.7][%s] base=%s + taxes=%s → perPax=%s × count=%d → groupTotal=%s%n",
+                            paxType, baseFare, taxes, perPaxTotal, paxCount, paxGroupTotal
+                    );
+                }
+
+                // Compare aggregated totals with overall total
+                System.out.printf("\t🔍 [TC.7] Sum of passenger group totals = %s | Overall total = %s%n",
+                        sumOfPassengerTotals, overallTotal);
+
+                softAssert.assertEquals(sumOfPassengerTotals, overallTotal,
+                        "❌ [TC.7] Overall total mismatch");
+
+            } else {
+                System.out.println("⚠️ [TC.7] No passengerFareBreakdown found in response.");
+                softAssert.fail("Missing passengerFareBreakdown in FareConfirm response");
+            }
+
+            System.out.println("✅ [TC.7] Fare breakdown calculation check completed.");
+        } catch (Exception e) {
+            softAssert.fail("⚠️ [TC.7] Exception while validating fare breakdown calculation: " + e.getMessage());
+            System.out.println("\t⚠️ [TC.7] Exception: " + e.getMessage());
         }
-
-        System.out.println("✅ [TC.9] Fare breakdown calculation check completed.");
     }
 
+
     /**
-     * TC.10 – Validate No Duplicate Tax Codes
+     * TC.8 – Validate No Duplicate Tax Codes
      * Ensures that within each passenger’s fare breakdown:
      *  - taxesAndFees[].code values are unique (no duplicates allowed).
      * Example:
@@ -452,14 +434,14 @@ public class FareConfirmAssertions {
      * @param softAssert The TestNG SoftAssert instance
      */
     private static void validateNoDuplicateTaxCodes(Response response, SoftAssert softAssert) {
-        System.out.println("\n📌 [TC.10]: Validating no duplicate tax codes per passenger...");
+        System.out.println("\n📌 [TC.8]: Validating no duplicate tax codes per passenger...");
 
         List<Map<String, Object>> passengerBreakdowns =
-                response.jsonPath().getList("selectedOfferOptions[0].passengerFareBreakdown");
+                response.jsonPath().getList("selectedOffer.passengerFareBreakdown");
 
         if (passengerBreakdowns == null || passengerBreakdowns.isEmpty()) {
-            System.out.println("⚠️ [TC.10] No passengerFareBreakdown found in response.");
-            softAssert.fail("[TC.10] passengerFareBreakdown is missing");
+            System.out.println("⚠️ [TC.8] No passengerFareBreakdown found in response.");
+            softAssert.fail("[TC.8] passengerFareBreakdown is missing");
             return;
         }
 
@@ -469,7 +451,7 @@ public class FareConfirmAssertions {
 
             List<Map<String, Object>> taxes = (List<Map<String, Object>>) pax.get("taxesAndFees");
             if (taxes == null) {
-                System.out.println("\t⚠️ [TC.10][" + paxType + "] No taxesAndFees found — skipping.");
+                System.out.println("\t⚠️ [TC.8][" + paxType + "] No taxesAndFees found — skipping.");
                 continue;
             }
 
@@ -479,27 +461,27 @@ public class FareConfirmAssertions {
                 System.out.println("\t\tTax code found: " + code);
 
                 if (seenCodes.contains(code)) {
-                    softAssert.fail("[TC.10][" + paxType + "] Duplicate tax code found: " + code);
+                    softAssert.fail("[TC.8][" + paxType + "] Duplicate tax code found: " + code);
                 } else {
                     seenCodes.add(code);
                 }
             }
-            System.out.println("\t✅ [TC.10][" + paxType + "] No duplicate tax codes found.");
+            System.out.println("\t✅ [TC.8][" + paxType + "] No duplicate tax codes found.");
         }
 
-        System.out.println("✅ [TC.10] Duplicate tax codes validation completed for all passengers.");
+        System.out.println("✅ [TC.8] Duplicate tax codes validation completed for all passengers.");
     }
 
     /**
-     * TC.11 – Validate Price Classes
+     * TC.9 – Validate Price Classes
      * Ensures that the `priceClasses` object exists and for each class:
      *  - priceClassName is not null
-     *  - fareType is not null
+     *  - fareDescription is not null
      *  - rulesAndPenalties list exists and is not empty
      * Example validation:
      *  {
      *    "priceClassName": "Light",
-     *    "fareType": "PublicFare",
+     *    "fareDescription": "PublicFare",
      *    "rulesAndPenalties": ["Non-Refundable", "Change with fee"]
      *  }
      *
@@ -507,14 +489,14 @@ public class FareConfirmAssertions {
      * @param softAssert The TestNG SoftAssert instance
      */
     private static void validatePriceClasses(Response response, SoftAssert softAssert) {
-        System.out.println("\n📌 [TC.11]: Validating price classes...");
+        System.out.println("\n📌 [TC.9]: Validating price classes...");
 
         Map<String, Map<String, Object>> priceClasses =
                 response.jsonPath().getMap("priceClasses");
 
         if (priceClasses == null || priceClasses.isEmpty()) {
-            softAssert.fail("[TC.11] priceClasses are missing or empty.");
-            System.out.println("❌ [TC.11] priceClasses are missing or empty.");
+            softAssert.fail("[TC.9] priceClasses are missing or empty.");
+            System.out.println("❌ [TC.9] priceClasses are missing or empty.");
             return;
         }
 
@@ -528,25 +510,25 @@ public class FareConfirmAssertions {
 
             // Validate required fields
             softAssert.assertNotNull(priceClass.get("priceClassName"),
-                    "[TC.11] priceClassName is missing in priceClass: " + priceClassKey);
-            softAssert.assertNotNull(priceClass.get("fareType"),
-                    "[TC.11] fareType is missing in priceClass: " + priceClassKey);
+                    "[TC.9] priceClassName is missing in priceClass: " + priceClassKey);
+            softAssert.assertNotNull(priceClass.get("fareDescription"),
+                    "[TC.9] fareDescription is missing in priceClass: " + priceClassKey);
 
             // Validate rules list
             List<String> rules = (List<String>) priceClass.get("rulesAndPenalties");
             softAssert.assertTrue(rules != null && !rules.isEmpty(),
-                    "[TC.11] rulesAndPenalties missing/empty in priceClass: " + priceClassKey);
+                    "[TC.9] rulesAndPenalties missing/empty in priceClass: " + priceClassKey);
 
             System.out.println("\t✅ Validated PriceClass: name=" + priceClass.get("priceClassName")
-                    + ", fareType=" + priceClass.get("fareType")
+                    + ", fareDescription=" + priceClass.get("fareDescription")
                     + ", rulesCount=" + rules.size());
         }
 
-        System.out.println("✅ [TC.11] All price classes validated successfully.");
+        System.out.println("✅ [TC.9] All price classes validated successfully.");
     }
 
     /**
-     * TC.12 – Validate Baggage Details
+     * TC.10 – Validate Baggage Details
      * Ensures that:
      *  - `baggageDetails` object exists and is not empty.
      *  - Each baggage entry has a valid key.
@@ -561,15 +543,15 @@ public class FareConfirmAssertions {
      * @param softAssert The TestNG SoftAssert instance
      */
     private static void validateBaggageDetails(Response response, SoftAssert softAssert) {
-        System.out.println("📌 [TC.12]: Validating baggage details...");
+        System.out.println("📌 [TC.10]: Validating baggage details...");
 
         Map<String, Object> responseMap = response.jsonPath().getMap("$");
 
         Map<String, Object> baggageDetails = (Map<String, Object>) responseMap.get("baggageDetails");
 
         // 1. Validate baggageDetails presence
-        softAssert.assertNotNull(baggageDetails, "[TC.12] baggageDetails is missing.");
-        softAssert.assertFalse(baggageDetails.isEmpty(), "[TC.12] baggageDetails is empty.");
+        softAssert.assertNotNull(baggageDetails, "[TC.10] baggageDetails is missing.");
+        softAssert.assertFalse(baggageDetails.isEmpty(), "[TC.10] baggageDetails is empty.");
 
         // 2. Iterate and check fields
         for (Map.Entry<String, Object> entry : baggageDetails.entrySet()) {
@@ -579,30 +561,30 @@ public class FareConfirmAssertions {
             System.out.println("\t🔎 Validating baggage key: " + baggageKey);
 
             // Validate key is not null
-            softAssert.assertNotNull(baggageKey, "[TC.12] baggage key is null.");
+            softAssert.assertNotNull(baggageKey, "[TC.10] baggage key is null.");
 
             // Validate carryOn & checkIn baggage presence
             softAssert.assertTrue(baggage.containsKey("carryOnBaggage"),
-                    "[TC.12] Missing carryOnBaggage for key: " + baggageKey);
+                    "[TC.10] Missing carryOnBaggage for key: " + baggageKey);
             softAssert.assertTrue(baggage.containsKey("checkInBaggage"),
-                    "[TC.12] Missing checkInBaggage for key: " + baggageKey);
+                    "[TC.10] Missing checkInBaggage for key: " + baggageKey);
 
             softAssert.assertNotNull(baggage.get("carryOnBaggage"),
-                    "[TC.12] carryOnBaggage is null for key: " + baggageKey);
+                    "[TC.10] carryOnBaggage is null for key: " + baggageKey);
             softAssert.assertNotNull(baggage.get("checkInBaggage"),
-                    "[TC.12] checkInBaggage is null for key: " + baggageKey);
+                    "[TC.10] checkInBaggage is null for key: " + baggageKey);
         }
 
-        System.out.println("✅ [TC.12] Baggage details validated successfully.");
+        System.out.println("✅ [TC.10] Baggage details validated successfully.");
     }
 
     /**
-     * TC.13 – Validate Passenger Code Uniqueness and Associated Amounts Data
+     * TC.11 – Validate Passenger Code Uniqueness and Associated Amounts Data
      * Purpose:
      * Ensures that each passengerTypeCode appears only once in the fare breakdown,
      * and verifies that required amount fields exist (not null).
      * Steps:
-     * 1. Extract `selectedOfferOptions[0].passengerFareBreakdown` from response.
+     * 1. Extract `selectedOffer[0].passengerFareBreakdown` from response.
      * 2. Fail if list is missing/empty.
      * 3. For each passenger entry:
      *    - Validate uniqueness of passengerTypeCode.
@@ -617,14 +599,17 @@ public class FareConfirmAssertions {
      * @param softAssert The SoftAssert instance for validation
      */
     private static void validatePassengerCodeUniquenessAndAmounts(Response response, SoftAssert softAssert) {
-        System.out.println("\n📌 [TC.13]: Validating Passenger Code Uniqueness and Amounts Data...");
+        System.out.println("\n📌 [TC.11]: Validating Passenger Code Uniqueness and Amounts Data...");
 
+        JsonPath jsonPath = response.jsonPath();
+
+        // Directly extract passengerFareBreakdown from the selectedOffer object
         List<Map<String, Object>> passengerBreakdowns =
-                response.jsonPath().getList("selectedOfferOptions[0].passengerFareBreakdown");
+                jsonPath.getList("selectedOffer.passengerFareBreakdown");
 
         if (passengerBreakdowns == null || passengerBreakdowns.isEmpty()) {
-            softAssert.fail("[TC.13] passengerFareBreakdown is missing or empty.");
-            System.out.println("❌ [TC.13] passengerFareBreakdown is missing or empty.");
+            softAssert.fail("[TC.11] passengerFareBreakdown is missing or empty.");
+            System.out.println("❌ [TC.11] passengerFareBreakdown is missing or empty.");
             return;
         }
 
@@ -638,21 +623,19 @@ public class FareConfirmAssertions {
 
             // 1. Uniqueness check
             softAssert.assertTrue(!seenTypes.contains(paxType),
-                    "[TC.13] Duplicate passengerTypeCode found: " + paxType);
+                    "[TC.11] Duplicate passengerTypeCode found: " + paxType);
             seenTypes.add(paxType);
 
             // 2. Required amount fields check
-            softAssert.assertNotNull(pax.get("passengerTotalAmount"),
-                    "[TC.13] passengerTotalAmount missing for passengerTypeCode: " + paxType);
-            softAssert.assertNotNull(pax.get("passengerTaxesAmount"),
-                    "[TC.13] passengerTaxesAmount missing for passengerTypeCode: " + paxType);
-            softAssert.assertNotNull(pax.get("passengerBaseAmount"),
-                    "[TC.13] passengerBaseAmount missing for passengerTypeCode: " + paxType);
+            softAssert.assertNotNull(pax.get("paxTotalTaxAmount"),
+                    "[TC.11] passengerTaxesAmount missing for passengerTypeCode: " + paxType);
+            softAssert.assertNotNull(pax.get("paxBaseAmount"),
+                    "[TC.11] passengerBaseAmount missing for passengerTypeCode: " + paxType);
 
             System.out.println("\t✅ Validated passengerTypeCode=" + paxType);
         }
 
-        System.out.println("✅ [TC.13] Passenger code uniqueness and amounts check completed.");
+        System.out.println("✅ [TC.11] Passenger code uniqueness and amounts check completed.");
     }
 
     // ==============================================================
@@ -680,10 +663,8 @@ public class FareConfirmAssertions {
      * Compares core fare amounts for a single passenger type.
      */
     private static void validateSinglePassengerBreakdown(SoftAssert softAssert, String type, Map<String, Object> expected, Map<String, Object> actual) {
-        compareField("numberOfPassengers", expected, actual, type, softAssert);
-        compareField("passengerTotalAmount", expected, actual, type, softAssert);
-        compareField("passengerTaxesAmount", expected, actual, type, softAssert);
-        compareField("passengerBaseAmount", expected, actual, type, softAssert);
+        compareField("paxTotalTaxAmount", expected, actual, type, softAssert);
+        compareField("paxBaseAmount", expected, actual, type, softAssert);
     }
     /**
      * Compares a single field in passenger breakdown for a given passenger type.

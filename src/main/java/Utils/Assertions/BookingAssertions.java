@@ -24,7 +24,7 @@ public class BookingAssertions {
      *  - RBD and currencies are correct
      */
     public static void validateBookingResponse(Response BookResponse, Map<String, Object> bookResponse,
-                                               Map<String, Object> fareConfirmResponse, Map<String, Object> addPaxPayload
+                                               Map<String, Object> fareConfirmResponse
                                                , Map<String, Object> selectedOfferFromSearch,
                                                SoftAssert softAssert) {
         System.out.println("==================== 🧾 VALIDATING BOOKING RESPONSE ====================\n");
@@ -36,7 +36,7 @@ public class BookingAssertions {
         validateJourneyAndSegmentMatch(bookResponse, fareConfirmResponse, softAssert);
 
         // Ensure passenger type codes match AddPax payload
-        validatePassengerDetails(bookResponse, addPaxPayload, softAssert);
+        validatePassengerDetails(bookResponse,fareConfirmResponse, softAssert); // replace fareConfirmResponse
 
         // Validate per-passenger fare totals
         validatePassengerTotalAmount(bookResponse, softAssert);
@@ -57,7 +57,7 @@ public class BookingAssertions {
         validateBreakdownAgainstFareConfirm(bookResponse, fareConfirmResponse, softAssert);
 
         // Validate that RBD codes match the originally selected offer
-        validateRbdMatchesSelectedOffer(BookResponse, selectedOfferFromSearch, softAssert, "order");
+        validateRbdMatchesSelectedOffer(BookResponse, selectedOfferFromSearch, softAssert);
 
         // Validate currency consistency in price details
         //validateCurrencies(BookResponse, "order", softAssert);

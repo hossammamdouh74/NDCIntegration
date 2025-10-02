@@ -145,9 +145,9 @@ public class PerformAssertions {
 
         saveFareConfirmResponse(offerIdForFile, responseMap);
 
-        selectedOfferFromSearch.put("fareConfirmOfferId", fareConfirmOfferId);
-        selectedOfferFromSearch.put("selectedOfferId", fareConfirmOfferId); // for payload reuse
-
+        selectedOfferFromSearch.put("fareConfirmResponseId", getFareConfirmResponseId(response));
+        selectedOfferFromSearch.put("SelectedOfferId", fareConfirmOfferId); // for payload reuse
+        System.out.println("\n\n💕💕💕selectedOfferFromSearch: "+selectedOfferFromSearch);
         if (Objects.equals(searchAddPaxScenarioType, "pass")) {
             validateFareConfirm(response, selectedOfferFromSearch);
         }
@@ -179,11 +179,10 @@ public class PerformAssertions {
         validateResponse(response, expectedStatusCode, true);
 
         Map<String, Object> bookResponse = response.jsonPath().getMap("$");
-        Map<String, Object> addPaxPayload = AddPaxPayload(searchPayload, fareConfirmId);
         Map<String, Object> fareConfirmResponse = loadFareConfirmResponse(fareConfirmId);
 
         SoftAssert softAssert = new SoftAssert();
-        validateBookingResponse(response, bookResponse, fareConfirmResponse, addPaxPayload, selectedOfferFromSearch, softAssert);
+        validateBookingResponse(response, bookResponse, fareConfirmResponse, selectedOfferFromSearch, softAssert);
         softAssert.assertAll();
 
         return getBookingInfo(response);

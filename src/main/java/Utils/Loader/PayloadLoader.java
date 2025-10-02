@@ -61,32 +61,39 @@ public class PayloadLoader {
         payload.put("searchResponseId", selectedOfferFromSearch.get("searchResponseId"));
         return payload;
     }
-
-
     /**
-     * Builds an Add Passenger payload by selecting only the passengers
-     * required from a shared template file.
+     * Builds the unified Book payload (AddPax + Book merged) using the 27-passenger template.
      *
-     * @param searchPayload The search payload used to determine passenger counts
-     * @param fareConfirmId The fare confirm offer ID
-     * @return Map containing the offer ID and selected passengers
+     * @param searchPayload         The search request payload (to determine passenger counts)
+     * @param fareConfirmResponseId The response ID from FareConfirm
+     * @param selectedOfferId       The OfferId returned by FareConfirm
+     * @return Book request payload map
      */
-    public static Map<String, Object> AddPaxPayload(Map<String, Object> searchPayload, String fareConfirmId) {
+    public static Map<String, Object> buildBookPayload(Map<String, Object> searchPayload,
+                                                       String fareConfirmResponseId,
+                                                       String selectedOfferId) {
         ObjectMapper mapper = new ObjectMapper();
         try {
+            // Load full 27-passenger template
             Map<String, Object> fullPayload = mapper.readValue(
                     new File("src/test/resources/TestData/SharedAddPax/SharedAddPax.json"),
                     new TypeReference<>() {}
             );
 
-            Map<String, Object> dynamicPayload = new HashMap<>();
-            dynamicPayload.put("OfferId", fareConfirmId);
+            Map<String, Object> bookPayload = new LinkedHashMap<>();
+            bookPayload.put("fareConfirmResponseId", fareConfirmResponseId);
+            bookPayload.put("supplier", searchPayload.get("supplier"));
+            bookPayload.put("credentialsSelector", searchPayload.get("credentialsSelector"));
+            bookPayload.put("SelectedOfferId", selectedOfferId);
+            bookPayload.put("selectedBundles", new ArrayList<>()); // Always empty for now
 
-            // All available passengers from the template
-            Map<String, Object> fullPassengers = new TreeMap<>((Map<String, Object>) fullPayload.get("Passengers"));
+            // ============================
+            // 🎯 Passengers Selection Logic
+            // ============================
+            Map<String, Object> fullPassengers = (Map<String, Object>) fullPayload.get("passengersList");
             Map<String, Object> selectedPassengers = new LinkedHashMap<>();
 
-            // Determine how many of each passenger type are required
+            // Calculate required passenger counts from search
             List<Map<String, Object>> searchPassengers = (List<Map<String, Object>>) searchPayload.get("passengers");
             Map<String, Integer> requiredCounts = new HashMap<>();
             for (Map<String, Object> pax : searchPassengers) {
@@ -95,15 +102,15 @@ public class PayloadLoader {
                 requiredCounts.put(type, count);
             }
 
-            // Track how many of each type we've added
+            // Track usage counters
             Map<String, Integer> typeCounters = new HashMap<>();
             requiredCounts.keySet().forEach(type -> typeCounters.put(type, 0));
 
-            // Select passengers from the template until we meet the required counts
+            // Pick passengers from template
             for (Map.Entry<String, Object> entry : fullPassengers.entrySet()) {
                 String paxKey = entry.getKey();
                 Map<String, Object> paxValue = (Map<String, Object>) entry.getValue();
-                String type = ((String) paxValue.get("PassengerTypeCode")).toUpperCase();
+                String type = ((String) paxValue.get("passengerTypeCode")).toUpperCase();
 
                 if (!requiredCounts.containsKey(type)) continue;
 
@@ -111,24 +118,37 @@ public class PayloadLoader {
                 int used = typeCounters.get(type);
 
                 if (used < needed) {
+                    // Keep original key from template (ADT1, CHD1, INF1)
                     selectedPassengers.put(paxKey, paxValue);
                     typeCounters.put(type, used + 1);
                 }
             }
 
             System.out.println("🎯 Required passenger counts: " + requiredCounts);
-            System.out.println("📦 Total passengers available in template: " + fullPassengers.size());
-            System.out.println("✅ Selected passengers:");
-            selectedPassengers.forEach((k, v) ->
-                    System.out.println("\t" + k + " → " + ((Map<?, ?>) v).get("PassengerTypeCode"))
-            );
+            System.out.println("✅ Selected passengers: " + selectedPassengers.keySet());
 
-            dynamicPayload.put("Passengers", selectedPassengers);
-            return dynamicPayload;
+            bookPayload.put("passengersList", selectedPassengers);
+
+            // ============================
+            // 📞 Contacts from template
+            // ============================
+            Map<String, Object> contacts = (Map<String, Object>) fullPayload.get("contactsList");
+            bookPayload.put("contactsList", contacts);
+
+            return bookPayload;
 
         } catch (IOException e) {
-            throw new RuntimeException("❌ Failed to load or parse AddPax template", e);
+            throw new RuntimeException("❌ Failed to build Book payload", e);
         }
+    }
+    /** Creates a Book After Hold payload from booking info. */
+    public static Map<String, Object> BookAfterHoldPayload(Map<String, Object> bookingInfo) {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("supplier", bookingInfo.get("ndcBookingReference"));
+        payload.put("credentialsSelector", bookingInfo.get("airlinePnr"));
+        payload.put("pnr", bookingInfo.get("gdsPnr"));
+        payload.put("gdsPNR", bookingInfo.getOrDefault("bookingToken", ""));
+        return payload;
     }
 
     public static List<Map<String, Object>> getNegativeAddPaxPayloads(String folderPath, String testCaseId, String fareConfirmId) {
@@ -157,17 +177,6 @@ public class PayloadLoader {
         return payloads;
     }
 
-
-    /** Creates a Book After Hold payload from booking info. */
-    public static Map<String, Object> BookAfterHoldPayload(Map<String, Object> bookingInfo) {
-        Map<String, Object> payload = new HashMap<>();
-        payload.put("ndcBookingReference", bookingInfo.get("ndcBookingReference"));
-        payload.put("airlinePnr", bookingInfo.get("airlinePnr"));
-        payload.put("gdsPnr", bookingInfo.get("gdsPnr"));
-        payload.put("bookingToken", bookingInfo.getOrDefault("bookingToken", ""));
-        return payload;
-    }
-
     /** Creates a Retrieve payload from booking info. */
     public static Map<String, Object> RetrievePayload(Map<String, Object> bookingInfo) {
         Map<String, Object> payload = new HashMap<>();
@@ -175,22 +184,6 @@ public class PayloadLoader {
         payload.put("airlinePnr", bookingInfo.get("airlinePnr"));
         payload.put("gdsPnr", bookingInfo.get("gdsPnr"));
         payload.put("bookingToken", bookingInfo.getOrDefault("bookingToken", ""));
-        return payload;
-    }
-
-    /** Creates a Book payload with no bundles. */
-    public static Map<String, Object> BookPayload(String paxOfferId) {
-        Map<String, Object> payload = new HashMap<>();
-        payload.put("OfferId", paxOfferId);
-        payload.put("selectedBundles", new ArrayList<>());
-        return payload;
-    }
-
-    /** Creates a Hold payload with no bundles. */
-    public static Map<String, Object> HoldPayload(String paxOfferId) {
-        Map<String, Object> payload = new HashMap<>();
-        payload.put("OfferId", paxOfferId);
-        payload.put("selectedBundles", new ArrayList<>());
         return payload;
     }
 
